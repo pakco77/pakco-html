@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+.cache/
+.idea/
+.vscode/
+*.swp
+
+# Local upstream/reference checkouts, not part of the public skill package
+local-webui-reference/
+guizang-ppt-skill-main/
