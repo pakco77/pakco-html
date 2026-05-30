@@ -1,26 +1,28 @@
 # Maintainer notes
 
-HTML PPT Picker is a static AgentSkill: templates, themes, layouts, examples,
+DeckTaste is a static AgentSkill: templates, themes (skins), layouts, examples,
 and the picker should work without a build step.
 
-This repo does not currently operate a public deck-review workflow. Custom decks
-created by users or agents are private artifacts by default.
+This repo does not currently operate a public deck-review workflow. Custom skins
+and decks created by users or agents are private artifacts by default.
 
-## Create a custom deck locally
+## Create a custom skin / deck locally
 
-Fastest path: open `templates/style-picker.html`, click the `+ Custom deck` card
-in either the Themes or Decks tab, then paste the copied prompt into Codex /
-Claude / Hermes.
+Fastest path: open `templates/style-picker.html`, click the `+ Custom skin`
+card on the `🎨 Skins` tab or the `+ Custom template` card on the `📑 Templates`
+tab, then paste the copied prompt into Codex / Claude / Hermes. Each build uses a
+unique `<slug>` and is appended to `examples/decktaste.local.json`, so you can
+stack many custom skins/templates without overwriting earlier ones.
 
-Manual path:
+Manual path (pick your own `<slug>`, e.g. `q3-review`):
 
 ```bash
-./scripts/new-deck.sh my-talk
-open examples/my-talk/index.html
+./scripts/new-deck.sh <slug>
+open examples/<slug>/index.html
 ```
 
 For a more opinionated starting point, copy an existing folder from
-`templates/full-decks/<name>/` into `examples/my-talk/`, then replace the content
+`templates/full-decks/<name>/` into `examples/<slug>/`, then replace the content
 while keeping the scoped CSS class pattern.
 
 Custom decks should stay in `examples/` unless the maintainer explicitly decides
@@ -43,23 +45,23 @@ Minimal local registry shape:
 {
   "decks": [
     {
-      "id": "my-talk",
-      "labelZh": "我的私有 Deck",
-      "labelEn": "My Private Deck",
+      "id": "<slug>",
+      "labelZh": "我的私有模板",
+      "labelEn": "My Private Template",
       "descZh": "本地 taste",
       "descEn": "Local taste",
-      "path": "../examples/my-talk/index.html",
+      "path": "../examples/<slug>/index.html",
       "author": "Local",
       "presenter": true,
-      "prompt": "Please continue using the visual taste in examples/my-talk/."
+      "prompt": "Please continue using the visual taste in examples/<slug>/."
     }
   ],
   "themes": [
     {
-      "id": "my-theme",
-      "labelZh": "我的本地主题",
-      "labelEn": "My Local Theme",
-      "css": "../examples/my-theme/theme.css",
+      "id": "<skin-slug>",
+      "labelZh": "我的本地皮肤",
+      "labelEn": "My Local Skin",
+      "css": "../examples/<skin-slug>/theme.css",
       "author": "Local"
     }
   ]
@@ -138,8 +140,10 @@ Check:
 
 Keep upstream attribution to:
 
-- `lewislulu/html-ppt-skill`
-- `op7418/guizang-ppt-skill`
+- `lewislulu/html-ppt-skill` — core skill, themes/skins, layouts, runtime, presenter mode
+- `op7418/guizang-ppt-skill` — magazine / Swiss deck templates (bundled as `guizang-magazine` + `guizang-swiss`)
+- `op7418/guizang-social-card-skill` — social-card system behind the `图文 / Social Cards` tab (declared in `skills-lock.json`, not vendored)
+- `Leonxlnx/taste-skill` — UI taste system behind the `UI Taste` tab (referenced via copied prompts, not vendored)
 
 Do not add company-specific logos, private brand names, or proprietary color
 systems to the public template set unless the maintainer explicitly approves it.

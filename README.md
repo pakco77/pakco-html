@@ -1,316 +1,164 @@
 # DeckTaste.skill — *Visual taste menu for AI-generated decks*
 
+**English** · [中文说明 →](README.zh-CN.md)
+
 [![Forked from lewislulu/html-ppt-skill](https://img.shields.io/badge/forked%20from-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
 [![Integrates op7418/guizang-ppt-skill](https://img.shields.io/badge/integrates-op7418%2Fguizang--ppt--skill-orange?logo=github)](https://github.com/op7418/guizang-ppt-skill)
+[![Integrates op7418/guizang-social-card-skill](https://img.shields.io/badge/integrates-guizang--social--card--skill-orange?logo=github)](https://github.com/op7418/guizang-social-card-skill)
 [![Integrates Leonxlnx/taste-skill](https://img.shields.io/badge/integrates-Leonxlnx%2Ftaste--skill-blueviolet?logo=github)](https://github.com/Leonxlnx/taste-skill)
-[![Upstream stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=upstream%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
-[![Guizang stars](https://img.shields.io/github/stars/op7418/guizang-ppt-skill?label=guizang%20stars&style=social)](https://github.com/op7418/guizang-ppt-skill/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **Credit to [@lewislulu](https://github.com/lewislulu)** (core skill), **[@op7418 歸藏](https://github.com/op7418)** (magazine + swiss decks, social cards), and **[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)** (UI taste). This fork packages those capabilities as DeckTaste.skill: see the style first, then copy a prompt your agent can follow.
+<div align="center">
 
-> **Stop prompting taste. Pick it.**
->
-> DeckTaste.skill is a local-first visual taste picker. It does not primarily solve “how to generate a PPT”; it solves “how do I tell an agent my taste in a stable way?” Browse real deck previews, click a card, and copy an executable prompt for Claude Code / Codex / Hermes. You can also turn decks you like into a local taste library, so the next run reuses your taste instead of asking you to describe it again.
+https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4
 
-**One-line positioning:** a visual taste menu for AI agents: see the style, copy the prompt, let the agent follow it.
+<em>▶ Player not loading? <a href="https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4">Watch the 60-second demo</a></em>
 
-**Author:** lewis &lt;sudolewis@gmail.com&gt;
-**License:** MIT
-**中文文档:** [README.zh-CN.md](README.zh-CN.md)
+</div>
 
-> ## 🙏 About This Fork
->
-> This fork keeps the upstream skill intact and adds a visual taste layer:
->
-> - 🎨 **Core skill** — [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill): 36 themes, 31 layouts, 47 animations, presenter mode.
-> - 🪶 **Magazine & Swiss decks** — [**op7418/guizang-ppt-skill**](https://github.com/op7418/guizang-ppt-skill) (歸藏): 2 deck templates × 9 color variants, WebGL fluid/grid backgrounds.
-> - 🧩 **UI taste** — [**Leonxlnx/taste-skill**](https://github.com/Leonxlnx/taste-skill): the visual taste system behind the `UI Taste` tab (Auto / High-end Soft / Minimalist / Industrial Brutalist).
-> - 🖼 **Social cards** — [**op7418/guizang-social-card-skill**](https://github.com/op7418/guizang-social-card-skill) (歸藏): the editorial × e-ink and Swiss social-image system behind the `图文 / Social Cards` tab.
->
-> What this fork adds on top:
->
-> - 🎨 **DeckTaste WebUI** — `templates/style-picker.html`: browse deck themes × deck taste cards × UI taste choices visually, then copy install/usage prompts in one click.
-> - 🪶 **+9 guizang deck variants** — `guizang-magazine` (5 colors) + `guizang-swiss` (4 colors), wired into the picker with author attribution.
-> - 🖼 **Social Cards tab** — a 2-tone preview studio (Editorial × E-ink / Swiss) for [guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill): open a tone, switch color branch, pick a size (Rednote 3:4 / WeChat covers / Square 1:1), then copy a prompt. Preview + size selection + prompt import only — no image generation in this product.
-> - 🐛 **Stability fixes** for `presenter-mode-reveal`.
->
-> Positioning: DeckTaste does not generate directly; it is a taste menu plus prompt launcher. The current core is AI-generated decks. UI taste can stay as a minimal Taste.skill visual entry. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.
+## 🙏 Credit & upstream
 
-## 🎨 DeckTaste WebUI (this fork's main addition)
+DeckTaste is a fork/packaging layer. The real visual work belongs to the upstream authors:
 
-A single static HTML file at `templates/style-picker.html` lets you browse deck themes / deck taste cards / UI taste choices / layouts visually, then copy an executable prompt to paste into your AI agent.
+- 🎨 **[lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)** — the core skill: 36 themes, 31 layouts, 47 animations, runtime, presenter mode. **Bundled** in this repo.
+- 🪶 **[op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)** (歸藏) — magazine × e-ink and Swiss deck templates. **Bundled** as `guizang-magazine` + `guizang-swiss` (9 color variants).
+- 🖼 **[op7418/guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill)** (歸藏) — the social-image system behind the `🖼 Social Cards` tab. **Declared as a dependency** (`skills-lock.json`), installed on demand — not vendored here.
+- 🧩 **[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)** — the UI taste system behind the `🧩 UI Taste` tab. **Referenced via copied prompts** — not vendored here.
 
-The `UI Taste` tab is deliberately minimal: it shows only 4 user-facing taste choices from [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill): Auto Taste, High-end Soft, Minimalist Product, and Industrial Brutalist. Workflow skills (`image-to-code`, `redesign-existing-projects`), model-specific tightening (`gpt-taste`), and execution helpers (`full-output-enforcement`) are handled inside the copied prompt instead of appearing as picker cards. Each preview is a DeckTaste interpretation, not an official Taste.skill demo URL.
+> What this fork adds: a single-file **visual picker** (`templates/style-picker.html`) that turns all of the above into a click-to-copy taste menu, plus 9 guizang deck variants wired in, a 2-tone Social Cards preview studio, real per-style UI Taste demos, and stability fixes for presenter mode.
 
-| Themes (36) | Full-Deck Picker Cards (24) | Page Layouts (31) |
+## 🎯 One-line positioning
+
+**Stop prompting taste. Pick it.**
+
+DeckTaste is a local-first *visual taste menu* for AI agents. It does not try to be an online PPT editor — it solves a different problem: **how do I tell an agent my taste in a stable, repeatable way?** Browse real previews, click a card, get an executable prompt for Claude Code / Codex / Hermes. The agent generates the deck (or skin, template, social-card set, UI) following the visual constraints you picked.
+
+## ▶ 30-second start
+
+1. **Install** the skill (one line — see [Install](#-install)).
+2. **Open the picker.** It ships at `templates/style-picker.html` inside the installed skill. Either open it yourself in a browser, or just tell your agent *"open the DeckTaste picker"*. For live iframe previews, serve the folder (see Install).
+3. **Click any card** in 🎨 Skins / 📑 Templates / 🧩 UI Taste / 🖼 Social Cards — the matching prompt is copied to your clipboard.
+4. **Paste into your agent**, replace `[paste your outline here]` with your content, hit enter. You get a complete deck you can open in any browser.
+
+## 📦 What's in the box
+
+| Module | Count | Where |
 |---|---|---|
-| ![Themes tab](docs/readme/webui/01-themes.png) | ![Full-deck templates tab](docs/readme/webui/02-templates.png) | ![Layouts tab](docs/readme/webui/03-layouts.png) |
+| 🎨 **Skins** (CSS re-skin) | **36** | `assets/themes/*.css` |
+| 📑 **Templates** (full decks) | **24** | `templates/full-decks/` + guizang variants |
+| 🧩 **UI Taste** (picker tab) | 4 | prompts → `Leonxlnx/taste-skill` |
+| 🖼 **Social Cards** (picker tab) | 2 tones | prompts → `guizang-social-card-skill` |
+| 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
+| ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
+| 💥 **Canvas FX** | **20** | `assets/animations/fx/*.js` |
+| 🎤 **Presenter mode** | — | `S` key / `?preview=N` |
 
-### How to launch it
+**Skins vs Templates** — a *skin* only swaps color/type over a shared layout (re-skin); a *template* is a full deck with its own HTML structure (re-bone).
 
-After you (or your AI agent) install this skill, the file lives at:
+| 🎨 Skins (36) | 📑 Templates (24) | 🧩 Layouts (31) |
+|---|---|---|
+| ![Skins tab](docs/readme/webui/01-themes.png) | ![Templates tab](docs/readme/webui/02-templates.png) | ![Layouts tab](docs/readme/webui/03-layouts.png) |
+
+<details>
+<summary>36 skins · 24 templates · 31 layouts (full lists)</summary>
+
+**36 skins** — `minimal-white`, `editorial-serif`, `soft-pastel`, `sharp-mono`, `arctic-cool`, `sunset-warm`, `catppuccin-latte`, `catppuccin-mocha`, `dracula`, `tokyo-night`, `nord`, `solarized-light`, `gruvbox-dark`, `rose-pine`, `neo-brutalism`, `glassmorphism`, `bauhaus`, `swiss-grid`, `terminal-green`, `xiaohongshu-white`, `rainbow-gradient`, `aurora`, `blueprint`, `memphis-pop`, `cyberpunk-neon`, `y2k-chrome`, `retro-tv`, `japanese-minimal`, `vaporwave`, `midcentury`, `corporate-clean`, `academic-paper`, `news-broadcast`, `pitch-deck-vc`, `magazine-bold`, `engineering-whiteprint`.
+
+**24 templates** — 15 native full decks + 9 guizang color variants. Extracted looks: `xhs-white-editorial`, `graphify-dark-graph`, `knowledge-arch-blueprint`, `hermes-cyber-terminal`, `obsidian-claude-gradient`, `testing-safety-alert`, `xhs-pastel-card`, `dir-key-nav-minimal`. Scenario decks: `pitch-deck`, `product-launch`, `tech-sharing`, `weekly-report`, `xhs-post` (9-slide 3:4), `course-module`, **`presenter-mode-reveal`** 🎤 (full speaker scripts on every slide). Guizang: `guizang-magazine` ×5 + `guizang-swiss` ×4.
+
+**31 layouts** — cover · toc · section-divider · bullets · two-column · three-column · big-quote · stat-highlight · kpi-grid · table · code · diff · terminal · flow-diagram · timeline · roadmap · mindmap · comparison · pros-cons · todo-checklist · gantt · image-hero · image-grid · chart-bar · chart-line · chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks.
+
+</details>
+
+## ✅ When it fits / 🚫 when it doesn't
+
+**Good fit**
+- You want an AI agent to build decks / 小红书 social cards / UI **in a specific look you can see first**.
+- You keep reusing a visual style and are tired of re-describing it every time.
+- You work in Claude Code / Codex / Cursor / Hermes (anything AgentSkill-aware).
+- You want pure static HTML output — no build, openable in any browser.
+
+**Not a fit**
+- You want a WYSIWYG online PPT editor with drag-and-drop. DeckTaste is a *menu + prompt launcher*, not an editor.
+- You don't use an AI agent and want to hand-build slides.
+- You expect the `🖼 Social Cards` tab to render images itself — it only copies a prompt (preview + size + prompt import; the upstream skill does the rendering).
+- You need realtime collaboration or a hosted cloud service.
+
+## 🤖 Agent support
+
+Works with any runtime that supports AgentSkills. After install the skill lives at:
 
 ```
-~/.claude/skills/html-ppt/templates/style-picker.html      # Claude Code
-~/.codex/skills/html-ppt/templates/style-picker.html       # Codex
-~/.hermes/skills/html-ppt/templates/style-picker.html      # Hermes Agent
+~/.claude/skills/html-ppt/      # Claude Code
+~/.codex/skills/html-ppt/       # Codex
+~/.hermes/skills/html-ppt/      # Hermes Agent
+~/.cursor/…  /  others          # any AgentSkill-aware agent
 ```
 
-Pick one of these to open it:
+The picker is the same file in every case: `…/html-ppt/templates/style-picker.html`. Copying a prompt into an agent needs **no MCP**. MCP/a local bridge is only needed if you want the web page to directly launch an agent, read local files, or write the generated folder.
 
-```bash
-# 1) Just open the file (works for browsing only — previews in iframes need a server)
-open ~/.claude/skills/html-ppt/templates/style-picker.html
-
-# 2) Recommended — serve the skill folder so iframe previews load (any port, any agent)
-cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
-# then visit:  http://localhost:8000/templates/style-picker.html
-
-# Or with Node:
-cd ~/.claude/skills/html-ppt && npx --yes serve -l 8000
-```
-
-Click any card → the install command + a ready prompt is copied to your clipboard. Paste it into your AI agent and you're done.
-
-![html-ppt — cover with live previews](docs/readme/hero.gif)
-
-> One command installs **36 themes × 20 canvas FX × 31 layouts × 24 deck taste cards + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
-
-## 🎤 Presenter Mode (new!)
-
-Press `S` on any deck to pop open a dedicated presenter window with four
-draggable, resizable **magnetic cards**: current slide, next slide preview,
-speaker script (逐字稿), and timer. Two windows stay in sync via
-`BroadcastChannel`.
-
-![Presenter mode with 4 magnetic cards](docs/readme/presenter-mode.png)
-
-**Why previews are pixel-perfect:** each card is an `<iframe>` that loads the
-same deck HTML with a `?preview=N` query param. The runtime detects this and
-renders only slide N with no chrome — so the preview uses the **same CSS,
-theme, fonts and viewport** as the audience view. Colors and layout are
-guaranteed identical.
-
-**Smooth (no-reload) navigation:** on slide change, the presenter window
-sends `postMessage({type:'preview-goto', idx:N})` to each iframe. The iframe
-just toggles `.is-active` between slides — **no reload, no flicker**.
-
-**Speaker script rules (3 golden):**
-1. **Prompt signals, not lines to read** — bold the keywords, separate
-   transition sentences into their own paragraphs
-2. **150–300 words per slide** — that's the ~2–3 min/page pace
-3. **Write it like you speak** — conversational, not written prose
-
-See [`references/presenter-mode.md`](references/presenter-mode.md) for the
-full authoring guide, or copy the ready-made template at
-`templates/full-decks/presenter-mode-reveal/` which ships with full 150-300
-word speaker scripts on every slide.
-
-## Install (one command)
+## ⬇️ Install
 
 ```bash
 npx skills add https://github.com/pakco77/DeckTaste
 ```
 
-That registers the skill with your agent runtime. After install, any agent
-that supports AgentSkills can author presentations by asking things like:
-
-> "做一份 8 页的技术分享 slides，用 cyberpunk 主题"
-> "turn this outline into a pitch deck"
-> "做一个小红书图文，9 张，白底柔和风"
-
-## What's in the box
-
-| | Count | Where |
-|---|---|---|
-| 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
-| 🎨 **Themes** | **36** | `assets/themes/*.css` |
-| 📑 **Deck taste cards** | **24** | `templates/full-decks/<name>/` + Guizang variants |
-| 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
-| ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
-| 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
-| 🖼️ **Showcase decks** | 4 | `templates/*-showcase.html` |
-| 📸 **Verification screenshots** | 56 | `scripts/verify-output/` |
-
-### 36 Themes
-
-`minimal-white`, `editorial-serif`, `soft-pastel`, `sharp-mono`, `arctic-cool`,
-`sunset-warm`, `catppuccin-latte`, `catppuccin-mocha`, `dracula`, `tokyo-night`,
-`nord`, `solarized-light`, `gruvbox-dark`, `rose-pine`, `neo-brutalism`,
-`glassmorphism`, `bauhaus`, `swiss-grid`, `terminal-green`, `xiaohongshu-white`,
-`rainbow-gradient`, `aurora`, `blueprint`, `memphis-pop`, `cyberpunk-neon`,
-`y2k-chrome`, `retro-tv`, `japanese-minimal`, `vaporwave`, `midcentury`,
-`corporate-clean`, `academic-paper`, `news-broadcast`, `pitch-deck-vc`,
-`magazine-bold`, `engineering-whiteprint`.
-
-![36 themes · 8 of them](docs/readme/themes.png)
-
-Each is a pure CSS-tokens file — swap one `<link>` to reskin the entire deck.
-Browse them all in `templates/theme-showcase.html` (each slide rendered in an
-isolated iframe so theme ≠ theme is visually guaranteed).
-
-![24 deck taste cards](docs/readme/templates.png)
-
-### 24 deck taste cards
-
-15 native full-deck templates plus 9 Guizang color variants. The native set contains eight extracted visual languages and seven generic scenario scaffolds:
-
-**Extracted looks**
-- `xhs-white-editorial` — 小红书白底杂志风
-- `graphify-dark-graph` — 暗底 + 力导向知识图谱
-- `knowledge-arch-blueprint` — 蓝图 / 架构图风
-- `hermes-cyber-terminal` — 终端 cyberpunk
-- `obsidian-claude-gradient` — 紫色渐变卡
-- `testing-safety-alert` — 红 / 琥珀警示风
-- `xhs-pastel-card` — 柔和马卡龙图文
-- `dir-key-nav-minimal` — 方向键极简
-
-**Scenario decks**
-- `pitch-deck`, `product-launch`, `tech-sharing`, `weekly-report`,
-  `xhs-post` (9-slide 3:4), `course-module`,
-  **`presenter-mode-reveal`** 🎤 — complete talk template with full 150-300
-  word speaker scripts on every slide, designed around the `S` key presenter mode
-
-Each is a self-contained folder with scoped `.tpl-<name>` CSS so multiple
-decks can be previewed side-by-side without collisions. Browse the full
-gallery in `templates/full-decks-index.html`.
-
-![31 single-page layouts](docs/readme/layouts.png)
-
-### 31 Single-page layouts
-
-cover · toc · section-divider · bullets · two-column · three-column ·
-big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
-flow-diagram · timeline · roadmap · mindmap · comparison · pros-cons ·
-todo-checklist · gantt · image-hero · image-grid · chart-bar · chart-line ·
-chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
-
-Every layout ships with realistic demo data so you can drop it into a deck
-and immediately see it render.
-
-![31 layouts auto-cycling through real template files](docs/readme/layouts-live.gif)
-
-*The big iframe is loading `templates/single-page/<name>.html` directly and cycling through all 31 layouts every 2.8 seconds.*
-
-![47 animations — 27 CSS + 20 canvas FX](docs/readme/animations.png)
-
-### 27 CSS animations + 20 Canvas FX
-
-**CSS (lightweight)** — directional fades, `rise-in`, `zoom-pop`, `blur-in`,
-`glitch-in`, `typewriter`, `neon-glow`, `shimmer-sweep`, `gradient-flow`,
-`stagger-list`, `counter-up`, `path-draw`, `morph-shape`, `parallax-tilt`,
-`card-flip-3d`, `cube-rotate-3d`, `page-turn-3d`, `perspective-zoom`,
-`marquee-scroll`, `kenburns`, `ripple-reveal`, `spotlight`, …
-
-**Canvas FX (cinematic)** — `particle-burst`, `confetti-cannon`, `firework`,
-`starfield`, `matrix-rain`, `knowledge-graph` (force-directed physics),
-`neural-net` (signal pulses), `constellation`, `orbit-ring`, `galaxy-swirl`,
-`word-cascade`, `letter-explode`, `chain-react`, `magnetic-field`,
-`data-stream`, `gradient-blob`, `sparkle-trail`, `shockwave`,
-`typewriter-multi`, `counter-explosion`. Each is a real hand-rolled canvas
-module auto-initialised on slide enter via `fx-runtime.js`.
-
-## Quick start (manual, after install or git clone)
+Then open the picker (the second option enables live iframe previews):
 
 ```bash
-# Scaffold a new deck from the base template
-./scripts/new-deck.sh my-talk
+# 1) Just browse cards (previews need a server)
+open ~/.claude/skills/html-ppt/templates/style-picker.html
 
-# Browse everything
-open templates/theme-showcase.html         # all 36 themes (iframe-isolated)
-open templates/layout-showcase.html        # all 31 layouts
-open templates/animation-showcase.html     # all 47 animations
-open templates/full-decks-index.html       # all 15 native full decks
-
-# Render any template to PNG via headless Chrome
-./scripts/render.sh templates/theme-showcase.html
-./scripts/render.sh examples/my-talk/index.html 12
+# 2) Recommended — serve the folder so previews load
+cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+# visit: http://localhost:8000/templates/style-picker.html
 ```
 
+Click a card → the install command + a ready prompt are on your clipboard → paste into your agent.
 
-## Create your own deck
+![cover with live previews](docs/readme/hero.gif)
 
-Private decks do not need a public-template review flow. The shortest paths are:
-
-- Click the `+ Custom deck` card in the theme or template tab of `templates/style-picker.html`, then paste the copied prompt into Codex / Claude / Hermes.
-- Or scaffold one locally under `examples/`:
-
-```bash
-./scripts/new-deck.sh my-talk
-open examples/my-talk/index.html
-```
-
-Custom decks stay in `examples/` by default. Do not register them in README / SKILL / references, and do not put them under `templates/full-decks/` unless the maintainer explicitly decides to ship them as part of the public catalog. After generation, the agent updates the local private registry at `examples/decktaste.local.json`. Refresh DeckTaste WebUI and the deck appears as a `local` card in the matching tab.
-
-That registry is ignored by `.gitignore`; it is your local taste library, not a public review mechanism, and it does not change the public template counts.
-
-MCP or a local bridge is only needed if the web picker should directly launch an agent, read local files, or write the generated deck folder; copying a prompt into Codex does not require MCP.
-
-## Keyboard cheat sheet
-
-```
-← → Space PgUp PgDn Home End   navigate
-F                               fullscreen
-S                               open presenter window (magnetic cards)
-N                               quick notes drawer (bottom)
-R                               reset timer (in presenter window)
-O                               slide overview grid
-T                               cycle themes (syncs to presenter)
-A                               cycle a demo animation on current slide
-#/N (URL)                       deep-link to slide N
-?preview=N (URL)                preview-only mode (single slide, no chrome)
-```
-
-## Project structure
+## 🗂 Project structure
 
 ```
 DeckTaste/
-├── SKILL.md                      agent-facing dispatcher
-├── README.md                     this file
-├── references/                   detailed catalogs
-│   ├── themes.md                 36 themes with when-to-use
-│   ├── layouts.md                31 layout types
-│   ├── animations.md             27 CSS + 20 FX catalog
-│   ├── full-decks.md             24 deck taste cards
-│   └── authoring-guide.md        full workflow
+├── SKILL.md                      agent-facing dispatcher (skill name: html-ppt)
+├── README.md / README.zh-CN.md   docs (EN / 中文)
+├── skills-lock.json              declared skill deps (guizang-social-card-skill)
+├── references/                   detailed catalogs (themes, layouts, animations, full-decks, presenter-mode)
 ├── assets/
-│   ├── base.css                  shared tokens + primitives
-│   ├── fonts.css                 webfont imports
-│   ├── runtime.js                keyboard + presenter + overview
-│   ├── themes/*.css              36 theme token files
-│   └── animations/
-│       ├── animations.css        27 named CSS animations
-│       ├── fx-runtime.js         auto-init [data-fx] on slide enter
-│       └── fx/*.js               20 canvas FX modules
+│   ├── base.css                  shared design tokens + primitives
+│   ├── runtime.js                keyboard nav + presenter + overview
+│   ├── themes/*.css              36 skin token files
+│   └── animations/               27 CSS animations + 20 canvas FX
 ├── templates/
+│   ├── style-picker.html         ★ the DeckTaste WebUI (Skins/Templates/UI Taste/Social Cards/Guide)
 │   ├── deck.html                 minimal starter
-│   ├── theme-showcase.html       iframe-isolated theme tour
-│   ├── layout-showcase.html      all 31 layouts
-│   ├── animation-showcase.html   47 animation slides
-│   ├── full-decks-index.html     15-deck native gallery
-│   ├── full-decks/<name>/        17 deck folders (15 native + 2 Guizang bases)
+│   ├── *-showcase.html           theme / layout / animation tours
+│   ├── full-decks/<name>/        17 deck folders (15 native + guizang-magazine/-swiss)
 │   └── single-page/*.html        31 layout files with demo data
-├── scripts/
-│   ├── new-deck.sh               scaffold
-│   ├── render.sh                 headless Chrome → PNG
-│   └── verify-output/            56 self-test screenshots
-└── examples/demo-deck/           complete working deck
+├── scripts/                      new-deck.sh · render.sh · verify-output/
+└── examples/                     local builds + decktaste.local.json (git-ignored)
 ```
 
-## Philosophy
+## 🎨 Create your own skin / deck
 
-- **Token-driven design system.** All color, radius, shadow, font decisions
-  live in `assets/base.css` + the current theme file. Change one variable,
-  the whole deck reflows tastefully.
-- **Iframe isolation for previews.** Theme / layout / full-deck showcases all
-  use `<iframe>` per slide so each preview is a real, independent render.
-- **Zero build.** Pure static HTML/CSS/JS. CDN only for webfonts, highlight.js
-  and chart.js (optional).
-- **Senior-designer defaults.** Opinionated type scale, spacing rhythm,
-  gradients and card treatments — no "Corporate PowerPoint 2006" vibes.
+The picker has two custom cards — **`+ Custom skin`** (🎨 Skins tab) and **`+ Custom template`** (📑 Templates tab). Click one, paste the copied prompt into your agent.
+
+- Each build outputs to a unique `examples/<slug>/` (pick a meaningful slug).
+- You can stack **many** custom skins/templates — each appends to `examples/decktaste.local.json`, never overwrites, and shows as a `local` card after you refresh the picker.
+- Manual path: `./scripts/new-deck.sh <slug>` then `open examples/<slug>/index.html`.
+
+`decktaste.local.json` is git-ignored — it's your personal taste library, not a public catalog, and it does not change the public counts.
+
+## 🧭 Philosophy
+
+- **Token-driven design system.** Color, radius, shadow, type all live in `assets/base.css` + the active skin. Change one variable, the whole deck reflows tastefully.
+- **See it before you pick it.** Every preview is a real, isolated `<iframe>` render — no screenshots, no mock-ups.
+- **Menu, not generator.** DeckTaste copies executable prompts; your agent does the generating. That keeps it model-agnostic and zero-build.
+- **Senior-designer defaults.** Opinionated type scale, spacing rhythm, gradients — no "Corporate PowerPoint 2006".
 - **Chinese + English first-class.** Noto Sans SC / Noto Serif SC pre-imported.
 
 ## License
 
-MIT © 2026 lewis &lt;sudolewis@gmail.com&gt;.
+MIT © 2026 lewis &lt;sudolewis@gmail.com&gt;. Upstream skills retain their own licenses and attribution (see [Credit & upstream](#-credit--upstream)).

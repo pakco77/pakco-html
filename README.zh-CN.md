@@ -1,323 +1,164 @@
 # DeckTaste.skill · 给 AI Agent 用的视觉审美菜单
 
+[中文](README.zh-CN.md) · [**English →**](README.md)
+
 [![Fork 自 lewislulu/html-ppt-skill](https://img.shields.io/badge/fork%20%E8%87%AA-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
 [![集成 op7418/guizang-ppt-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-op7418%2Fguizang--ppt--skill-orange?logo=github)](https://github.com/op7418/guizang-ppt-skill)
+[![集成 guizang-social-card-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-guizang--social--card--skill-orange?logo=github)](https://github.com/op7418/guizang-social-card-skill)
 [![集成 Leonxlnx/taste-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-Leonxlnx%2Ftaste--skill-blueviolet?logo=github)](https://github.com/Leonxlnx/taste-skill)
-[![上游 stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=%E4%B8%8A%E6%B8%B8%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
-[![歸藏 stars](https://img.shields.io/github/stars/op7418/guizang-ppt-skill?label=%E6%AD%B8%E8%97%8F%20stars&style=social)](https://github.com/op7418/guizang-ppt-skill/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **核心功劳归 [@lewislulu](https://github.com/lewislulu)**（核心 skill）、**[@op7418 歸藏](https://github.com/op7418)**（杂志/瑞士 deck、社交图文）和 **[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)**（UI taste）。本 fork 把这些能力包装成 DeckTaste.skill：先看见风格，再复制 Prompt 给 Agent 照着做。
+<div align="center">
 
-> **别再描述审美，直接选择审美。**
->
-> DeckTaste.skill 是一个本地优先的视觉风格选择器。它解决的不是“怎么生成 PPT”，而是“人怎么把自己的审美稳定说给 Agent 听”。用户可以浏览真实 deck 预览，点击卡片复制可直接粘给 Claude Code / Codex / Hermes 的 Prompt，让 Agent 按选中的风格生成演示文稿。用户也可以把自己喜欢的 deck 沉淀成本地风格资产库，下次不用重新解释审美，直接复用自己的 taste。
->
-> Stop prompting taste. Pick it.
+https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4
 
-**一句话定位：** 给 AI Agent 用的视觉审美菜单：看见风格，点击复制，让 Agent 照着做。
+<em>▶ 播放器没加载？<a href="https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4">点这里看 60 秒 demo</a></em>
 
-**作者：** lewis &lt;sudolewis@gmail.com&gt;
-**协议：** MIT
-**English docs:** [README.md](README.md)
+</div>
 
-> ## 🙏 关于本 Fork
->
-> 本 fork 保留上游能力，额外加一个可视化 taste 层：
->
-> - 🎨 **核心 skill** —— [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill)：36 主题、31 布局、47 动效、演讲者模式。
-> - 🪶 **杂志 & 瑞士 deck** —— [**op7418/guizang-ppt-skill**](https://github.com/op7418/guizang-ppt-skill)（歸藏）：2 套 deck 模板 × 9 色板，WebGL 流体/网格背景。
-> - 🧩 **UI taste** —— [**Leonxlnx/taste-skill**](https://github.com/Leonxlnx/taste-skill)：`UI Taste` 标签背后的视觉审美系统（Taste 默认 / 高级柔和 / 克制极简 / 工业粗粝）。
-> - 🖼 **社交图文** —— [**op7418/guizang-social-card-skill**](https://github.com/op7418/guizang-social-card-skill)（歸藏）：`图文 / Social Cards` 标签背后的「电子杂志×墨水 / 瑞士国际主义」社交图系统。
->
-> 本 fork 在两份原作之上额外做的事：
->
-> - 🎨 **DeckTaste WebUI** —— `templates/style-picker.html`：可视化浏览 deck 主题 × deck 风格 × UI Taste.skill 入口，一键复制安装命令与可执行 Prompt。
-> - 🪶 **新增 9 套歸藏色板 deck** —— `guizang-magazine`（5 色） + `guizang-swiss`（4 色），已接入 picker，含作者署名。
-> - 🖼 **图文标签** —— 为 [guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill) 做的「2 基调预览工作台」（电子杂志×墨水 / 瑞士）：点开基调，切换配色分支，选尺寸（小红书 3:4 / 公众号封面 / 方形 1:1），再复制 Prompt。只做预览 + 尺寸选择 + 导入 Prompt，不在本产品内生成图片。
-> - 🐛 修复 `presenter-mode-reveal` 的若干稳定性问题。
->
-> 定位：DeckTaste 不直接生成内容，它是“审美菜单 + Prompt launcher”。当前核心是 AI-generated decks；UI Taste 可以作为 Taste.skill 的极简可视化入口；配图风格应定位为“配图 Prompt”，只输出图片模型可用的提示词与比例约束，不负责生成图片。
+## 🙏 致敬上游
 
-## 🎨 DeckTaste WebUI（本 fork 的主要新增）
+DeckTaste 是一个封装层，真正的视觉功劳属于上游作者：
 
-`templates/style-picker.html` 是一个单文件静态页面，可以可视化浏览全部 deck 主题 / deck 风格 / UI taste 选择 / 布局，点击任意卡片即把“安装命令 + 一段可执行 Prompt”复制到剪贴板，直接粘给 AI agent。
+- 🎨 **[lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)** —— 核心 skill：36 皮肤、31 布局、47 动效、runtime、演讲者模式。本仓库**已打包**。
+- 🪶 **[op7418/guizang-ppt-skill](https://github.com/op7418/guizang-ppt-skill)**（歸藏）—— 电子杂志 × 墨水 / 瑞士国际主义 deck 模板。**已打包**为 `guizang-magazine` + `guizang-swiss`（9 个配色变体）。
+- 🖼 **[op7418/guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill)**（歸藏）—— `🖼 图文` 标签背后的社交图系统。以**依赖**形式声明（`skills-lock.json`），按需安装，未内置进本仓库。
+- 🧩 **[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)** —— `🧩 UI Taste` 标签背后的 UI 审美系统。仅通过**复制出的 Prompt 引用**，未内置进本仓库。
 
-`UI Taste` tab 会保持极简：只展示 [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill) 里 4 个用户真正需要选择的 taste：Taste 默认、高级柔和、克制极简、工业粗粝。`image-to-code`、`redesign-existing-projects`、`gpt-taste`、`full-output-enforcement` 这类工作流 / 模型强化 / 执行工具不放进 picker，而是写进复制出来的 Prompt 里由 Agent 自动判断。每个 HTML preview 都是 DeckTaste 的可视化解释，不是 Taste.skill 官方 demo URL。
+> 本 fork 额外做的事：一个单文件**可视化选择器**（`templates/style-picker.html`），把上面这些能力变成「看见即点击复制」的审美菜单；接入 9 套歸藏 deck 变体；做了一个 2 基调的图文预览工作台；把 UI Taste 的预览改成每个风格各自真实的 demo；并修复了演讲者模式的若干问题。
 
-| Deck 主题（36 套） | Deck taste cards（24 张） | 页面布局（31 种） |
+## 🎯 一句话定位
+
+**别再描述审美，直接选择审美。**
+
+DeckTaste 是给 AI Agent 用的、本地优先的**视觉审美菜单**。它不打算做在线 PPT 编辑器——它解决的是另一个问题：**人怎么把自己的审美稳定、可复用地说给 Agent 听？** 浏览真实预览，点一张卡，拿到一段能直接粘给 Claude Code / Codex / Hermes 的可执行 Prompt，Agent 按你选中的视觉约束去生成 deck（或皮肤、模板、社交图文、UI）。
+
+## ▶ 30 秒开始
+
+1. **安装** skill（一行命令，见 [安装](#-安装)）。
+2. **打开选择器。** 它在安装好的 skill 里：`templates/style-picker.html`。你可以自己用浏览器打开，或直接对 Agent 说*"打开 DeckTaste 选择器"*。想要 iframe 实时预览，就起个本地服务器（见安装）。
+3. **点任意卡片** —— 🎨 皮肤 / 📑 模板 / 🧩 UI Taste / 🖼 图文，对应 Prompt 就复制到剪贴板了。
+4. **粘给 Agent**，把 `[在此粘贴你的内容大纲]` 换成你的内容，回车。拿到一份能直接用浏览器打开的完整 deck。
+
+## 📦 Skill 内容一览
+
+| 模块 | 数量 | 位置 |
 |---|---|---|
-| ![主题 Tab](docs/readme/webui/01-themes.png) | ![完整 Deck Tab](docs/readme/webui/02-templates.png) | ![布局 Tab](docs/readme/webui/03-layouts.png) |
+| 🎨 **皮肤**（换皮 / CSS） | **36** | `assets/themes/*.css` |
+| 📑 **模板**（完整 deck） | **24** | `templates/full-decks/` + 歸藏变体 |
+| 🧩 **UI Taste**（选择器标签） | 4 | Prompt → `Leonxlnx/taste-skill` |
+| 🖼 **图文**（选择器标签） | 2 基调 | Prompt → `guizang-social-card-skill` |
+| 🧩 **单页布局** | **31** | `templates/single-page/*.html` |
+| ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
+| 💥 **Canvas FX** | **20** | `assets/animations/fx/*.js` |
+| 🎤 **演讲者模式** | —— | `S` 键 / `?preview=N` |
 
-### 怎么启动
+**皮肤 vs 模板** —— 皮肤只换配色字体（同一套布局*换皮*）；模板是有独立 HTML 结构的完整版式（*换骨*）。
 
-skill 装好之后，文件路径在：
+| 🎨 皮肤 (36) | 📑 模板 (24) | 🧩 布局 (31) |
+|---|---|---|
+| ![皮肤 Tab](docs/readme/webui/01-themes.png) | ![模板 Tab](docs/readme/webui/02-templates.png) | ![布局 Tab](docs/readme/webui/03-layouts.png) |
+
+<details>
+<summary>36 皮肤 · 24 模板 · 31 布局（完整清单）</summary>
+
+**36 皮肤** —— `minimal-white`、`editorial-serif`、`soft-pastel`、`sharp-mono`、`arctic-cool`、`sunset-warm`、`catppuccin-latte`、`catppuccin-mocha`、`dracula`、`tokyo-night`、`nord`、`solarized-light`、`gruvbox-dark`、`rose-pine`、`neo-brutalism`、`glassmorphism`、`bauhaus`、`swiss-grid`、`terminal-green`、`xiaohongshu-white`、`rainbow-gradient`、`aurora`、`blueprint`、`memphis-pop`、`cyberpunk-neon`、`y2k-chrome`、`retro-tv`、`japanese-minimal`、`vaporwave`、`midcentury`、`corporate-clean`、`academic-paper`、`news-broadcast`、`pitch-deck-vc`、`magazine-bold`、`engineering-whiteprint`。
+
+**24 模板** —— 15 套原生完整 deck + 9 套歸藏配色变体。提炼款：`xhs-white-editorial`、`graphify-dark-graph`、`knowledge-arch-blueprint`、`hermes-cyber-terminal`、`obsidian-claude-gradient`、`testing-safety-alert`、`xhs-pastel-card`、`dir-key-nav-minimal`。场景款：`pitch-deck`、`product-launch`、`tech-sharing`、`weekly-report`、`xhs-post`（9 页 3:4）、`course-module`、**`presenter-mode-reveal`** 🎤（每页带完整逐字稿）。歸藏：`guizang-magazine` ×5 + `guizang-swiss` ×4。
+
+**31 布局** —— cover · toc · section-divider · bullets · two-column · three-column · big-quote · stat-highlight · kpi-grid · table · code · diff · terminal · flow-diagram · timeline · roadmap · mindmap · comparison · pros-cons · todo-checklist · gantt · image-hero · image-grid · chart-bar · chart-line · chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks。
+
+</details>
+
+## ✅ 合适 / 🚫 不合适
+
+**适合**
+- 想让 AI Agent 按**你能先看见的特定视觉**去做 deck / 小红书图文 / UI。
+- 你反复用同一种视觉风格，烦透了每次重新描述。
+- 你在 Claude Code / Codex / Cursor / Hermes（任何支持 AgentSkill 的环境）里工作。
+- 想要纯静态 HTML 产物——零构建，任意浏览器打开。
+
+**不适合**
+- 想要一个所见即所得、拖拽式的在线 PPT 编辑器。DeckTaste 是*菜单 + Prompt launcher*，不是编辑器。
+- 不用 AI Agent，想纯手工拉幻灯片。
+- 以为 `🖼 图文` 标签会自己出图——它只复制 Prompt（预览 + 选尺寸 + 导入 Prompt，真正出图由上游 skill 完成）。
+- 需要实时协作或云端托管服务。
+
+## 🤖 Agent 支持
+
+支持任何带 AgentSkill 的运行时。安装后 skill 落在：
 
 ```
-~/.claude/skills/html-ppt/templates/style-picker.html      # Claude Code
-~/.codex/skills/html-ppt/templates/style-picker.html       # Codex
-~/.hermes/skills/html-ppt/templates/style-picker.html      # Hermes Agent
+~/.claude/skills/html-ppt/      # Claude Code
+~/.codex/skills/html-ppt/       # Codex
+~/.hermes/skills/html-ppt/      # Hermes Agent
+~/.cursor/…  /  其它             # 任何支持 AgentSkill 的 Agent
 ```
 
-任选一种方式打开：
+每种环境下选择器都是同一个文件：`…/html-ppt/templates/style-picker.html`。把 Prompt 复制给 Agent **不需要 MCP**；只有想让网页直接唤起 Agent、读本地文件、写生成目录时才需要 MCP / 本地桥接。
 
-```bash
-# 1) 直接 open 文件（只能浏览卡片，iframe 实时预览需要本地服务器）
-open ~/.claude/skills/html-ppt/templates/style-picker.html
-
-# 2) 推荐 —— 启动一个本地静态服务器，iframe 预览能加载
-cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
-# 然后访问：  http://localhost:8000/templates/style-picker.html
-
-# 或用 Node：
-cd ~/.claude/skills/html-ppt && npx --yes serve -l 8000
-```
-
-点任意卡片 → 安装命令 + 现成的 Prompt 已复制到剪贴板 → 粘给 AI agent → 完成。
-
-![html-ppt 封面 · 实时预览](docs/readme/hero.gif)
-
-> 一行命令装好 **36 主题 × 20 Canvas FX × 31 布局 × 24 张 deck taste cards + 演讲者模式**。
-> 上图里的每一个预览都是真实的 iframe 加载真实模板文件 —— 不是截图，不是色卡。
-
-## 🎤 演讲者模式（全新）
-
-在任何 deck 里按 `S` 键，弹出一个独立的演讲者窗口，包含 4 个**可拖拽、
-可调整大小的磁吸卡片**：当前页预览、下一页预览、逐字稿、计时器。两个窗口
-通过 `BroadcastChannel` 双向同步翻页。
-
-![演讲者模式 · 4 个磁吸卡片](docs/readme/presenter-mode.png)
-
-**为什么预览是像素级完美的：** 每个卡片是一个 `<iframe>`，加载的是**同一
-份 deck HTML 文件**，只是 URL 多了 `?preview=N` 参数。runtime 检测到这个
-参数后，只渲染第 N 页并隐藏所有 chrome —— 所以预览使用**和观众视图完全相
-同的 CSS、主题、字体、viewport**，颜色和排版保证 100% 一致。
-
-**丝滑翻页（零闪烁）：** 翻页时演讲者窗口通过 `postMessage({type:'preview-goto',
-idx:N})` 通知 iframe，iframe 只是切换 `.is-active` class —— **不重新加载、
-不白屏、不闪烁**。
-
-**逐字稿 3 条铁律：**
-1. **提示信号，不是讲稿** — 关键词加粗，过渡句独立成段
-2. **每页 150–300 字** — 约 2–3 分钟/页的节奏
-3. **用口语，不用书面语** — "所以" 不是 "因此"，"这个" 不是 "该"
-
-详见 [`references/presenter-mode.md`](references/presenter-mode.md)，或直接复制
-`templates/full-decks/presenter-mode-reveal/` 这个现成模板 —— 每一页都带完整
-150–300 字的示例逐字稿。
-
-## 一行命令安装
+## ⬇️ 安装
 
 ```bash
 npx skills add https://github.com/pakco77/DeckTaste
 ```
 
-装好后，任何支持 AgentSkill 的 agent（Claude Code / Codex / Cursor / OpenClaw 等）
-都能用这套能力做 PPT。对 agent 说：
-
-> "做一份 8 页的技术分享 slides，用 cyberpunk 主题"
-> "把这段 outline 变成投资人 pitch deck"
-> "做一个小红书图文，9 张，白底柔和风"
-> "做一份带演讲者模式的产品分享，我想要有逐字稿"
-
-## Skill 内容一览
-
-| | 数量 | 位置 |
-|---|---|---|
-| 🎤 **演讲者模式** | **新增** | `S` 键 / `?preview=N` |
-| 🎨 **主题** | **36** | `assets/themes/*.css` |
-| 📑 **Deck taste cards** | **24** | `templates/full-decks/<name>/` + 歸藏色板变体 |
-| 🧩 **单页布局** | **31** | `templates/single-page/*.html` |
-| ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
-| 💥 **Canvas FX 动画** | **20** | `assets/animations/fx/*.js` |
-| 🖼️ **Showcase deck** | 4 | `templates/*-showcase.html` |
-| 📸 **验证截图** | 56 | `scripts/verify-output/` |
-
-### 36 套主题
-
-`minimal-white`、`editorial-serif`、`soft-pastel`、`sharp-mono`、`arctic-cool`、
-`sunset-warm`、`catppuccin-latte`、`catppuccin-mocha`、`dracula`、`tokyo-night`、
-`nord`、`solarized-light`、`gruvbox-dark`、`rose-pine`、`neo-brutalism`、
-`glassmorphism`、`bauhaus`、`swiss-grid`、`terminal-green`、`xiaohongshu-white`、
-`rainbow-gradient`、`aurora`、`blueprint`、`memphis-pop`、`cyberpunk-neon`、
-`y2k-chrome`、`retro-tv`、`japanese-minimal`、`vaporwave`、`midcentury`、
-`corporate-clean`、`academic-paper`、`news-broadcast`、`pitch-deck-vc`、
-`magazine-bold`、`engineering-whiteprint`
-
-![36 主题 · 其中 8 个](docs/readme/themes.png)
-
-每个主题都是一份纯 CSS token 文件 —— 只需要换一行 `<link>` 就能给整份 deck
-换皮。在 `templates/theme-showcase.html` 里可以浏览全部（每一页用独立 iframe
-渲染，避免样式互相污染）。
-
-![24 张完整 deck 选择卡](docs/readme/templates.png)
-
-### 24 张完整 deck 选择卡
-
-15 套原生完整 deck 模板 + 9 套歸藏色板变体。原生部分包含 8 个从真实作品提炼的视觉语言、7 个通用场景脚手架：
-
-**提炼款**
-- `xhs-white-editorial` — 小红书白底杂志风
-- `graphify-dark-graph` — 暗底 + 力导向知识图谱
-- `knowledge-arch-blueprint` — 蓝图 / 架构图风
-- `hermes-cyber-terminal` — 终端 cyberpunk 风
-- `obsidian-claude-gradient` — 紫色渐变卡
-- `testing-safety-alert` — 红 / 琥珀警示风
-- `xhs-pastel-card` — 柔和马卡龙图文
-- `dir-key-nav-minimal` — 方向键极简
-
-**场景款**
-- `pitch-deck` — 投资人 pitch
-- `product-launch` — 产品发布会
-- `tech-sharing` — 技术分享
-- `weekly-report` — 周报
-- `xhs-post` — 小红书图文（9 页 3:4）
-- `course-module` — 教学模块
-- **`presenter-mode-reveal`** 🎤 — 完整分享模板，**每一页都带 150-300 字
-  的示例逐字稿**，围绕 `S` 键演讲者模式专门设计
-
-每个模板都是自包含的文件夹，用 scoped `.tpl-<name>` CSS，所以多个模板可以
-同时加载不会互相污染。在 `templates/full-decks-index.html` 可以看全套 gallery。
-
-![31 种单页布局](docs/readme/layouts.png)
-
-### 31 种单页布局
-
-cover · toc · section-divider · bullets · two-column · three-column ·
-big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
-flow-diagram · timeline · roadmap · mindmap · comparison · pros-cons ·
-todo-checklist · gantt · image-hero · image-grid · chart-bar · chart-line ·
-chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
-
-每个布局都带真实的示例数据，拖进 deck 立即看得到效果。
-
-![31 种布局通过真实模板文件自动循环播放](docs/readme/layouts-live.gif)
-
-*大 iframe 直接加载 `templates/single-page/<name>.html` 文件，每 2.8 秒
-自动切换到下一个布局。*
-
-![47 个动效 · 27 CSS + 20 Canvas FX](docs/readme/animations.png)
-
-### 27 个 CSS 动画 + 20 个 Canvas FX
-
-**CSS 动画（轻量）** — 方向性淡入、`rise-in`、`zoom-pop`、`blur-in`、
-`glitch-in`、`typewriter`（打字机）、`neon-glow`（霓虹光晕）、
-`shimmer-sweep`（流光）、`gradient-flow`（渐变流动）、`stagger-list`
-（列表错开入场）、`counter-up`（数字滚动）、`path-draw`（路径绘制）、
-`morph-shape`、`parallax-tilt`、`card-flip-3d`、`cube-rotate-3d`、
-`page-turn-3d`、`perspective-zoom`、`marquee-scroll`、`kenburns`、
-`ripple-reveal`、`spotlight`、…
-
-**Canvas FX（电影级）** — `particle-burst`（粒子爆发）、`confetti-cannon`
-（彩带）、`firework`（烟花）、`starfield`（星空）、`matrix-rain`
-（代码雨）、`knowledge-graph`（力导向知识图谱）、`neural-net`（神经网络
-脉冲）、`constellation`（星座连线）、`orbit-ring`（轨道环）、
-`galaxy-swirl`（星系漩涡）、`word-cascade`、`letter-explode`、
-`chain-react`、`magnetic-field`、`data-stream`、`gradient-blob`、
-`sparkle-trail`、`shockwave`、`typewriter-multi`、`counter-explosion`。
-每一个都是手写的 canvas 模块，进入 slide 时由 `fx-runtime.js` 自动初始化。
-
-## 快速开始（手动 / 安装后 / git clone 后）
+然后打开选择器（第二种方式能加载 iframe 实时预览）：
 
 ```bash
-# 从 base 模板新建一个 deck
-./scripts/new-deck.sh my-talk
+# 1) 只浏览卡片（预览需要服务器）
+open ~/.claude/skills/html-ppt/templates/style-picker.html
 
-# 浏览所有内容
-open templates/theme-showcase.html         # 全部 36 主题（iframe 隔离）
-open templates/layout-showcase.html        # 全部 31 布局
-open templates/animation-showcase.html     # 全部 47 动效
-open templates/full-decks-index.html       # 全部 15 个原生完整 deck
-
-# 用 headless Chrome 导出 PNG
-./scripts/render.sh templates/theme-showcase.html
-./scripts/render.sh examples/my-talk/index.html 12
+# 2) 推荐 —— 起个本地服务器，预览能加载
+cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+# 访问：http://localhost:8000/templates/style-picker.html
 ```
 
+点任意卡片 → 安装命令 + 现成 Prompt 已在剪贴板 → 粘给 Agent。
 
-## 自建自己的 deck
+![封面 · 实时预览](docs/readme/hero.gif)
 
-只想做自己的私有 deck，不需要走公共模板流程。最快有两种方式：
-
-- 在 `templates/style-picker.html` 的主题或模板页点击 `+ 自建 deck` 卡片，复制一段带约束的 Prompt 给 Codex / Claude / Hermes。
-- 手动脚手架到 `examples/`：
-
-```bash
-./scripts/new-deck.sh my-talk
-open examples/my-talk/index.html
-```
-
-自建 deck 默认只放在 `examples/`，不注册进 README / SKILL / references，也不进入 `templates/full-decks/`。生成完成后，Agent 会更新本地私有 registry：`examples/decktaste.local.json`。刷新 DeckTaste WebUI 后，这个 deck 会以 `local` 卡片显示在对应 tab 里。
-
-这个 registry 已被 `.gitignore` 忽略，只服务于你的本地 taste library。它不是公共模板审核机制，也不会改变仓库里的公开模板计数。
-
-如果要让网页里的 `+` 卡片直接启动 Agent、读取本地文件并写入 deck 目录，那才需要 MCP 或本地桥接服务；只是复制 Prompt 到 Codex 使用时不需要。
-
-## 键盘快捷键
-
-```
-← → Space PgUp PgDn Home End   翻页
-F                               全屏
-S                               打开演讲者窗口（磁吸卡片模式）
-N                               底部 notes 抽屉
-R                               重置计时器（演讲者窗口内）
-O                               slide 总览网格
-T                               切换主题（自动同步到演讲者窗口）
-A                               在当前 slide 循环演示一个动画
-#/N (URL)                       深链到第 N 页
-?preview=N (URL)                预览模式（只显示单页，隐藏 chrome）
-```
-
-## 项目结构
+## 🗂 目录结构
 
 ```
 DeckTaste/
-├── SKILL.md                      agent 入口
-├── README.md                     英文 README
-├── README.zh-CN.md               本文件
-├── references/                   详细文档
-│   ├── themes.md                 36 主题 + 使用场景
-│   ├── layouts.md                31 布局
-│   ├── animations.md             27 CSS + 20 FX 目录
-│   ├── full-decks.md             24 张 deck 选择卡
-│   ├── presenter-mode.md         🎤 演讲者模式 + 逐字稿指南
-│   └── authoring-guide.md        完整工作流
+├── SKILL.md                      agent 入口（skill 名仍为 html-ppt）
+├── README.md / README.zh-CN.md   文档（英文 / 中文）
+├── skills-lock.json              声明的 skill 依赖（guizang-social-card-skill）
+├── references/                   详细文档（themes / layouts / animations / full-decks / presenter-mode）
 ├── assets/
-│   ├── base.css                  共享 tokens + 基础组件
-│   ├── fonts.css                 web 字体引入
+│   ├── base.css                  共享设计 tokens + 基础组件
 │   ├── runtime.js                键盘导航 + 演讲者模式 + 总览
-│   ├── themes/*.css              36 主题 token 文件
-│   └── animations/
-│       ├── animations.css        27 个命名 CSS 动画
-│       ├── fx-runtime.js         进入 slide 自动初始化 [data-fx]
-│       └── fx/*.js               20 个 Canvas FX 模块
+│   ├── themes/*.css              36 个皮肤 token 文件
+│   └── animations/               27 CSS 动画 + 20 Canvas FX
 ├── templates/
+│   ├── style-picker.html         ★ DeckTaste WebUI（皮肤/模板/UI Taste/图文/使用说明）
 │   ├── deck.html                 最小起步模板
-│   ├── theme-showcase.html       iframe 隔离的主题 tour
-│   ├── layout-showcase.html      全部 31 布局
-│   ├── animation-showcase.html   47 动画 slide
-│   ├── full-decks-index.html     15 个原生 deck gallery
-│   ├── full-decks/<name>/        17 个 deck 文件夹（15 原生 + 2 个歸藏基础模板）
+│   ├── *-showcase.html           主题 / 布局 / 动画 tour
+│   ├── full-decks/<name>/        17 个 deck 文件夹（15 原生 + guizang-magazine/-swiss）
 │   └── single-page/*.html        31 个布局文件（带示例数据）
-├── scripts/
-│   ├── new-deck.sh               脚手架
-│   ├── render.sh                 headless Chrome → PNG
-│   └── verify-output/            56 张自测截图
-└── examples/demo-deck/           完整可运行的示例 deck
+├── scripts/                      new-deck.sh · render.sh · verify-output/
+└── examples/                     本地生成物 + decktaste.local.json（已 git 忽略）
 ```
 
-## 设计理念
+## 🎨 自建皮肤 / 模板
 
-- **Token 驱动的设计系统。** 所有颜色、圆角、阴影、字体决策都在
-  `assets/base.css` + 当前主题文件里。改一个变量，整份 deck 优雅地重排。
-- **Iframe 隔离预览。** 主题 / 布局 / 完整 deck 的 showcase 都用 `<iframe>`，
-  确保每个预览都是真实、独立的渲染结果。
-- **零构建。** 纯静态 HTML/CSS/JS。只有 webfont / highlight.js / chart.js
-  (可选) 走 CDN。
-- **资深设计师的默认值。** 字号规律、间距节奏、渐变、卡片处理都有态度 ——
-  绝不是 "PowerPoint 2006" 那种味道。
-- **中英双语一等公民。** 预导入了 Noto Sans SC / Noto Serif SC。
+选择器里有两张自建卡——**`+ 自建皮肤`**（🎨 皮肤页）和 **`+ 自建模板`**（📑 模板页）。点一张，把复制出的 Prompt 粘给 Agent。
+
+- 每次生成输出到唯一的 `examples/<slug>/`（自己取个有意义的 slug）。
+- 可以**累积添加多个**皮肤/模板——每个 append 到 `examples/decktaste.local.json`，互不覆盖，刷新选择器后都会以 `local` 卡显示。
+- 手动方式：`./scripts/new-deck.sh <slug>`，再 `open examples/<slug>/index.html`。
+
+`decktaste.local.json` 已被 `.gitignore` 忽略——它是你的本地 taste library，不是公共目录，也不改变公开计数。
+
+## 🧭 设计理念
+
+- **Token 驱动的设计系统。** 颜色、圆角、阴影、字体都在 `assets/base.css` + 当前皮肤里。改一个变量，整份 deck 优雅重排。
+- **先看见，再选择。** 每个预览都是真实、隔离的 `<iframe>` 渲染——不是截图、不是色卡。
+- **是菜单，不是生成器。** DeckTaste 复制可执行 Prompt，生成交给你的 Agent，因此模型无关、零构建。
+- **资深设计师的默认值。** 字号规律、间距节奏、渐变都有态度——绝不是 "PowerPoint 2006"。
+- **中英双语一等公民。** 预导入 Noto Sans SC / Noto Serif SC。
 
 ## 协议
 
-MIT © 2026 lewis &lt;sudolewis@gmail.com&gt;
+MIT © 2026 lewis &lt;sudolewis@gmail.com&gt;。上游 skill 各自保留其许可与署名（见 [致敬上游](#-致敬上游)）。
