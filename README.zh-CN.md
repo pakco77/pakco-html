@@ -10,9 +10,9 @@
 
 <div align="center">
 
-https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4
+[![DeckTaste — 60 秒 demo](docs/readme/launch-cover.jpg)](https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4)
 
-<em>▶ 播放器没加载？<a href="https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4">点这里看 60 秒 demo</a></em>
+<em>▶ 点封面播放 60 秒 demo</em>
 
 </div>
 
