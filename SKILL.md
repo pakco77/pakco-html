@@ -3,9 +3,11 @@ name: html-ppt
 description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
 ---
 
-# html-ppt — HTML PPT Picker
+# html-ppt — DeckTaste.skill
 
-Author professional HTML presentations as static files, with a visual picker for choosing themes, full-deck templates, layouts, and prompts. One theme file = one look. One layout file = one page type. One animation class = one entry effect.
+DeckTaste.skill is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes generate the deck with stable visual constraints.
+
+The underlying skill still authors professional HTML presentations as static files, with themes, full-deck taste cards, layouts, animations, and prompts. One theme file = one look. One layout file = one page type. One animation class = one entry effect.
 All pages share a token-based design system in `assets/base.css`.
 
 ## Install
@@ -19,7 +21,7 @@ One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 ## What the skill gives you
 
 - **36 themes** (`assets/themes/*.css`) — minimal-white, editorial-serif, soft-pastel, sharp-mono, arctic-cool, sunset-warm, catppuccin-latte/mocha, dracula, tokyo-night, nord, solarized-light, gruvbox-dark, rose-pine, neo-brutalism, glassmorphism, bauhaus, swiss-grid, terminal-green, xiaohongshu-white, rainbow-gradient, aurora, blueprint, memphis-pop, cyberpunk-neon, y2k-chrome, retro-tv, japanese-minimal, vaporwave, midcentury, corporate-clean, academic-paper, news-broadcast, pitch-deck-vc, magazine-bold, engineering-whiteprint
-- **24 deck picker cards** (`templates/full-decks/<name>/` + Guizang variants) — 15 native complete multi-slide decks with scoped `.tpl-<name>` CSS, plus 9 Guizang color variants. Native templates include 8 extracted looks (xhs-white-editorial, graphify-dark-graph, knowledge-arch-blueprint, hermes-cyber-terminal, obsidian-claude-gradient, testing-safety-alert, xhs-pastel-card, dir-key-nav-minimal) and 7 scenario scaffolds (pitch-deck, product-launch, tech-sharing, weekly-report, xhs-post 3:4, course-module, **presenter-mode-reveal** — 演讲者模式专用)
+- **24 deck taste cards** (`templates/full-decks/<name>/` + Guizang variants) — 15 native complete multi-slide decks with scoped `.tpl-<name>` CSS, plus 9 Guizang color variants. Native templates include 8 extracted looks (xhs-white-editorial, graphify-dark-graph, knowledge-arch-blueprint, hermes-cyber-terminal, obsidian-claude-gradient, testing-safety-alert, xhs-pastel-card, dir-key-nav-minimal) and 7 scenario scaffolds (pitch-deck, product-launch, tech-sharing, weekly-report, xhs-post 3:4, course-module, **presenter-mode-reveal** — 演讲者模式专用)
 - **31 layouts** (`templates/single-page/*.html`) with realistic demo data
 - **27 CSS animations** (`assets/animations/animations.css`) via `data-anim`
 - **20 canvas FX animations** (`assets/animations/fx/*.js`) via `data-fx` — particle-burst, confetti-cannon, firework, starfield, matrix-rain, knowledge-graph (force-directed), neural-net (pulses), constellation, orbit-ring, galaxy-swirl, word-cascade, letter-explode, chain-react, magnetic-field, data-stream, gradient-blob, sparkle-trail, shockwave, typewriter-multi, counter-explosion

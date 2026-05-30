@@ -1,19 +1,31 @@
-# Contributing
+# Maintainer notes
 
-Thanks for helping improve HTML PPT Picker. This repository is a static AgentSkill: templates, themes, layouts, and examples should work without a build step.
+HTML PPT Picker is a static AgentSkill: templates, themes, layouts, examples,
+and the picker should work without a build step.
 
-## What belongs in a contribution
+This repo does not currently operate a public deck-review workflow. Custom decks
+created by users or agents are private artifacts by default.
 
-### Good additions
+## Create a custom deck locally
 
-- A reusable theme in `assets/themes/<name>.css`
-- A reusable single-page layout in `templates/single-page/<name>.html`
-- A polished full-deck template in `templates/full-decks/<name>/`
-- Documentation or bug fixes for the picker, runtime, presenter mode, or template authoring
+Fastest path: open `templates/style-picker.html`, click the `+ Custom deck` card
+in either the Themes or Decks tab, then paste the copied prompt into Codex /
+Claude / Hermes.
 
-### Keep experiments out of public indexes
+Manual path:
 
-Generated decks used only for testing should stay in `examples/` or a scratch branch. Do not add test-only decks to:
+```bash
+./scripts/new-deck.sh my-talk
+open examples/my-talk/index.html
+```
+
+For a more opinionated starting point, copy an existing folder from
+`templates/full-decks/<name>/` into `examples/my-talk/`, then replace the content
+while keeping the scoped CSS class pattern.
+
+Custom decks should stay in `examples/` unless the maintainer explicitly decides
+to ship one in the public catalog. Do not register experimental or private decks
+in:
 
 - `templates/style-picker.html`
 - `templates/full-decks-index.html`
@@ -21,48 +33,60 @@ Generated decks used only for testing should stay in `examples/` or a scratch br
 - `README.md` / `README.zh-CN.md`
 - `SKILL.md`
 
-A deck should only be registered when it is intended to be shipped as a reusable template.
+Private decks and themes can still appear in the local WebUI through
+`examples/decktaste.local.json`. That file is ignored by git and is intended as
+a per-user taste library. It is not part of the public catalog.
 
-## Create a custom deck locally
+Minimal local registry shape:
 
-Fastest path:
-
-```bash
-./scripts/new-deck.sh my-talk
-open examples/my-talk/index.html
+```json
+{
+  "decks": [
+    {
+      "id": "my-talk",
+      "labelZh": "我的私有 Deck",
+      "labelEn": "My Private Deck",
+      "descZh": "本地 taste",
+      "descEn": "Local taste",
+      "path": "../examples/my-talk/index.html",
+      "author": "Local",
+      "presenter": true,
+      "prompt": "Please continue using the visual taste in examples/my-talk/."
+    }
+  ],
+  "themes": [
+    {
+      "id": "my-theme",
+      "labelZh": "我的本地主题",
+      "labelEn": "My Local Theme",
+      "css": "../examples/my-theme/theme.css",
+      "author": "Local"
+    }
+  ]
+}
 ```
 
-For a more opinionated starting point, copy an existing folder from `templates/full-decks/<name>/` into `examples/my-talk/`, then replace the content while keeping the scoped CSS class pattern.
+## Maintainer-only catalog changes
 
-## Ship a new full-deck template
+Adding a theme, layout, or public full-deck template is a maintainer decision,
+not the default output of custom deck generation.
 
-1. Add a folder: `templates/full-decks/<slug>/`
-2. Include at least:
-   - `index.html`
-   - `style.css`
-   - optional `README.md`
-3. Scope CSS with `.tpl-<slug>` so previews do not collide with other decks.
-4. Use shared runtime/assets where possible:
-   - `../../../assets/runtime.js` from full-deck folders when needed
-   - `../../../assets/animations/...` for animation assets
-5. Register the deck in every public index/doc:
-   - `templates/style-picker.html` `DECKS` array and tab counts in both languages
-   - `templates/full-decks-index.html`
-   - `references/full-decks.md`
-   - `README.md`
-   - `README.zh-CN.md`
-   - `SKILL.md`
-6. Recount and verify before opening a PR.
+When a catalog item is intentionally shipped, update all public indexes and docs
+in the same change:
 
-## Ship a new theme
+- `templates/style-picker.html`
+- `templates/full-decks-index.html`
+- `references/full-decks.md`
+- `references/themes.md` when adding a theme
+- `README.md`
+- `README.zh-CN.md`
+- `SKILL.md`
 
-1. Add `assets/themes/<slug>.css`.
-2. Define/override CSS tokens rather than hard-coding styles in templates.
-3. Register it in:
-   - `templates/style-picker.html` `THEMES` array and tab counts in both languages
-   - `references/themes.md`
-   - README count lines in both languages
-   - `SKILL.md`
+Keep full-deck CSS scoped with `.tpl-<slug>` so previews do not collide with
+other decks. Use shared runtime/assets where possible:
+
+- `../../../assets/runtime.js` from full-deck folders when needed
+- `../../../assets/animations/...` for animation assets
 
 ## Verification checklist
 
@@ -117,4 +141,5 @@ Keep upstream attribution to:
 - `lewislulu/html-ppt-skill`
 - `op7418/guizang-ppt-skill`
 
-Do not add company-specific logos, private brand names, or proprietary color systems to the public template set unless the maintainer explicitly approves it.
+Do not add company-specific logos, private brand names, or proprietary color
+systems to the public template set unless the maintainer explicitly approves it.

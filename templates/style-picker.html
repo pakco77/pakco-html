@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>HTML PPT Picker</title>
+<title>DeckTaste.skill</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../assets/fonts.css">
 <style>
@@ -61,6 +61,59 @@
   .card:hover{transform:translateY(-2px);border-color:rgba(167,139,250,.4);
     box-shadow:0 12px 30px rgba(0,0,0,.4)}
   .card.copied{border-color:#1aaf6c;box-shadow:0 0 0 2px rgba(26,175,108,.3)}
+  .card.custom-card{min-height:280px;border-style:dashed;border-color:rgba(167,139,250,.45);
+    background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(244,114,182,.08) 52%,rgba(103,232,249,.08))}
+  .card.custom-card:hover{border-color:rgba(244,114,182,.72);box-shadow:0 18px 46px rgba(167,139,250,.22)}
+  .custom-preview{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(circle at 28% 24%,rgba(167,139,250,.28),transparent 34%),
+      radial-gradient(circle at 72% 68%,rgba(103,232,249,.18),transparent 38%),
+      rgba(255,255,255,.03)}
+  .custom-plus{width:76px;height:76px;border-radius:24px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#a78bfa,#f472b6);color:#fff;font-size:52px;line-height:1;font-weight:300;
+    box-shadow:0 18px 44px rgba(167,139,250,.35)}
+  .custom-card .meta{padding:16px 18px}
+  .custom-card .name{font-size:16px}
+  .custom-card .desc{font-size:12px;color:#b8c0d4}
+  .ui-demo{aspect-ratio:16/10;padding:18px;background:#10131c;position:relative;overflow:hidden;color:#f7f8fb;
+    --ui-panel:rgba(255,255,255,.08);--ui-border:rgba(255,255,255,.14);--ui-muted:rgba(255,255,255,.58);--ui-accent:#67e8f9}
+  .ui-demo:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 20% 12%,var(--ui-glow-a,rgba(103,232,249,.24)),transparent 28%),radial-gradient(circle at 84% 72%,var(--ui-glow-b,rgba(167,139,250,.24)),transparent 34%);opacity:.9}
+  .ui-stage{position:relative;height:100%;display:flex;flex-direction:column;gap:10px}
+  .ui-topbar{height:26px;border:1px solid var(--ui-border);background:var(--ui-panel);border-radius:9px;
+    display:flex;align-items:center;justify-content:space-between;padding:0 10px;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .ui-nav{display:flex;gap:5px}.ui-nav span{width:26px;height:6px;border-radius:99px;background:rgba(255,255,255,.24);display:block}
+  .ui-pill{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--ui-border);border-radius:99px;
+    padding:4px 8px;font-size:8px;font-weight:800;letter-spacing:.04em;color:var(--ui-accent);background:rgba(255,255,255,.06)}
+  .ui-body{min-height:0;flex:1;display:grid;gap:10px}
+  .ui-body.two{grid-template-columns:.8fr 1.2fr}.ui-body.three{grid-template-columns:.72fr 1fr .78fr}
+  .ui-pane,.ui-widget,.ui-phone,.ui-shot{border:1px solid var(--ui-border);background:var(--ui-panel);border-radius:14px;min-width:0;overflow:hidden}
+  .ui-pane{padding:12px;display:flex;flex-direction:column;gap:9px}.ui-pane.tight{padding:9px;gap:7px}
+  .ui-title{font-size:22px;line-height:.92;font-weight:900;letter-spacing:-.04em}.ui-title.small{font-size:16px;line-height:1}
+  .ui-sub{font-size:8px;line-height:1.35;color:var(--ui-muted);font-weight:600}
+  .ui-btnrow{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}.ui-btn{height:20px;border-radius:7px;background:var(--ui-accent);color:#071018;padding:0 9px;display:flex;align-items:center;font-size:8px;font-weight:900}.ui-btn.ghost{background:rgba(255,255,255,.08);color:inherit;border:1px solid var(--ui-border)}
+  .ui-metric{font-size:26px;font-weight:950;letter-spacing:-.05em;line-height:1}.ui-caption{font-size:7px;color:var(--ui-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:800}
+  .ui-bars{display:flex;align-items:end;gap:5px;height:44px;margin-top:auto}.ui-bars span{flex:1;border-radius:5px 5px 2px 2px;background:linear-gradient(180deg,var(--ui-accent),rgba(255,255,255,.16))}
+  .ui-list{display:flex;flex-direction:column;gap:6px}.ui-row{display:flex;align-items:center;gap:7px;border:1px solid var(--ui-border);background:rgba(255,255,255,.05);border-radius:9px;padding:6px}.ui-dot{width:9px;height:9px;border-radius:50%;background:var(--ui-accent);flex:0 0 auto}.ui-copyline{height:6px;border-radius:99px;background:rgba(255,255,255,.22);flex:1}.ui-copyline.short{max-width:54%}
+  .ui-phone{width:82px;margin:auto;padding:8px;border-radius:22px;background:#0b0f19}.ui-screen{height:132px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));padding:9px;display:flex;flex-direction:column;gap:7px}.ui-card-mini{border-radius:10px;background:rgba(255,255,255,.12);border:1px solid var(--ui-border);padding:7px}
+  .ui-shot{display:grid;grid-template-rows:28px 1fr;background:#fff;color:#10131c}.ui-shot-head{background:#edf0f7;display:flex;align-items:center;gap:5px;padding:0 8px}.ui-shot-head span{width:6px;height:6px;border-radius:50%;background:#aab0c0}.ui-shot-main{padding:12px;display:grid;grid-template-columns:1fr .8fr;gap:10px}.ui-image{border-radius:12px;background:linear-gradient(135deg,#111827,#5eead4 54%,#f472b6);min-height:72px}.ui-code{border-radius:10px;background:#111827;padding:8px;display:flex;flex-direction:column;gap:5px}.ui-code span{height:5px;border-radius:99px;background:#67e8f9}.ui-code span:nth-child(2n){background:#a78bfa;width:76%}
+  .ui-demo.minimal{background:#f7f8fb;color:#10131c;--ui-panel:#fff;--ui-border:rgba(15,23,42,.12);--ui-muted:#64748b;--ui-accent:#111827;--ui-glow-a:rgba(15,23,42,.08);--ui-glow-b:rgba(148,163,184,.16)}
+  .ui-demo.brutalist{background:#e8e000;color:#050505;--ui-panel:#050505;--ui-border:#050505;--ui-muted:#d8d8d8;--ui-accent:#e8e000;--ui-glow-a:transparent;--ui-glow-b:transparent}
+  .ui-demo.brutalist .ui-pane,.ui-demo.brutalist .ui-widget,.ui-demo.brutalist .ui-topbar{border:2px solid #050505;border-radius:2px;box-shadow:7px 7px 0 #fff;color:#fff}
+  .ui-demo.soft{background:#f6efe8;color:#5a3e36;--ui-panel:rgba(255,255,255,.72);--ui-border:rgba(155,112,84,.18);--ui-muted:#967568;--ui-accent:#9b7054;--ui-glow-a:rgba(155,112,84,.18);--ui-glow-b:rgba(244,205,178,.34)}
+  .ui-demo.gpt{background:#090b12;--ui-panel:rgba(13,18,31,.86);--ui-border:rgba(103,232,249,.2);--ui-accent:#67e8f9;--ui-glow-a:rgba(103,232,249,.26);--ui-glow-b:rgba(167,139,250,.2)}
+  .ui-demo.legacy{background:#fdfdfb;color:#171717;--ui-panel:#fff;--ui-border:#d7d7d2;--ui-muted:#757575;--ui-accent:#2563eb;--ui-glow-a:rgba(37,99,235,.12);--ui-glow-b:rgba(0,0,0,.04)}
+  .ui-demo.redesign{background:#111827;--ui-panel:rgba(255,255,255,.08);--ui-border:rgba(248,113,113,.32);--ui-accent:#f87171;--ui-glow-a:rgba(248,113,113,.26);--ui-glow-b:rgba(251,191,36,.14)}
+  .ui-demo.imagecode{background:#0c1020;--ui-panel:rgba(255,255,255,.08);--ui-border:rgba(94,234,212,.24);--ui-accent:#5eead4;--ui-glow-a:rgba(94,234,212,.24);--ui-glow-b:rgba(244,114,182,.2)}
+  .ui-demo.stitch{background:#f8fafc;color:#0f172a;--ui-panel:#fff;--ui-border:rgba(37,99,235,.16);--ui-muted:#64748b;--ui-accent:#2563eb;--ui-glow-a:rgba(37,99,235,.12);--ui-glow-b:rgba(20,184,166,.14)}
+  .ui-demo .badge{position:absolute;top:10px;left:10px;background:rgba(103,232,249,.88);color:#071018;
+    font-size:10px;padding:2px 8px;border-radius:4px;font-weight:700;z-index:2;font-family:'JetBrains Mono',monospace}
+  /* 配图卡片预览舞台(社交卡海报按选中比例居中展示) */
+  .card-demo{aspect-ratio:4/3;display:grid;place-items:center;padding:18px;position:relative;overflow:hidden;
+    background:radial-gradient(circle at 28% 18%,rgba(167,139,250,.12),transparent 42%),radial-gradient(circle at 78% 82%,rgba(103,232,249,.1),transparent 44%),#0c0d12}
+  .card-demo .badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.72);color:#fff;
+    font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;z-index:2;font-family:'JetBrains Mono',monospace}
+  .card-demo .badge.count{left:auto;right:10px;background:rgba(167,139,250,.85);color:#fff;font-weight:700}
+  .meta .enter{margin:8px 0 0;font-size:11px;color:#67e8f9;font-weight:600;display:flex;align-items:center;gap:5px}
   .preview{aspect-ratio:16/10;background:#fff;position:relative;overflow:hidden}
   .preview iframe{position:absolute;inset:0;width:166.67%;height:166.67%;border:0;
     transform:scale(.6);transform-origin:0 0;pointer-events:none}
@@ -68,6 +121,8 @@
     font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;z-index:2}
   .preview .badge.scenario{background:rgba(167,139,250,.85)}
   .preview .badge.extracted{background:rgba(244,114,182,.85)}
+  .preview .badge.local{background:rgba(26,175,108,.88)}
+  .preview .badge.ui{background:rgba(103,232,249,.85);color:#071018}
 
   /* Copy button on each card (no propagation) */
   .copy-btn{position:absolute;top:8px;right:8px;z-index:3;background:rgba(167,139,250,.85);
@@ -92,6 +147,7 @@
   .meta .feat span{padding:1px 6px;border-radius:3px;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
   .meta .feat .yes{background:rgba(26,175,108,.15);color:#1aaf6c}
   .meta .feat .no{background:rgba(255,255,255,.05);color:#5a6076}
+  .meta .feat .kind{background:rgba(103,232,249,.12);color:#67e8f9}
   .empty{padding:80px 20px;text-align:center;color:#5a6076}
 
   /* Modal */
@@ -113,6 +169,39 @@
   .modal-name{position:absolute;top:14px;left:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
     padding:8px 16px;border-radius:18px;font-size:13px;font-weight:600;
     font-family:'Inter','PingFang SC',sans-serif}
+
+  /* 配图预览工作台(切配色 + 选比例 + 复制) */
+  .card-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);
+    z-index:110;display:none;align-items:center;justify-content:center;padding:32px}
+  .card-modal.open{display:flex}
+  .card-studio{position:relative;width:min(1180px,95vw);max-height:90vh;background:#13141a;
+    border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;
+    display:grid;grid-template-columns:1.35fr 1fr;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+  .cs-stage{display:grid;place-items:center;padding:36px;min-height:520px;overflow:hidden;
+    background:radial-gradient(circle at 28% 18%,rgba(167,139,250,.14),transparent 44%),radial-gradient(circle at 78% 84%,rgba(103,232,249,.1),transparent 46%),#0c0d12}
+  .cs-stage .sc-poster{max-height:100%}
+  .cs-panel{padding:30px 30px 26px;display:flex;flex-direction:column;gap:18px;overflow-y:auto}
+  .cs-tone{margin:0;font-size:20px;font-weight:800;letter-spacing:-.01em;padding-right:34px}
+  .cs-tone-desc{margin:0;font-size:13px;line-height:1.6;color:#aab0c0}
+  .cs-group{display:flex;flex-direction:column;gap:9px}
+  .cs-label{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6a7086;
+    font-family:'JetBrains Mono',monospace}
+  .cs-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .cs-chip{display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:9px;cursor:pointer;
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#cfd4e2;font-size:12px;
+    font-weight:600;font-family:'Inter','PingFang SC',sans-serif;transition:.15s}
+  .cs-chip:hover{border-color:rgba(255,255,255,.28)}
+  .cs-chip.active{border-color:#67e8f9;background:rgba(103,232,249,.12);color:#fff}
+  .cs-chip .sw{width:14px;height:14px;border-radius:4px;border:1px solid rgba(255,255,255,.25);flex:0 0 auto}
+  .cs-chip.ratio{font-family:'JetBrains Mono',monospace;letter-spacing:.04em}
+  .cs-spec{margin:0;font-size:12px;color:#8a90a4;font-family:'JetBrains Mono',monospace}
+  .cs-copy{margin-top:auto;background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff;border:0;
+    padding:13px 18px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700;
+    font-family:'Inter','PingFang SC',sans-serif;transition:.15s}
+  .cs-copy:hover{transform:translateY(-1px);box-shadow:0 10px 26px rgba(167,139,250,.4)}
+  .cs-copy.ok{background:#1aaf6c}
+  .cs-note{margin:0;font-size:11px;color:#5a6076;text-align:center}
+  @media (max-width:760px){.card-studio{grid-template-columns:1fr;max-height:94vh}.cs-stage{min-height:300px;padding:24px}}
 
   /* Toast */
   .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);
@@ -167,7 +256,7 @@
 
 <header>
   <div class="brand">
-    <h1>HTML PPT Picker <span class="accent">· Visual deck selector</span></h1>
+    <h1>DeckTaste.skill <span class="accent">· Visual taste menu</span></h1>
     <div class="sub" id="brand-sub"></div>
   </div>
 
@@ -193,6 +282,8 @@
   <div class="tabs" id="tabs">
     <button class="tab active" data-view="themes"></button>
     <button class="tab" data-view="decks"></button>
+    <button class="tab" data-view="ui"></button>
+    <button class="tab" data-view="cards"></button>
     <button class="tab" data-view="guide"></button>
   </div>
 </header>
@@ -219,24 +310,52 @@
   </div>
 </div>
 
+<div class="card-modal" id="card-modal">
+  <div class="card-studio">
+    <button class="modal-close" id="card-close">×</button>
+    <div class="cs-stage" id="cs-stage"></div>
+    <div class="cs-panel">
+      <div>
+        <p class="cs-tone" id="cs-tone-name"></p>
+        <p class="cs-tone-desc" id="cs-tone-desc"></p>
+      </div>
+      <div class="cs-group">
+        <span class="cs-label" id="cs-color-label"></span>
+        <div class="cs-chips" id="cs-colors"></div>
+      </div>
+      <div class="cs-group">
+        <span class="cs-label" id="cs-ratio-label"></span>
+        <div class="cs-chips" id="cs-ratios"></div>
+      </div>
+      <p class="cs-spec" id="cs-spec"></p>
+      <button class="cs-copy" id="cs-copy"></button>
+      <p class="cs-note" id="cs-note"></p>
+    </div>
+  </div>
+</div>
+
 <script>
 const REPO_URL = 'https://github.com/pakco77/html-ppt-picker';
 const UPSTREAM_URL = 'https://github.com/lewislulu/html-ppt-skill';
+const GUIZANG_URL = 'https://github.com/op7418/guizang-ppt-skill';
+const TASTE_URL = 'https://github.com/Leonxlnx/taste-skill';
 const INSTALL_CMD = 'npx skills add ' + REPO_URL;
 
 /* ───── i18n strings ───── */
 const I18N = {
   zh: {
     htmlLang: 'zh-CN',
-    sub: '预览主题与模板，一键复制 Prompt · Made by Pakco · ',
+    sub: '给 AI Agent 用的视觉审美菜单：看见风格，点击复制，让 Agent 照着做 · Made by Pakco · ',
     forkLink: 'Fork from @lewislulu & @guizang',
     installTitle: '点击复制安装命令',
     copy: '复制',
     copied: '✓ 已复制',
     search: '搜索名称…',
     sizeS: '小', sizeM: '中', sizeL: '大',
-    tabThemes: '🎨 主题 (36)',
+    tabThemes: '🎨 皮肤 (36)',
     tabDecks: '📑 模板 (24)',
+    tabUITaste: '🧩 UI Taste (4)',
+    tabCards: '🖼 图文 (2 基调)',
     tabGuide: '📖 使用说明',
     empty: '没有匹配的风格',
     toastDefault: '已复制 Prompt — 粘到 Claude / Codex / Hermes 即用',
@@ -251,9 +370,20 @@ const I18N = {
     zoomHint: 'CLICK TO ZOOM',
     badgeScenario: 'scenario',
     badgeExtracted: 'extracted',
-    themeDemoKicker: (n)=>`主题 · ${n}`,
+    themeDemoKicker: (n)=>`皮肤 · ${n}`,
     themeDemoLede: '一图胜千言。同一份 demo 内容，换一个 CSS token 文件就换皮。',
     themeDemoKpiLabel: '满意度',
+    customThemeName: '+ 自建皮肤',
+    customThemeDesc: '自建一套皮肤（主题 CSS token）：复用 Lewis 的 deck.html / base.css / runtime 架构，生成到 examples/&lt;slug&gt;/。可重复添加多个，每次取新名互不覆盖。',
+    customDeckName: '+ 自建模板',
+    customDeckDesc: '自建一套模板：从最接近的 full-deck 复制并尽量还原原效果，生成到 examples/&lt;slug&gt;/。可重复添加多个，每次取新名互不覆盖。',
+    uiTasteNoPresenter: '无演示模式',
+    cardImportNote: '只导入 prompt，不在本页生成图片',
+    cardModeEditorial: '电子杂志 × 墨水',
+    cardModeSwiss: '瑞士国际主义',
+    cardEnterHint: '点击预览 · 切配色 + 选尺寸',
+    csColorLabel: '颜色分支',
+    csRatioLabel: '尺寸 / 比例',
     guide: {
       h1: '一行命令安装',
       h1desc: '装好后，任何支持 AgentSkill 的 agent（Claude Code / Codex / Cursor / Hermes Agent 等）都能调用这套能力。',
@@ -262,23 +392,26 @@ const I18N = {
       linkRelease: '🏷 Releases',
       linkUpstream: '🙏 致敬上游 lewislulu',
       linkGuizang: '🙏 致敬上游 guizang',
+      linkTaste: '🙏 致敬上游 taste.skill',
       terminalTip: '💻 <b style="color:#cfd4e2">如何打开终端：</b>Mac → 聚焦搜索（⌘ Space）输入"终端"或"Terminal"；Windows → 按 Win 键搜索"PowerShell"或"cmd"。',
       h2: '如何让 Agent 用',
-      h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 主题</code> 或 <code>📑 模板</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。',
+      h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 皮肤</code>、<code>📑 模板</code>、<code>🧩 UI Taste</code> 或 <code>🖼 图文</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。<code>🖼 图文</code> 标签点开后，在预览里切换配色分支、选尺寸（小红书 3:4 / 公众号封面 / 方形 1:1），再复制。<br><b style="color:#cfd4e2">皮肤 vs 模板：</b>皮肤只换配色字体（同一套布局换皮），模板是有独立 HTML 结构的完整版式（换骨）。',
       h2steps: '<b style="color:#cfd4e2">四步流程：</b>',
       steps: [
         '装好 skill（上面那条命令）',
-        '在 picker 里挑一个主题 / 模板，点卡复制 Prompt',
+        '在 DeckTaste 里挑一个可见风格，点卡复制 Prompt',
         '粘到 Agent，补内容，回车',
         'Agent 生成 deck 目录，浏览器打开 <code>index.html</code> 即用'
       ],
       h3: '例句（可直接说给 Agent 听）',
       examples: [
-        '"做一份 8 页的技术分享 slides，用 cyberpunk-neon 主题"',
-        '"把这段 outline 变成投资人 pitch deck，用 pitch-deck-vc 主题"',
+        '"做一份 8 页的技术分享 slides，用 cyberpunk-neon 皮肤"',
+        '"把这段 outline 变成投资人 pitch deck，用 pitch-deck-vc 皮肤"',
         '"做一个小红书图文，9 张，用 xhs-pastel-card 模板"',
         '"做一份带演讲者模式的产品分享，用 presenter-mode-reveal 模板，每页带 200 字逐字稿"',
-        '"做一份团队周报，用 weekly-report 模板，包含 KPI / 进展 / 阻塞项"'
+        '"做一份团队周报，用 weekly-report 模板，包含 KPI / 进展 / 阻塞项"',
+        '"给这个 SaaS 页面做 UI，不做 PPT，用 UI Taste 的高级柔和方向；如果是已有项目先审计再改"',
+        '"做一组小红书图文，用图文标签的靛蓝瓷配色，3:4，沿用 guizang-social-card-skill 的工作流"'
       ],
       h4: '键盘快捷键（生成的 deck 自带运行时）',
       shortcuts: [
@@ -294,18 +427,18 @@ const I18N = {
         ['?preview=N', '预览模式（只显示单页，隐藏 chrome）']
       ],
       h5: '资源 & 文档',
-      h6: '自建 / 贡献自己的 deck',
-      h6body: '<b style="color:#fff">私有 deck：</b>先运行 <code>./scripts/new-deck.sh my-talk</code> 放到 <code>examples/</code>。<br><b style="color:#fff">要开源成模板：</b>放到 <code>templates/full-decks/&lt;slug&gt;/</code>，同步注册 picker / README / SKILL / references，然后跑验证清单。',
+      h6: '自建自己的 taste',
+      h6body: '<b style="color:#fff">最短路径：</b>在皮肤或模板页点击 <code>+ 自建皮肤</code> / <code>+ 自建模板</code> 卡片，复制一段带约束的 Prompt 给 Agent。它会基于 lewislulu/html-ppt-skill 的架构新建 <code>examples/&lt;slug&gt;/</code>，复用 <code>assets/base.css</code>、主题 token、<code>runtime.js</code>、<code>.slide</code> 与 <code>&lt;aside class="notes"&gt;</code>，不注册进 picker，也不进入公共目录。<b>可以反复自建多个</b>，每次取一个新的 slug，append 到 <code>examples/decktaste.local.json</code>，互不覆盖，刷新后都会以 local 卡显示。<br><b style="color:#fff">关于 MCP：</b>只是复制 Prompt 到 Codex / Claude / Hermes 时不需要 MCP；只有想让网页里的按钮直接唤起 Agent、读取本地文件或写入目录，才需要额外接入 MCP / 本地桥接服务。',
       docLinks: [
         ['/blob/main/README.zh-CN.md', '📖 中文 README'],
         ['/blob/main/README.md', '📖 English README'],
-        ['/blob/main/CONTRIBUTING.md', '🤝 贡献 / 自建 deck 指南'],
         ['/blob/main/SKILL.md', '🤖 SKILL.md（给 Agent 看的）'],
         ['/blob/main/references/themes.md', '🎨 主题清单'],
         ['/blob/main/references/full-decks.md', '📑 完整 Deck 模板'],
         ['/blob/main/references/presenter-mode.md', '🎤 演讲者模式指南']
       ],
-      tip: '💡 提示：所有主题/模板均为纯静态 HTML/CSS/JS，只用 CDN 字体。生成的 deck 离线也能跑。语言切换覆盖整个 picker UI 和主题预览 demo；full-deck 内部内容的双语化（每页正文）是后续工作 — 当前 deck 用 <code>?lang=en</code> 参数加载，模板可逐步读取该参数实现真双语。'
+      localRegistry: '本地私有 taste：生成后刷新 WebUI 即可看到',
+      tip: '💡 提示：DeckTaste 当前负责可视化选择与复制可执行 Prompt，不负责直接生成。自建 deck / theme 会通过 <code>examples/decktaste.local.json</code> 在本地 WebUI 展示，不进入公共模板库。UI Taste 是 Taste.skill 的极简可视化入口，只复制 UI coding prompt，不包含演示模式。配图风格更准确地说是“配图 Prompt”，只输出给图片模型使用的提示词与比例约束。'
     },
     promptTheme: (name, label) => `请使用 html-ppt skill 帮我做一份 PPT。
 - 主题(theme) = ${name}（${label}）
@@ -321,25 +454,141 @@ const I18N = {
 - 保留模板的 .tpl-${name} 作用域 CSS 和所有视觉元素
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
 请生成完整可直接浏览器打开的 HTML。`,
+    promptCustomTheme: () => `请使用 html-ppt skill 帮我自建一份私有 HTML deck 或私有主题。
+- 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
+- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的数组里，绝不删除或覆盖已有 entry
+- 本地 WebUI 展示：生成完成后，新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck 或 theme
+  registry 格式示例：
+  {
+    "decks": [
+      {
+        "id": "<slug>",
+        "labelZh": "我的私有 Deck",
+        "labelEn": "My Private Deck",
+        "descZh": "基于某个模板重构的本地 taste",
+        "descEn": "Local taste rebuilt from a source template",
+        "path": "../examples/<slug>/index.html",
+        "author": "Local",
+        "presenter": true,
+        "prompt": "请基于 examples/<slug>/ 的风格继续生成同风格 deck。"
+      }
+    ],
+    "themes": [
+      {
+        "id": "my-theme",
+        "labelZh": "我的本地主题",
+        "labelEn": "My Local Theme",
+        "descZh": "本地私有主题",
+        "descEn": "Local private theme",
+        "css": "../examples/<slug>/theme.css",
+        "author": "Local",
+        "prompt": "请使用 examples/<slug>/theme.css 的主题风格生成 HTML deck。"
+      }
+    ]
+  }
+  如果文件已存在，请保留其它 entries，只按 id 更新本次生成的 deck/theme
+- 起点：使用 lewislulu/html-ppt-skill 的模板代码架构，而不是从零写页面
+- 架构要求：
+  1. 以 templates/deck.html 的 HTML 结构为基线
+  2. 引入 assets/base.css、assets/fonts.css、一个合适的 assets/themes/*.css、assets/animations/animations.css
+  3. 必须保留 assets/runtime.js，支持 ← → / T / A / F / S / O / N
+  4. 每页使用 <section class="slide">，演讲备注放进 <aside class="notes"> 或 <div class="notes">
+  5. 需要页面类型时优先复用 templates/single-page/*.html 的结构，再替换内容
+- 还原要求：如果我提供了参考模板 / 截图 / 旧 PPT / 网页，请尽可能还原原模板的布局、字体层级、动效节奏、装饰元素和主题氛围，但用 html-ppt 的 token 与运行时重构
+- 内容：[在此粘贴你的主题、受众、页数、内容大纲或参考文件说明]
+请输出完整可直接浏览器打开的 HTML deck 或主题 CSS，说明入口文件路径，并提醒我刷新 DeckTaste WebUI。`,
+    promptCustomDeck: () => `请使用 html-ppt skill 帮我自建一份私有 full-deck。
+- 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
+- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的 decks 数组里，绝不删除或覆盖已有 entry
+- 本地 WebUI 展示：生成完成后，新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck
+  registry 格式示例：
+  {
+    "decks": [
+      {
+        "id": "<slug>",
+        "labelZh": "我的私有 Deck",
+        "labelEn": "My Private Deck",
+        "descZh": "基于 full-deck 模板重构的本地 taste",
+        "descEn": "Local taste rebuilt from a full-deck template",
+        "path": "../examples/<slug>/index.html",
+        "author": "Local",
+        "presenter": true,
+        "prompt": "请基于 examples/<slug>/ 的风格继续生成同风格 deck。"
+      }
+    ]
+  }
+  如果文件已存在，请保留其它 entries，只按 id 更新 <slug>
+- 起点：从最接近的 templates/full-decks/<name>/ 复制一份到 examples/<slug>/，再替换为我的内容
+- 代码架构要求：
+  1. 尽量沿用 lewislulu/html-ppt-skill 的 full-deck 架构：index.html + scoped style.css + .tpl-<slug> 根 class
+  2. 保留 assets/base.css、assets/fonts.css、assets/runtime.js、必要的 animations / fx-runtime 引用
+  3. 保留模板原有的 chrome slots、slide-number、主题切换、演讲者模式兼容逻辑
+  4. 每一页仍是 <section class="slide">，逐字稿只写入 <aside class="notes"> 或 <div class="notes">
+  5. 不修改原模板源文件，只在 examples/<slug>/ 里生成我的版本
+- 还原要求：尽可能还原原模板效果，包括视觉比例、布局密度、背景层、装饰元素、动效节奏、组件样式和 presenter mode 支持
+- 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构 / 参考模板名]
+请输出完整可直接浏览器打开的 HTML deck，说明入口文件路径，并提醒我刷新 DeckTaste WebUI。`,
     promptGuizang: (id, label, deckDir, themeKey) => `请使用 guizang-ppt-skill 生成一份 PPT。
 - 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}
 - 主题色 = ${label}（theme key: ${themeKey}）
 - 页数：8-12 页（你可按内容调整）
 - 输出：单文件 index.html，含 WebGL 背景和翻页
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请生成完整可直接浏览器打开的 HTML。`
+请生成完整可直接浏览器打开的 HTML。`,
+    promptUITaste: (item) => `请使用 Taste.skill 处理这个 UI 任务。
+- 推荐先安装完整 Taste.skill bundle：npx skills add https://github.com/Leonxlnx/taste-skill
+- 如果只安装单个视觉入口：npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
+- 这个入口只用于 UI，不用于 PPT / deck，也没有演示模式
+
+用户选择的视觉 taste：
+- 名称：${item.zh}
+- 使用的主要 skill：${item.installName}
+- 视觉方向：${item.descZh}
+
+自动工作流判断：
+- 如果我提供了截图、参考图、设计稿或“按图还原”要求，请自动按 image-to-code 工作流：先分析视觉参考，再实现前端
+- 如果这是已有项目、已有路径、已有页面改版，请自动按 redesign-existing-projects 工作流：先做 UI 审计，再修改关键布局、层级、间距、状态、颜色和动效
+- 如果当前执行环境是 Codex / GPT / ChatGPT，自动叠加 gpt-taste 的更严格 anti-slop 规则
+- 默认应用 full-output-enforcement：禁止半成品、占位注释、跳过实现或只给说明不落代码
+
+实现要求：
+- 强化 layout / typography / spacing / motion，避免 generic SaaS slop
+- 不要输出模板说明页，不要只写设计建议
+- 如果是新项目：直接产出可运行前端界面
+- 如果是已有项目：直接改代码，并说明入口文件
+
+内容：[在此粘贴产品说明 / 页面需求 / 技术栈 / 现有路径 / 参考图说明]
+请输出可以直接运行或合入项目的 UI 实现。`,
+    promptCard: (item, ratio) => `请使用 guizang-social-card-skill 帮我做社交配图（只做配图，不是 PPT / deck / 横版网页）。
+- 安装：npx skills add https://github.com/op7418/guizang-social-card-skill
+- 目标平台 / 尺寸：${ratio.platZh}（${ratio.spec}，比例 ${ratio.label}）
+- 视觉模式：${item.mode === 'editorial' ? '电子杂志 × 电子墨水（Editorial × E-ink）' : '瑞士国际主义（Swiss International）'}
+- 主题 / 配色：${item.zh}（${item.mode === 'editorial' ? 'data-theme' : 'data-accent'}="${item.themeKey}"）
+- 适用内容方向：${item.descZh}
+
+请严格沿用该 skill 的原本工作流，不要跳步：
+1. Intake：先确认平台、源文案与小红书品类；按它的「三选一」配图策略问我一次——A 我自己的照片/截图（最推荐，最不 AI 感）/ B 帮我从 Pexels·Unsplash·Flickr 找 / C 用 AI 生成。只问这一次。
+2. Extract story：把内容拆成逐页 plan。小红书=封面 hook + 每页一个观点，5-9 页；公众号=21:9 主封面 + 1:1 方封面配对，写在同一个 HTML 里并加合并预览段方便对照。
+3. 复制种子模板 ${item.mode === 'editorial' ? 'assets/template-editorial-card.html' : 'assets/template-swiss-card.html'} 为 index.html，在 <html> 上设 ${item.mode === 'editorial' ? 'data-theme' : 'data-accent'}="${item.themeKey}"，只替换 <!-- POSTERS_HERE --> 区块，使用对应的 Layout Recipe（${item.mode === 'editorial' ? 'M01-M16' : 'S01-S12'}）。
+4. 排版纪律：3:4 卡必须吃满画布（内容覆盖 ≥75% 画布高度）；不要让文字溢出、贴边或压到页脚；图片上叠字时按 image-overlay.md 做主体避让与 object-position。
+5. 渲染导出 PNG（${ratio.spec}），先把结果图给我看，再问我要不要跑 node validate-social-deck.mjs 自检。
+
+内容：[在此粘贴文章 / 脚本 / 字幕 / 截图说明 / 标题]
+不要把快捷键、使用说明或键盘提示画进图里。`
   },
   en: {
     htmlLang: 'en',
-    sub: 'Preview themes and decks, copy prompts · Made by Pakco · ',
+    sub: 'A visual taste menu for AI agents: see the style, copy the prompt, let the agent follow it · Made by Pakco · ',
     forkLink: 'Fork from @lewislulu & @guizang',
     installTitle: 'Click to copy install command',
     copy: 'Copy',
     copied: '✓ Copied',
     search: 'Search…',
     sizeS: 'S', sizeM: 'M', sizeL: 'L',
-    tabThemes: '🎨 Themes (36)',
-    tabDecks: '📑 Decks (24)',
+    tabThemes: '🎨 Skins (36)',
+    tabDecks: '📑 Templates (24)',
+    tabUITaste: '🧩 UI Taste (4)',
+    tabCards: '🖼 Social Cards (2 tones)',
     tabGuide: '📖 How to use',
     empty: 'No matches',
     toastDefault: 'Prompt copied — paste into Claude / Codex / Hermes',
@@ -354,9 +603,20 @@ const I18N = {
     zoomHint: 'CLICK TO ZOOM',
     badgeScenario: 'scenario',
     badgeExtracted: 'extracted',
-    themeDemoKicker: (n)=>`Theme · ${n}`,
+    themeDemoKicker: (n)=>`Skin · ${n}`,
     themeDemoLede: 'A picture is worth a thousand words. Same demo content, different CSS token file = different skin.',
     themeDemoKpiLabel: 'satisfaction',
+    customThemeName: '+ Custom skin',
+    customThemeDesc: 'Build your own skin (theme CSS tokens): reuse the Lewis deck.html / base.css / runtime architecture, output to examples/&lt;slug&gt;/. Add as many as you like — each uses a new slug, none overwrites another.',
+    customDeckName: '+ Custom template',
+    customDeckDesc: 'Build your own template: copy the closest full-deck, preserve its effect, output to examples/&lt;slug&gt;/. Add as many as you like — each uses a new slug, none overwrites another.',
+    uiTasteNoPresenter: 'no presenter mode',
+    cardImportNote: 'imports a prompt only — no image generation here',
+    cardModeEditorial: 'Editorial × E-ink',
+    cardModeSwiss: 'Swiss International',
+    cardEnterHint: 'Open to switch palette + size',
+    csColorLabel: 'Color branch',
+    csRatioLabel: 'Size / ratio',
     guide: {
       h1: 'Install (one line)',
       h1desc: 'After install, any AgentSkill-aware agent (Claude Code / Codex / Cursor / Hermes Agent ...) can use this skill.',
@@ -365,23 +625,26 @@ const I18N = {
       linkRelease: '🏷 Releases',
       linkUpstream: '🙏 Upstream (lewislulu)',
       linkGuizang: '🙏 Upstream (guizang)',
+      linkTaste: '🙏 Upstream (taste.skill)',
       terminalTip: '💻 <b style="color:#cfd4e2">How to open a terminal:</b> Mac → Spotlight (⌘ Space) type "Terminal"; Windows → press Win key and search "PowerShell" or "cmd".',
       h2: 'How to make your agent use it',
-      h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Themes</code> or <code>📑 Decks</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content.',
+      h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Skins</code>, <code>📑 Templates</code>, <code>🧩 UI Taste</code>, or <code>🖼 Social Cards</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content. On <code>🖼 Social Cards</code> you can pick a size first (Rednote 3:4 / WeChat covers / Square 1:1) before copying.<br><b style="color:#cfd4e2">Skins vs Templates:</b> a skin only swaps color/type over a shared layout (re-skin); a template is a full layout with its own HTML structure (re-bone).',
       h2steps: '<b style="color:#cfd4e2">Four steps:</b>',
       steps: [
         'Install the skill (the command above)',
-        'Pick a theme / deck in this picker, click the card to copy its prompt',
+        'Pick a visible taste in DeckTaste, click the card to copy its prompt',
         'Paste in your agent, fill in your outline, hit enter',
         'Agent generates a deck directory — open <code>index.html</code> in any browser'
       ],
       h3: 'Example one-liners (say them to your agent)',
       examples: [
-        '"Make an 8-page tech-sharing deck using the cyberpunk-neon theme"',
-        '"Turn this outline into a VC pitch deck using the pitch-deck-vc theme"',
+        '"Make an 8-page tech-sharing deck using the cyberpunk-neon skin"',
+        '"Turn this outline into a VC pitch deck using the pitch-deck-vc skin"',
         '"Build a 9-card xiaohongshu post using the xhs-pastel-card template"',
         '"Build a product talk with presenter mode using presenter-mode-reveal, 200-word speaker notes per slide"',
-        '"Build a weekly team report using the weekly-report template: KPIs / progress / blockers"'
+        '"Build a weekly team report using the weekly-report template: KPIs / progress / blockers"',
+        '"Design this SaaS page as UI, not a deck; use the High-end Soft UI taste and audit first if this is an existing project"',
+        '"Make a Rednote social-card set using the Social Cards Indigo Porcelain theme, 3:4, following the guizang-social-card-skill workflow"'
       ],
       h4: 'Keyboard shortcuts (built into every generated deck)',
       shortcuts: [
@@ -397,18 +660,18 @@ const I18N = {
         ['?preview=N', 'Preview mode (single slide, no chrome)']
       ],
       h5: 'Resources & docs',
-      h6: 'Create / contribute your own deck',
-      h6body: '<b style="color:#fff">Private deck:</b> run <code>./scripts/new-deck.sh my-talk</code> and keep it in <code>examples/</code>.<br><b style="color:#fff">Reusable public template:</b> put it under <code>templates/full-decks/&lt;slug&gt;/</code>, sync picker / README / SKILL / references, then run the verification checklist.',
+      h6: 'Create your own taste',
+      h6body: '<b style="color:#fff">Shortest path:</b> click the <code>+ Custom skin</code> / <code>+ Custom template</code> card on the Skins or Templates tab, then paste the copied prompt into your agent. The prompt asks the agent to create <code>examples/&lt;slug&gt;/</code> with the lewislulu/html-ppt-skill architecture: <code>assets/base.css</code>, theme tokens, <code>runtime.js</code>, <code>.slide</code>, and <code>&lt;aside class="notes"&gt;</code>. It does not register the result in the picker or public catalogs. <b>You can build many</b> — each uses a new slug, appends to <code>examples/decktaste.local.json</code>, never overwrites, and shows as a local card after refresh.<br><b style="color:#fff">MCP note:</b> copying a prompt into Codex / Claude / Hermes does not require MCP. MCP or a local bridge is only needed if this web page should directly launch an agent, read local files, or write the generated folder.',
       docLinks: [
         ['/blob/main/README.md', '📖 English README'],
         ['/blob/main/README.zh-CN.md', '📖 中文 README'],
-        ['/blob/main/CONTRIBUTING.md', '🤝 Contributing / custom decks'],
         ['/blob/main/SKILL.md', '🤖 SKILL.md (for agents)'],
         ['/blob/main/references/themes.md', '🎨 Themes index'],
         ['/blob/main/references/full-decks.md', '📑 Full-deck templates'],
         ['/blob/main/references/presenter-mode.md', '🎤 Presenter mode guide']
       ],
-      tip: '💡 Tip: all themes/templates are pure static HTML/CSS/JS, CDN-fonts only. Generated decks work offline. Language toggle covers the whole picker UI + theme preview demo; full-deck content (per-slide copy) is loaded with a <code>?lang=en</code> URL parameter — individual deck templates can opt in to read it for true bilingual content.'
+      localRegistry: 'Local private taste: refresh the WebUI after generation',
+      tip: '💡 Tip: DeckTaste currently visualizes choices and copies executable prompts; it does not generate directly. Custom decks / themes appear in the local WebUI through <code>examples/decktaste.local.json</code>, without entering the public template catalog. UI Taste is a minimal visual entry for Taste.skill: it copies UI coding prompts only and has no presenter mode. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.'
     },
     promptTheme: (name, label) => `Please use the html-ppt skill to build me a deck.
 - theme = ${name} (${label})
@@ -424,13 +687,127 @@ Please return a complete HTML deck I can open in the browser.`,
 - keep the .tpl-${name} scoped CSS and all visual elements
 - content: [paste your outline / key data / section structure here]
 Please return a complete HTML deck I can open in the browser.`,
+    promptCustomTheme: () => `Please use the html-ppt skill to create a private HTML deck or private theme for me.
+- goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
+- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
+- local WebUI visibility: after generation, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck or theme after refresh
+  registry example:
+  {
+    "decks": [
+      {
+        "id": "<slug>",
+        "labelZh": "我的私有 Deck",
+        "labelEn": "My Private Deck",
+        "descZh": "基于某个模板重构的本地 taste",
+        "descEn": "Local taste rebuilt from a source template",
+        "path": "../examples/<slug>/index.html",
+        "author": "Local",
+        "presenter": true,
+        "prompt": "Please continue using the visual taste in examples/<slug>/."
+      }
+    ],
+    "themes": [
+      {
+        "id": "my-theme",
+        "labelZh": "我的本地主题",
+        "labelEn": "My Local Theme",
+        "descZh": "本地私有主题",
+        "descEn": "Local private theme",
+        "css": "../examples/<slug>/theme.css",
+        "author": "Local",
+        "prompt": "Please use the theme style from examples/<slug>/theme.css to build an HTML deck."
+      }
+    ]
+  }
+  If the file already exists, preserve other entries and update the generated deck/theme entry by id
+- starting point: use the lewislulu/html-ppt-skill template code architecture instead of writing a page from scratch
+- architecture requirements:
+  1. use templates/deck.html as the baseline HTML structure
+  2. load assets/base.css, assets/fonts.css, one suitable assets/themes/*.css file, and assets/animations/animations.css
+  3. keep assets/runtime.js so the deck supports ← → / T / A / F / S / O / N
+  4. each page must be a <section class="slide">; speaker notes go in <aside class="notes"> or <div class="notes">
+  5. when a page type is needed, reuse the structure from templates/single-page/*.html before replacing content
+- fidelity requirement: if I provide a reference template / screenshot / old PPT / web page, recreate the original layout, type hierarchy, motion rhythm, decorative layers, and overall mood as closely as possible, but rebuild it using html-ppt tokens and runtime
+- content: [paste topic, audience, page count, outline, or reference-file notes here]
+Please output a complete browser-openable HTML deck or theme CSS, tell me the entry file path, and remind me to refresh DeckTaste WebUI.`,
+    promptCustomDeck: () => `Please use the html-ppt skill to create a private full-deck for me.
+- goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
+- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
+- local WebUI visibility: after generation, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck after refresh
+  registry example:
+  {
+    "decks": [
+      {
+        "id": "<slug>",
+        "labelZh": "我的私有 Deck",
+        "labelEn": "My Private Deck",
+        "descZh": "基于 full-deck 模板重构的本地 taste",
+        "descEn": "Local taste rebuilt from a full-deck template",
+        "path": "../examples/<slug>/index.html",
+        "author": "Local",
+        "presenter": true,
+        "prompt": "Please continue using the visual taste in examples/<slug>/."
+      }
+    ]
+  }
+  If the file already exists, preserve other entries and update only the <slug> entry by id
+- starting point: copy the closest templates/full-decks/<name>/ into examples/<slug>/, then replace it with my content
+- code architecture requirements:
+  1. preserve the lewislulu/html-ppt-skill full-deck architecture: index.html + scoped style.css + .tpl-<slug> root class
+  2. keep assets/base.css, assets/fonts.css, assets/runtime.js, and any needed animations / fx-runtime references
+  3. preserve the template's chrome slots, slide-number, theme cycling, and presenter-mode compatibility
+  4. every page remains a <section class="slide">; speaker notes only go in <aside class="notes"> or <div class="notes">
+  5. do not modify the source template files; generate my version only inside examples/<slug>/
+- fidelity requirement: recreate the original template effect as closely as possible, including visual proportions, layout density, background layers, decorative elements, motion timing, component styling, and presenter mode support
+- content: [paste outline / key data / section structure / reference template name here]
+Please output a complete browser-openable HTML deck, tell me the entry file path, and remind me to refresh DeckTaste WebUI.`,
     promptGuizang: (id, label, deckDir, themeKey) => `Please use guizang-ppt-skill to build me a deck.
 - style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}
 - color theme = ${label} (theme key: ${themeKey})
 - pages: 8-12 (adjust to fit content)
 - output: single-file index.html with WebGL background and swipe navigation
 - content: [paste your outline / theme direction / key points here]
-Please return a complete HTML deck I can open in the browser.`
+Please return a complete HTML deck I can open in the browser.`,
+    promptUITaste: (item) => `Please use Taste.skill for this UI task.
+- Recommended install for automatic routing: npx skills add https://github.com/Leonxlnx/taste-skill
+- If installing only the selected visual entry: npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
+- This entry is for UI only, not PPT / decks, and it has no presenter mode
+
+Selected visual taste:
+- Name: ${item.en}
+- Primary skill: ${item.installName}
+- Visual direction: ${item.descEn}
+
+Automatic workflow routing:
+- If I provide screenshots, reference images, design comps, or ask to match a visual reference, automatically use the image-to-code workflow: analyze the reference first, then implement the frontend
+- If this is an existing project, existing path, or redesign request, automatically use the redesign-existing-projects workflow: audit the UI first, then improve layout, hierarchy, spacing, states, color, and motion
+- If the current execution environment is Codex / GPT / ChatGPT, automatically layer in gpt-taste's stricter anti-slop rules
+- Apply full-output-enforcement by default: no half-finished output, placeholder comments, skipped sections, or explanation-only deliverables
+
+Implementation requirements:
+- Strengthen layout / typography / spacing / motion and avoid generic SaaS slop
+- Do not output a template explanation page or design advice only
+- If this is a new project: output a runnable frontend interface
+- If this is an existing project: modify the code directly and tell me the entry file
+
+Content: [paste product brief / page requirements / tech stack / existing path / reference notes here]
+Please return UI implementation that can run directly or be merged into the project.`,
+    promptCard: (item, ratio) => `Please use the guizang-social-card-skill to make social card images for me (images only — not a PPT / deck / horizontal website).
+- Install: npx skills add https://github.com/op7418/guizang-social-card-skill
+- Target platform / size: ${ratio.platEn} (${ratio.spec}, ratio ${ratio.label})
+- Visual mode: ${item.mode === 'editorial' ? 'Editorial Magazine × E-ink' : 'Swiss International'}
+- Theme / palette: ${item.en} (${item.mode === 'editorial' ? 'data-theme' : 'data-accent'}="${item.themeKey}")
+- Fits content like: ${item.descEn}
+
+Follow the skill's original workflow exactly, do not skip steps:
+1. Intake: confirm platform, source copy, and Rednote category; ask me ONCE about images using its three-way gate — A my own photo/screenshot (recommended, least "AI-looking") / B fetch from Pexels·Unsplash·Flickr for me / C generate with AI. Ask only once.
+2. Extract story: turn the source into a per-page plan. Rednote = cover hook + one idea per page, 5-9 pages; WeChat = 21:9 main cover + 1:1 square cover as a pair in the same HTML with a combined preview section.
+3. Copy the seed template ${item.mode === 'editorial' ? 'assets/template-editorial-card.html' : 'assets/template-swiss-card.html'} as index.html, set ${item.mode === 'editorial' ? 'data-theme' : 'data-accent'}="${item.themeKey}" on <html>, replace only the <!-- POSTERS_HERE --> region using the matching Layout Recipes (${item.mode === 'editorial' ? 'M01-M16' : 'S01-S12'}).
+4. Layout discipline: a 3:4 card must fill the canvas (content ≥75% of height); never let text overflow, touch edges, or collide with the footer; for text-on-photo follow image-overlay.md (subject mapping + inline object-position).
+5. Render PNGs (${ratio.spec}), show me the rendered images first, then ask whether to run node validate-social-deck.mjs.
+
+Content: [paste article / script / subtitles / screenshot notes / title here]
+Do not draw shortcuts, usage instructions, or keyboard hints into the images.`
   }
 };
 
@@ -506,24 +883,188 @@ const DECKS = [
   ['guizang-swiss-orange',    '歸藏·安全橙',     'Guizang · Safety Orange',  'extracted', '瑞士国际主义 · WebGL网格 / 安全橙',          'Swiss Style · WebGL grid / Safety Orange',      '歸藏', 'guizang-swiss', 'orange']
 ];
 
+const UI_TASTES = [
+  {
+    id: 'design-taste-frontend',
+    installName: 'design-taste-frontend',
+    zh: 'Taste 默认',
+    en: 'Auto Taste',
+    kindZh: '自动判断',
+    kindEn: 'Auto',
+    descZh: '不知道选哪种审美时用它：让 Agent 根据产品、行业、用户和内容自动判断视觉方向。',
+    descEn: 'Use this when you are unsure: the agent infers the visual direction from product, industry, audience, and content.',
+    demo: 'taste'
+  },
+  {
+    id: 'high-end-visual-design',
+    installName: 'high-end-visual-design',
+    zh: '高级柔和 UI',
+    en: 'High-end Visual Design',
+    kindZh: '视觉风格',
+    kindEn: 'Visual style',
+    descZh: '更像高端品牌或精品 SaaS：柔和对比、充足留白、精致字体和缓动。',
+    descEn: 'Soft, polished, expensive UI with whitespace, premium type, and spring motion.',
+    demo: 'soft'
+  },
+  {
+    id: 'minimalist-ui',
+    installName: 'minimalist-ui',
+    zh: '克制极简 UI',
+    en: 'Minimalist Product UI',
+    kindZh: '视觉风格',
+    kindEn: 'Visual style',
+    descZh: '适合知识库、任务管理、开发者工具、生产力产品：少装饰、强排版、清楚的信息层级。',
+    descEn: 'For docs, task tools, developer products, and productivity apps: restrained palette, sharp structure, and clear hierarchy.',
+    demo: 'minimal'
+  },
+  {
+    id: 'industrial-brutalist-ui',
+    installName: 'industrial-brutalist-ui',
+    zh: '工业粗粝 UI',
+    en: 'Industrial Brutalist UI',
+    kindZh: '视觉风格',
+    kindEn: 'Visual style',
+    descZh: '适合开发者工具、运维、安全、实验性产品、控制台：硬朗、机械、强对比。',
+    descEn: 'For devtools, ops, security, experimental products, and consoles: hard, mechanical, high-contrast UI.',
+    demo: 'brutalist'
+  }
+];
+
+/* ───── 配图(社交卡) 数据 by 歸藏/guizang-social-card-skill ─────
+   边界: 只做预览 + 尺寸选择 + 导入 prompt, 不在本页生成图片。
+   尺寸严格对齐 skill 的 references/platform-specs.md */
+const CARD_RATIOS = [
+  {id:'xhs',    label:'3:4',  ratio:'3 / 4',  fit:'h', spec:'1080×1440',
+   zh:'小红书', en:'Rednote',  platZh:'小红书图文（封面+多页）', platEn:'Rednote carousel (cover + pages)'},
+  {id:'wechat', label:'21:9', ratio:'21 / 9', fit:'w', spec:'2100×900 + 1080×1080',
+   zh:'公众号封面', en:'WeChat covers', platZh:'公众号封面配对（21:9 主封面 + 1:1 方封面）', platEn:'WeChat cover pair (21:9 main + 1:1 square)'},
+  {id:'square', label:'1:1',  ratio:'1 / 1',  fit:'h', spec:'1080×1080',
+   zh:'方形单图', en:'Square',    platZh:'方形单图', platEn:'Square single image'}
+];
+
+/* 6 电子杂志主题(data-theme) + 4 瑞士配色(data-accent), 配色取自 theme-presets.md */
+const SOCIAL_CARDS = [
+  {id:'ink-classic',      mode:'editorial', themeKey:'ink-classic',      zh:'墨水经典',   en:'Ink Classic',
+   descZh:'商业评论 / AI 随笔 / 产品思考 / 中性社论', descEn:'business commentary / AI essays / product thinking',
+   paper:'#f3f0e8', paper2:'#ebe6da', ink:'#0a0a0b', muted:'#68625a', accent:'#111111', on:'#fff'},
+  {id:'indigo-porcelain', mode:'editorial', themeKey:'indigo-porcelain', zh:'靛蓝瓷',     en:'Indigo Porcelain',
+   descZh:'技术 / 研究 / 数据 / AI 基建 / 冷静分析', descEn:'technology / research / data / calm analysis',
+   paper:'#f2f4f5', paper2:'#e5ebef', ink:'#0a1f3d', muted:'#5f6d78', accent:'#315d93', on:'#fff'},
+  {id:'forest-ink',       mode:'editorial', themeKey:'forest-ink',       zh:'森林墨',     en:'Forest Ink',
+   descZh:'徒步 / 户外 / 自然 / 可持续 / 田野笔记', descEn:'hiking / outdoor / nature / field notes',
+   paper:'#f5f1e8', paper2:'#e8dfcf', ink:'#16251b', muted:'#5d665d', accent:'#2e6b4f', on:'#fff'},
+  {id:'kraft-paper',      mode:'editorial', themeKey:'kraft-paper',      zh:'牛皮纸',     en:'Kraft Paper',
+   descZh:'记忆 / 手作 / 个人随笔 / 旧物 / 创作者笔记', descEn:'memory / craft / personal essays / creator notes',
+   paper:'#eedfc7', paper2:'#dfc9a8', ink:'#2a1e13', muted:'#755f49', accent:'#9b5a2e', on:'#fff'},
+  {id:'dune',             mode:'editorial', themeKey:'dune',             zh:'沙丘',       en:'Dune',
+   descZh:'设计 / 物件研究 / 作品集封面 / 克制美学', descEn:'design / object studies / portfolio covers',
+   paper:'#f0e6d2', paper2:'#ded0b7', ink:'#1f1a14', muted:'#6f6557', accent:'#8f7650', on:'#fff'},
+  {id:'midnight-ink',     mode:'editorial', themeKey:'midnight-ink',     zh:'午夜墨',     en:'Midnight Ink',
+   descZh:'游戏原画 / 夜景 / 电影感封面（唯一深色）', descEn:'game key art / night photography / cinematic (only dark)',
+   paper:'#0e0d0c', paper2:'#1a1714', ink:'#ece2cf', muted:'#9a8c75', accent:'#d4a04a', on:'#0e0d0c'},
+  {id:'ikb',          mode:'swiss', themeKey:'ikb',          zh:'克莱因蓝', en:'IKB Blue',
+   descZh:'AI / 技术 / 产品更新 / 工程（默认）', descEn:'AI / technology / product updates / engineering (default)',
+   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#002FA7', on:'#ffffff'},
+  {id:'lemon-yellow', mode:'swiss', themeKey:'lemon-yellow', zh:'柠檬黄',   en:'Lemon Yellow',
+   descZh:'年轻 / 消费 / 运动 / 零售 / 活泼', descEn:'young / consumer / sporty / retail / playful',
+   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#FFD500', on:'#0a0a0a'},
+  {id:'lemon-green',  mode:'swiss', themeKey:'lemon-green',  zh:'柠檬绿',   en:'Lemon Green',
+   descZh:'生态 / 未来 / 新兴科技 / 健康', descEn:'ecology / future / emerging tech / health',
+   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#C5E803', on:'#0a0a0a'},
+  {id:'safety-orange',mode:'swiss', themeKey:'safety-orange',zh:'安全橙',   en:'Safety Orange',
+   descZh:'工业 / 警示 / 紧急 / 风险 / 决策点', descEn:'industrial / warning / urgency / risk / decisions',
+   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#FF6B35', on:'#ffffff'}
+];
+
+/* 两个「基调」是顶层。配色分支(SOCIAL_CARDS)与比例都在预览工作台里切换。 */
+const CARD_TONES = [
+  {id:'editorial', mode:'editorial', defaultColor:'ink-classic',
+   zh:'电子杂志 × 电子墨水', en:'Editorial Magazine × E-ink',
+   descZh:'衬线大字 + 纸感墨色 + 氛围层，慢、考究、像手工排版的杂志特写。适合社论、AI 随笔、产品思考、人文向内容。',
+   descEn:'Serif display + paper/ink palette + atmosphere layer. Slow, considered, hand-set magazine feel. For essays, AI commentary, product thinking, cultural pieces.'},
+  {id:'swiss', mode:'swiss', defaultColor:'ikb',
+   zh:'瑞士国际主义', en:'Swiss International',
+   descZh:'Inter 极细大字 + 严格左对齐网格 + 单一高饱和强调色，工程化、可量化、果断。适合技术、产品更新、数据、发布说明。',
+   descEn:'Inter ultralight display + strict left grid + one high-saturation accent. Engineered, quantified, decisive. For tech, product updates, data, release notes.'}
+];
+function colorsForTone(toneId){ return SOCIAL_CARDS.filter(c=>c.mode===toneId); }
+
+/* 海报 mock 样式(运行时注入, 同一份字符串供卡内预览 + 放大 modal 复用)。
+   字号用 cqmin 容器查询单位, 随选中比例自动缩放。 */
+const SC_CSS = `
+.sc-poster{position:relative;overflow:hidden;background:var(--sc-paper);color:var(--sc-ink);
+  aspect-ratio:var(--sc-ratio);container-type:size;border-radius:3px;box-shadow:0 14px 38px rgba(0,0,0,.45)}
+.sc-poster.fit-h{height:100%}.sc-poster.fit-w{width:100%}
+.sc-grain{position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(rgba(0,0,0,.06) .5px,transparent .5px);background-size:4px 4px}
+.sc-poster.sc-dark .sc-grain{background-image:radial-gradient(rgba(255,244,214,.10) .5px,transparent .5px);opacity:.5}
+.sc-pad{position:absolute;inset:0;display:flex;flex-direction:column;padding:7.5cqmin}
+.sc-ed{font-family:Georgia,'Songti SC','Noto Serif SC',serif}
+.sc-ed .sc-kick{font-size:3.4cqmin;letter-spacing:.18em;text-transform:uppercase;color:var(--sc-accent);
+  font-weight:700;font-family:'JetBrains Mono',monospace}
+.sc-ed .sc-h{font-size:11.5cqmin;line-height:1.04;font-weight:700;letter-spacing:-.01em;margin-top:auto}
+.sc-ed .sc-rule{height:.6cqmin;width:38%;background:var(--sc-accent);margin:5cqmin 0 4cqmin}
+.sc-ed .sc-foot{display:flex;justify-content:space-between;font-size:2.9cqmin;color:var(--sc-muted);
+  font-family:'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase}
+.sc-sw{font-family:'Inter','Helvetica Neue',sans-serif}
+.sc-sw .sc-tag{font-size:3.2cqmin;font-weight:800;letter-spacing:.12em;font-family:'JetBrains Mono',monospace}
+.sc-sw .sc-h{font-size:14cqmin;line-height:.92;font-weight:300;letter-spacing:-.03em;margin-top:auto}
+.sc-sw .sc-chip{align-self:flex-start;margin-top:4cqmin;background:var(--sc-accent);color:var(--sc-on);
+  font-size:2.9cqmin;font-weight:800;padding:1.4cqmin 3cqmin;border-radius:1cqmin}
+.sc-sw .sc-bars{display:flex;gap:1.8cqmin;height:10cqmin;align-items:flex-end;margin-top:4.5cqmin}
+.sc-sw .sc-bars i{flex:1;background:var(--sc-accent);display:block}
+.sc-sw .sc-bars i:nth-child(1){height:48%}.sc-sw .sc-bars i:nth-child(2){height:82%}
+.sc-sw .sc-bars i:nth-child(3){height:34%}.sc-sw .sc-bars i:nth-child(4){height:100%}
+`;
+
 /* ───── State + helpers ───── */
 let lang = localStorage.getItem('htmlppt.lang') || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
 let view = 'themes';
 let q = '';
+let localTaste = {themes: [], decks: []};
 
 function T(){ return I18N[lang]; }
 function themeLabel(item){ const [id, zh, en] = item; return lang==='zh' ? zh : (en || zh || id); }
 function themeDesc(item){ const [,,,dz,de] = item; return lang==='zh' ? dz : (de || dz); }
 function deckLabel(item){ const [id, zh, en] = item; return lang==='zh' ? zh : (en || zh || id); }
 function deckDesc(item){ const [,,,,dz,de] = item; return lang==='zh' ? dz : (de || dz); }
+function safeText(v, fallback=''){ return typeof v === 'string' && v.trim() ? v.trim() : fallback; }
+function localLabel(item){ return lang==='zh' ? safeText(item.labelZh, item.labelEn || item.id) : safeText(item.labelEn, item.labelZh || item.id); }
+function localDesc(item){ return lang==='zh' ? safeText(item.descZh, item.descEn || '') : safeText(item.descEn, item.descZh || ''); }
+function localPrompt(item){
+  if(item && typeof item.prompt === 'string' && item.prompt.trim()) return item.prompt;
+  if(item && item.type === 'theme'){
+    return lang === 'zh'
+      ? `请使用 DeckTaste 本地主题 ${item.id} 生成一份 HTML deck。\n- 本地主题 CSS：${item.css}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
+      : `Please use the local DeckTaste theme ${item.id} to build an HTML deck.\n- local theme CSS: ${item.css}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
+  }
+  return lang === 'zh'
+    ? `请基于 DeckTaste 本地 deck ${item.id} 的视觉风格继续生成。\n- 本地入口：${item.path}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
+    : `Please continue using the visual taste from local DeckTaste deck ${item.id}.\n- local entry: ${item.path}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
+}
+
+async function loadLocalTaste(){
+  try{
+    const res = await fetch('../examples/decktaste.local.json', {cache: 'no-store'});
+    if(!res.ok) return;
+    const data = await res.json();
+    localTaste = {
+      themes: Array.isArray(data.themes) ? data.themes : [],
+      decks: Array.isArray(data.decks) ? data.decks : []
+    };
+  }catch(_){
+    localTaste = {themes: [], decks: []};
+  }
+}
 
 /* ───── Theme preview demo HTML (bilingual) ───── */
-function themeDemo(themeName, label){
+function themeDemo(themeName, label, cssHref){
   const t = T();
+  const href = cssHref || `../assets/themes/${themeName}.css`;
   return `<!doctype html><html lang="${t.htmlLang}"><head><meta charset="utf-8">
 <link rel="stylesheet" href="../assets/fonts.css">
 <link rel="stylesheet" href="../assets/base.css">
-<link rel="stylesheet" href="../assets/themes/${themeName}.css">
+<link rel="stylesheet" href="${href}">
 <style>
   html,body{margin:0;height:100%;overflow:hidden}
   .wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
@@ -569,6 +1110,611 @@ function showToast(msg){
   toastTimer = setTimeout(()=>toast.classList.remove('show'), 2400);
 }
 
+function customCardText(){
+  const t = T();
+  const isTheme = view === 'themes';
+  return {
+    name: isTheme ? t.customThemeName : t.customDeckName,
+    desc: isTheme ? t.customThemeDesc : t.customDeckDesc,
+    prompt: isTheme ? t.promptCustomTheme() : t.promptCustomDeck(),
+    id: isTheme ? '→ examples/&lt;slug&gt;/　起点 templates/deck.html + 主题 token' : '→ examples/&lt;slug&gt;/　起点 templates/full-decks/&lt;name&gt;/'
+  };
+}
+
+function customCardMatches(){
+  if(!q) return true;
+  const c = customCardText();
+  return `${c.name} ${c.desc} custom 自建 deck examples lewis template`.toLowerCase().includes(q.toLowerCase());
+}
+
+function localItemsForCurrentView(){
+  if(view === 'themes'){
+    return localTaste.themes.map(item => ({...item, type: 'theme'}));
+  }
+  return localTaste.decks.map(item => ({...item, type: 'deck'}));
+}
+
+function localItemMatches(item){
+  if(!q) return true;
+  return `${item.id || ''} ${localLabel(item)} ${localDesc(item)} ${item.author || ''} local 本地 私有 taste`.toLowerCase().includes(q.toLowerCase());
+}
+
+function uiTasteLabel(item){ return lang === 'zh' ? item.zh : item.en; }
+function uiTasteDesc(item){ return lang === 'zh' ? item.descZh : item.descEn; }
+function uiTasteKind(item){ return lang === 'zh' ? item.kindZh : item.kindEn; }
+function uiTasteMatches(item){
+  if(!q) return true;
+  return `${item.id} ${item.installName} ${item.zh} ${item.en} ${item.kindZh || ''} ${item.kindEn || ''} ${item.descZh} ${item.descEn} Taste.skill UI Taste 视觉 审美`.toLowerCase().includes(q.toLowerCase());
+}
+
+function uiTasteDemo(item){
+  const cls = item.demo || 'gpt';
+  const demos = {
+    taste: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Agent Studio</span><div class="ui-nav"><span></span><span></span><span></span></div></div>
+        <div class="ui-body two">
+          <div class="ui-pane">
+            <span class="ui-pill">VARIANCE 7</span>
+            <div class="ui-title">Launch taste without slop.</div>
+            <div class="ui-sub">Readable hierarchy, real product density, directed motion.</div>
+            <div class="ui-btnrow"><span class="ui-btn">Build UI</span><span class="ui-btn ghost">Audit</span></div>
+          </div>
+          <div class="ui-pane tight">
+            <div class="ui-metric">84%</div><div class="ui-caption">visual lift</div>
+            <div class="ui-bars"><span style="height:42%"></span><span style="height:68%"></span><span style="height:54%"></span><span style="height:86%"></span><span style="height:72%"></span></div>
+            <div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div>
+          </div>
+        </div>
+      </div>`,
+    legacy: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Portfolio Kit</span><div class="ui-nav"><span></span><span></span></div></div>
+        <div class="ui-body two">
+          <div class="ui-pane">
+            <span class="ui-pill">V1 RULES</span>
+            <div class="ui-title">Clean launch page</div>
+            <div class="ui-sub">Stable defaults for teams that prefer the original taste behavior.</div>
+            <div class="ui-btnrow"><span class="ui-btn">Start</span><span class="ui-btn ghost">Docs</span></div>
+          </div>
+          <div class="ui-pane tight">
+            <div class="ui-card-mini"><div class="ui-caption">Sections</div><div class="ui-metric">06</div></div>
+            <div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div>
+          </div>
+        </div>
+      </div>`,
+    gpt: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Codex Console</span><div class="ui-nav"><span></span><span></span><span></span></div></div>
+        <div class="ui-body three">
+          <div class="ui-pane tight"><span class="ui-pill">MOTION</span><div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div></div>
+          <div class="ui-pane"><div class="ui-title">Sharper GPT layout</div><div class="ui-sub">More asymmetry, less centered template drift.</div><div class="ui-bars"><span style="height:82%"></span><span style="height:48%"></span><span style="height:95%"></span><span style="height:62%"></span></div></div>
+          <div class="ui-pane tight"><div class="ui-metric">9.4</div><div class="ui-caption">anti-slop</div><div class="ui-btnrow"><span class="ui-btn">Run</span></div></div>
+        </div>
+      </div>`,
+    imagecode: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Reference to Code</span><div class="ui-nav"><span></span><span></span></div></div>
+        <div class="ui-shot">
+          <div class="ui-shot-head"><span></span><span></span><span></span><b style="font-size:8px;margin-left:6px">visual-ref.png</b></div>
+          <div class="ui-shot-main">
+            <div class="ui-image"></div>
+            <div class="ui-code"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>`,
+    redesign: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>UI Audit</span><span class="ui-pill">FIX 12</span></div>
+        <div class="ui-body two">
+          <div class="ui-pane tight">
+            <div class="ui-caption">Before</div>
+            <div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div>
+          </div>
+          <div class="ui-pane">
+            <span class="ui-pill">AFTER</span>
+            <div class="ui-title small">Hierarchy repaired</div>
+            <div class="ui-sub">Spacing, states, color contrast, and motion pass.</div>
+            <div class="ui-bars"><span style="height:42%"></span><span style="height:72%"></span><span style="height:88%"></span><span style="height:64%"></span></div>
+          </div>
+        </div>
+      </div>`,
+    minimal: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Linear Notes</span><div class="ui-nav"><span></span><span></span></div></div>
+        <div class="ui-body two">
+          <div class="ui-pane"><div class="ui-title">One clean workspace.</div><div class="ui-sub">Editorial rhythm, crisp table density, almost no ornament.</div><div class="ui-btnrow"><span class="ui-btn">Open</span></div></div>
+          <div class="ui-pane tight"><div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div></div></div>
+        </div>
+      </div>`,
+    brutalist: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>OPS TERMINAL</span><span>LIVE</span></div>
+        <div class="ui-body two">
+          <div class="ui-pane"><div class="ui-title">RAW CONTROL SURFACE</div><div class="ui-sub">Swiss grid, hard contrast, mechanical rhythm.</div><div class="ui-btnrow"><span class="ui-btn">EXECUTE</span></div></div>
+          <div class="ui-pane tight"><div class="ui-metric">404</div><div class="ui-caption">alerts</div><div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div></div>
+        </div>
+      </div>`,
+    soft: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Atelier</span><div class="ui-nav"><span></span><span></span></div></div>
+        <div class="ui-body two">
+          <div class="ui-pane"><span class="ui-pill">Premium</span><div class="ui-title">Calm product luxury.</div><div class="ui-sub">Soft contrast, generous whitespace, spring-like motion.</div><div class="ui-btnrow"><span class="ui-btn">Explore</span></div></div>
+          <div class="ui-phone"><div class="ui-screen"><div class="ui-card-mini"><div class="ui-caption">Balance</div><div class="ui-metric">72</div></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div></div>
+        </div>
+      </div>`,
+    stitch: `
+      <div class="ui-stage">
+        <div class="ui-topbar"><span>Design System</span><span class="ui-pill">DESIGN.md</span></div>
+        <div class="ui-body three">
+          <div class="ui-pane tight"><div class="ui-caption">Tokens</div><div class="ui-list"><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline"></span></div><div class="ui-row"><span class="ui-dot"></span><span class="ui-copyline short"></span></div></div></div>
+          <div class="ui-pane"><div class="ui-title small">Semantic components</div><div class="ui-sub">Stitch-ready hierarchy and reusable UI rules.</div><div class="ui-btnrow"><span class="ui-btn">Export</span></div></div>
+          <div class="ui-pane tight"><div class="ui-card-mini"><div class="ui-caption">Variants</div><div class="ui-metric">18</div></div></div>
+        </div>
+      </div>`
+  };
+  return `
+    <div class="ui-demo ${cls}">
+      <span class="badge ui">Taste.skill</span>
+      ${demos[cls] || demos.taste}
+    </div>`;
+}
+
+/* 每个 UI taste 直接渲染一个真实感 demo 页面(soft / minimal / brutalist / auto),
+   各自独立的视觉语言, 而不是同一套抽象 mock 换颜色。 */
+function uiTastePreview(item){
+  const zh = lang === 'zh';
+  const tag = `${uiTasteKind(item)} · ${item.installName}`;
+  const notice = zh ? 'DeckTaste 可视化 demo，不是 Taste.skill 官方页面' : 'DeckTaste sample demo, not an official Taste.skill page';
+  const head = `<!doctype html><html lang="${T().htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`;
+
+  const demos = {
+    // 高级柔和 —— 精品护肤品牌站
+    soft: () => `${head}<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;background:#f4ece2;color:#4a3a32}
+.serif{font-family:Georgia,'Songti SC','Times New Roman',serif}
+.page{height:100%;padding:34px 46px;display:flex;flex-direction:column;position:relative}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.brand{font-family:Georgia,serif;font-size:23px;font-weight:700;letter-spacing:.01em}
+.menu{display:flex;gap:26px;font-size:14px;color:#806f64}
+.cta{background:#bf7a4f;color:#fff;border:0;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:600;box-shadow:0 14px 30px rgba(191,122,79,.32);cursor:pointer}
+.hero{flex:1;display:grid;grid-template-columns:1.04fr .96fr;gap:46px;align-items:center;margin-top:6px}
+.eyebrow{font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:#bf7a4f;font-weight:700}
+h1{font-family:Georgia,serif;font-size:62px;line-height:1.02;letter-spacing:-.02em;margin:18px 0 0;font-weight:600}
+.lede{font-size:17px;line-height:1.75;color:#806f64;max-width:430px;margin:22px 0 0}
+.row{display:flex;gap:14px;margin-top:30px;align-items:center}
+.ghost{background:rgba(255,255,255,.7);border:1px solid #e3d3c4;border-radius:999px;padding:12px 24px;font-size:14px;font-weight:600;color:#4a3a32}
+.trust{margin-top:28px;font-size:13px;color:#9a877b;display:flex;gap:10px;align-items:center}
+.stars{color:#bf7a4f;letter-spacing:2px}
+.art{position:relative;height:100%;min-height:0;border-radius:36px;background:linear-gradient(150deg,#ecd7c3,#d7b69b 58%,#c2937c);box-shadow:0 34px 80px rgba(150,90,55,.3);overflow:hidden}
+.art:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 68% 22%,rgba(255,255,255,.55),transparent 42%)}
+.float{position:absolute;left:-24px;bottom:38px;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-radius:22px;padding:17px 19px;box-shadow:0 24px 56px rgba(120,80,50,.26);width:218px}
+.float .p{font-family:Georgia,serif;font-size:17px;font-weight:600}
+.float .s{font-size:12px;color:#9a877b;margin-top:3px}
+.float .pr{margin-top:13px;display:flex;align-items:center;justify-content:space-between}
+.price{font-family:Georgia,serif;font-size:23px;font-weight:700;color:#bf7a4f}
+.add{background:#4a3a32;color:#fff;border:0;border-radius:999px;width:36px;height:36px;font-size:19px;cursor:pointer}
+.tag{position:absolute;left:46px;top:74px;font-size:11px;color:#bf7a4f;font-weight:700;letter-spacing:.05em}
+.notice{position:absolute;right:18px;bottom:13px;font-size:11px;color:#a8978c;background:rgba(255,255,255,.66);border:1px solid #e3d3c4;border-radius:999px;padding:6px 12px}
+</style></head><body><div class="page">
+  <div class="nav"><div class="brand">Lumièra</div>
+    <div class="menu"><span>Rituals</span><span>Skin</span><span>Journal</span><span>About</span></div>
+    <button class="cta">${zh?'预约护理':'Book a ritual'}</button></div>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Slow Skincare</div>
+      <h1>${zh?'让肌肤<br>慢下来呼吸':'Skincare that<br>slows down'}</h1>
+      <p class="lede">${zh?'低噪声色彩、充足留白、克制的缓动——把高端品牌的从容感放进每一次交互。':'Low-noise color, generous whitespace, restrained motion — the unhurried calm of a premium brand in every interaction.'}</p>
+      <div class="row"><button class="cta">${zh?'选购系列':'Shop the line'}</button><button class="ghost">${zh?'了解配方':'Our formula'}</button></div>
+      <div class="trust"><span class="stars">★★★★★</span><span>${zh?'4.9 · 12,840 条评价':'4.9 · 12,840 reviews'}</span></div>
+    </div>
+    <div class="art">
+      <div class="float"><div class="p">Rosewood Serum</div><div class="s">${zh?'修护精华 · 30ml':'Repair serum · 30ml'}</div><div class="pr"><span class="price">¥248</span><button class="add">+</button></div></div>
+    </div>
+  </div>
+  <div class="notice">${notice}</div>
+</div></body></html>`,
+
+    // 克制极简 —— 文档 / 知识库工具
+    minimal: () => `${head}<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#fcfcfd;color:#13151a}
+.app{height:100%;display:grid;grid-template-columns:236px 1fr;position:relative}
+.side{border-right:1px solid #ebedf0;padding:24px 18px;display:flex;flex-direction:column}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;margin-bottom:14px}
+.logo .sq{width:22px;height:22px;border-radius:6px;background:#2563eb}
+.navlabel{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#9aa1ad;margin:16px 0 6px;font-weight:600}
+.item{font-size:14px;color:#4a515e;padding:8px 10px;border-radius:7px}
+.item.on{background:#eef2ff;color:#2563eb;font-weight:600}
+.main{padding:30px 40px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.crumb{font-size:13px;color:#9aa1ad}.crumb b{color:#13151a;font-weight:600}
+h1{font-size:30px;letter-spacing:-.02em;margin:10px 0 6px;font-weight:700}
+.sub{font-size:14px;color:#6b727e;margin:0;line-height:1.6}
+.bar{display:flex;gap:10px;margin:24px 0 16px}
+.btn{font-size:13px;font-weight:600;border-radius:8px;padding:8px 15px;border:1px solid #e2e5ea;background:#fff;color:#13151a;cursor:pointer}
+.btn.pri{background:#2563eb;color:#fff;border-color:#2563eb}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:#9aa1ad;font-weight:600;padding:0 0 11px;border-bottom:1px solid #ebedf0}
+td{padding:15px 0;border-bottom:1px solid #f1f2f5;color:#3b424d}
+.k{font-family:'JetBrains Mono',monospace;font-size:12.5px;color:#2563eb}
+.pill{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px;background:#e7f6ee;color:#179a5b}
+.pill.gray{background:#f1f2f5;color:#6b727e}
+.muted{color:#9aa1ad}
+.tag{position:absolute;left:254px;bottom:14px;font-size:11px;color:#9aa1ad}
+.notice{position:absolute;right:18px;bottom:13px;font-size:11px;color:#9aa1ad;border:1px solid #ebedf0;border-radius:999px;padding:6px 12px;background:#fff}
+</style></head><body><div class="app">
+  <aside class="side">
+    <div class="logo"><span class="sq"></span> Vault</div>
+    <div class="navlabel">${zh?'工作区':'Workspace'}</div>
+    <div class="item on">${zh?'文档':'Docs'}</div><div class="item">${zh?'任务':'Tasks'}</div><div class="item">${zh?'知识库':'Knowledge'}</div>
+    <div class="navlabel">${zh?'团队':'Team'}</div>
+    <div class="item">${zh?'成员':'Members'}</div><div class="item">${zh?'设置':'Settings'}</div>
+  </aside>
+  <main class="main">
+    <div class="crumb">${zh?'工作区':'Workspace'} / <b>${zh?'产品文档':'Product docs'}</b></div>
+    <h1>${zh?'产品文档':'Product docs'}</h1>
+    <p class="sub">${zh?'少装饰、强排版、清楚的信息层级——内容本身是主角。':'Low ornament, strong typography, clear hierarchy — the content is the hero.'}</p>
+    <div class="bar"><button class="btn pri">${zh?'新建文档':'New doc'}</button><button class="btn">${zh?'筛选':'Filter'}</button><button class="btn">${zh?'排序':'Sort'}</button></div>
+    <table>
+      <thead><tr><th>${zh?'文档':'Document'}</th><th>${zh?'状态':'Status'}</th><th>${zh?'负责人':'Owner'}</th><th>${zh?'更新':'Updated'}</th></tr></thead>
+      <tbody>
+        <tr><td><span class="k">/onboarding</span> ${zh?'新人指引':'Onboarding guide'}</td><td><span class="pill">${zh?'已发布':'Published'}</span></td><td>Aria</td><td class="muted">2h</td></tr>
+        <tr><td><span class="k">/api-auth</span> ${zh?'鉴权说明':'Auth reference'}</td><td><span class="pill gray">${zh?'草稿':'Draft'}</span></td><td>Wen</td><td class="muted">1d</td></tr>
+        <tr><td><span class="k">/billing</span> ${zh?'计费规则':'Billing rules'}</td><td><span class="pill">${zh?'已发布':'Published'}</span></td><td>Lin</td><td class="muted">3d</td></tr>
+        <tr><td><span class="k">/changelog</span> ${zh?'更新日志':'Changelog'}</td><td><span class="pill gray">${zh?'草稿':'Draft'}</span></td><td>Sol</td><td class="muted">5d</td></tr>
+      </tbody>
+    </table>
+  </main>
+  <div class="notice">${notice}</div>
+</div></body></html>`,
+
+    // 工业粗粝 —— 运维 / 终端控制台
+    brutalist: () => `${head}<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:'JetBrains Mono','SFMono-Regular',monospace;background:#e8e000;color:#0a0a0a}
+.page{height:100%;padding:28px 30px;display:flex;flex-direction:column;gap:16px;position:relative}
+.top{display:flex;align-items:center;justify-content:space-between;border:3px solid #0a0a0a;background:#0a0a0a;color:#e8e000;padding:13px 18px}
+.top .b{font-weight:800;font-size:21px;letter-spacing:.04em}
+.live{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800;letter-spacing:.08em}
+.live .d{width:11px;height:11px;border-radius:50%;background:#e8e000;animation:pulse 1.3s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(232,224,0,.8)}100%{box-shadow:0 0 0 13px rgba(232,224,0,0)}}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tile{border:3px solid #0a0a0a;background:#fff;box-shadow:8px 8px 0 #0a0a0a;padding:15px 16px}
+.tile .l{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.tile .v{font-size:40px;font-weight:800;line-height:1;margin-top:8px;letter-spacing:-.02em}
+.tile.alarm{background:#0a0a0a;color:#e8e000;box-shadow:8px 8px 0 #fff}
+.panel{flex:1;border:3px solid #0a0a0a;background:#fff;box-shadow:8px 8px 0 #0a0a0a;overflow:hidden;display:flex;flex-direction:column;min-height:0}
+.ph{display:flex;justify-content:space-between;align-items:center;padding:11px 16px;border-bottom:3px solid #0a0a0a;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.r{display:grid;grid-template-columns:90px 1fr auto;gap:14px;padding:11px 16px;border-bottom:1px solid #0a0a0a;font-size:13px;align-items:center}
+.r:last-child{border-bottom:0}
+.err{background:#0a0a0a;color:#e8e000;padding:1px 8px;font-weight:800}
+.ok{font-weight:800}
+.exec{align-self:flex-start;border:3px solid #0a0a0a;background:#0a0a0a;color:#e8e000;padding:13px 24px;font-weight:800;font-size:14px;text-transform:uppercase;letter-spacing:.06em;box-shadow:6px 6px 0 #fff;cursor:pointer}
+.tag{position:absolute;left:30px;bottom:8px;font-size:11px;font-weight:700}
+.notice{position:absolute;right:30px;bottom:6px;font-size:10px;font-weight:700;border:2px solid #0a0a0a;padding:4px 9px;background:#fff}
+</style></head><body><div class="page">
+  <div class="top"><span class="b">GRID//OPS</span><span class="live"><span class="d"></span>LIVE · ${zh?'生产环境':'PRODUCTION'}</span></div>
+  <div class="tiles">
+    <div class="tile"><div class="l">UPTIME</div><div class="v">99.98%</div></div>
+    <div class="tile alarm"><div class="l">${zh?'告警':'ALERTS'}</div><div class="v">12</div></div>
+    <div class="tile"><div class="l">${zh?'节点':'NODES'}</div><div class="v">48</div></div>
+  </div>
+  <div class="panel">
+    <div class="ph"><span>${zh?'事件流':'EVENT STREAM'}</span><span>${zh?'最近 5 分钟':'LAST 5 MIN'}</span></div>
+    <div class="r"><span>08:42:11</span><span>api-gateway · 503 upstream</span><span class="err">FAIL</span></div>
+    <div class="r"><span>08:42:09</span><span>worker-07 · job retry queued</span><span class="ok">RETRY</span></div>
+    <div class="r"><span>08:41:55</span><span>db-primary · failover ok</span><span class="ok">OK</span></div>
+    <div class="r"><span>08:41:30</span><span>edge-cache · purged 1.2k keys</span><span class="ok">OK</span></div>
+  </div>
+  <button class="exec">▶ ${zh?'执行恢复脚本':'RUN RECOVERY'}</button>
+  <div class="notice">${notice}</div>
+</div></body></html>`,
+
+    // Taste 默认(自动判断) —— 现代分析仪表盘, 代表"让 Agent 给一个高品位默认"
+    taste: () => `${head}<style>
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:'Inter',system-ui,sans-serif;background:#0b0f17;color:#e9eef7}
+.app{height:100%;display:grid;grid-template-columns:62px 1fr;position:relative}
+.rail{border-right:1px solid rgba(255,255,255,.07);padding:18px 0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.rail .lg{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#67e8f9,#a78bfa)}
+.rail .ic{width:30px;height:30px;border-radius:9px;background:rgba(255,255,255,.06)}
+.rail .ic.on{background:rgba(103,232,249,.16);box-shadow:inset 0 0 0 1px rgba(103,232,249,.4)}
+.body{padding:26px 32px;overflow:hidden;min-width:0;position:relative}
+.body:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 12% 0%,rgba(103,232,249,.1),transparent 36%),radial-gradient(circle at 92% 8%,rgba(167,139,250,.12),transparent 40%);pointer-events:none}
+.topbar{display:flex;align-items:center;justify-content:space-between;position:relative}
+.title{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.title .m{display:block;font-size:12px;font-weight:500;color:#8a97ab;letter-spacing:0;margin-top:3px}
+.who{display:flex;align-items:center;gap:10px}
+.btn{background:linear-gradient(135deg,#67e8f9,#a78bfa);color:#06121b;border:0;border-radius:10px;padding:10px 16px;font-weight:800;font-size:13px;cursor:pointer}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#a78bfa)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0 16px;position:relative}
+.card{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.04);border-radius:16px;padding:16px 18px}
+.card .l{font-size:12px;color:#8a97ab;font-weight:600}
+.card .v{font-size:32px;font-weight:850;letter-spacing:-.03em;margin-top:7px}
+.card .up{font-size:12px;font-weight:700;color:#34d399;margin-top:5px}
+.chart{border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.03);border-radius:16px;padding:18px;position:relative}
+.chart .h{display:flex;justify-content:space-between;font-size:13px;color:#8a97ab;font-weight:600;margin-bottom:6px}
+.chart .h b{color:#e9eef7;font-weight:800;font-size:15px}
+.tag{position:absolute;left:32px;bottom:12px;font-size:11px;color:#67e8f9;font-weight:600}
+.notice{position:absolute;right:18px;bottom:11px;font-size:11px;color:#8a97ab;border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:6px 12px;background:rgba(13,18,31,.7)}
+</style></head><body><div class="app">
+  <nav class="rail"><div class="lg"></div><div class="ic on"></div><div class="ic"></div><div class="ic"></div><div class="ic"></div></nav>
+  <main class="body">
+    <div class="topbar"><div class="title">Northwind${zh?' 概览':' Overview'}<span class="m">${zh?'让 Agent 先判断产品气质，再给一个高品位默认':'agent infers the mood, then ships a strong default'}</span></div>
+      <div class="who"><button class="btn">${zh?'生成界面':'Generate UI'}</button><div class="av"></div></div></div>
+    <div class="kpis">
+      <div class="card"><div class="l">${zh?'月度活跃':'Active users'}</div><div class="v">38.2k</div><div class="up">▲ 12.4%</div></div>
+      <div class="card"><div class="l">${zh?'收入':'Revenue'}</div><div class="v">$214k</div><div class="up">▲ 8.1%</div></div>
+      <div class="card"><div class="l">${zh?'留存':'Retention'}</div><div class="v">91%</div><div class="up">▲ 2.3%</div></div>
+    </div>
+    <div class="chart">
+      <div class="h"><b>${zh?'增长趋势':'Growth trend'}</b><span>${zh?'近 30 天':'Last 30 days'}</span></div>
+      <svg viewBox="0 0 600 120" preserveAspectRatio="none" style="width:100%;height:140px;display:block">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#67e8f9" stop-opacity=".4"/><stop offset="1" stop-color="#67e8f9" stop-opacity="0"/></linearGradient></defs>
+        <polygon fill="url(#g)" points="0,120 0,92 75,78 150,84 225,52 300,60 375,30 450,40 525,16 600,26 600,120"/>
+        <polyline fill="none" stroke="#67e8f9" stroke-width="3" points="0,92 75,78 150,84 225,52 300,60 375,30 450,40 525,16 600,26"/>
+      </svg>
+    </div>
+    <div class="notice">${notice}</div>
+  </main>
+</div></body></html>`
+  };
+  return (demos[item.demo] || demos.taste)();
+}
+
+function createUITasteCard(item){
+  const card = document.createElement('div');
+  card.className = 'card ui-taste-card';
+  const label = uiTasteLabel(item);
+  const desc = uiTasteDesc(item);
+  const promptText = T().promptUITaste(item);
+  card.innerHTML = `
+    <button class="copy-btn" type="button">${T().copyPrompt}</button>
+    ${uiTasteDemo(item)}
+    <div class="meta">
+      <p class="name">${label}</p>
+      <p class="desc">${desc}</p>
+      <p class="author">by Leonxlnx/taste-skill</p>
+      <div class="feat"><span class="kind">${uiTasteKind(item)}</span><span class="no">${T().uiTasteNoPresenter}</span></div>
+      <p class="id">--skill "${item.installName}"</p>
+    </div>`;
+  const modalSrc = {srcdoc: uiTastePreview(item)};
+  const modalLabel = `${label} · ${item.installName}`;
+  async function copyUI(e){
+    if(e) e.stopPropagation();
+    const ok = await copyToClipboard(promptText);
+    if(ok){
+      card.classList.add('copied');
+      const btn = card.querySelector('.copy-btn');
+      btn.textContent = T().copied;
+      showToast(T().toastCardCopied(label));
+      setTimeout(()=>{
+        card.classList.remove('copied');
+        btn.textContent = T().copyPrompt;
+      }, 2400);
+    }else{
+      showToast(T().toastFail);
+    }
+  }
+  card.addEventListener('click',()=>openModal(modalSrc, modalLabel, promptText));
+  card.querySelector('.copy-btn').addEventListener('click', copyUI);
+  return card;
+}
+
+/* ───── 配图(社交卡): 基调 → 预览工作台 ───── */
+function colorById(id){ return SOCIAL_CARDS.find(c=>c.id===id); }
+function ratioById(id){ return CARD_RATIOS.find(r=>r.id===id) || CARD_RATIOS[0]; }
+function toneLabel(tone){ return lang==='zh' ? tone.zh : tone.en; }
+function toneDesc(tone){ return lang==='zh' ? tone.descZh : tone.descEn; }
+function socialCardMode(item){ return item.mode==='editorial' ? T().cardModeEditorial : T().cardModeSwiss; }
+function toneMatches(tone){
+  if(!q) return true;
+  const colors = colorsForTone(tone.id).map(c=>`${c.zh} ${c.en} ${c.themeKey} ${c.descZh} ${c.descEn}`).join(' ');
+  return `${tone.id} ${tone.mode} ${tone.zh} ${tone.en} ${tone.descZh} ${tone.descEn} ${colors} guizang 歸藏 配图 社交卡 小红书 公众号 social card`.toLowerCase().includes(q.toLowerCase());
+}
+
+/* 海报 mock 节点(基调卡预览 + 工作台舞台 共用同一份 class)。ratio.fit 为空时不加 fit 类(由外层控制尺寸) */
+function socialPosterMarkup(item, ratio){
+  const vars = `--sc-paper:${item.paper};--sc-paper2:${item.paper2};--sc-ink:${item.ink};--sc-muted:${item.muted};--sc-accent:${item.accent};--sc-on:${item.on};--sc-ratio:${ratio.ratio}`;
+  const dark = item.id==='midnight-ink' ? ' sc-dark' : '';
+  const fit = ratio.fit ? ` fit-${ratio.fit}` : '';
+  const inner = item.mode==='editorial'
+    ? `<div class="sc-grain"></div>
+       <div class="sc-pad">
+         <div class="sc-kick">歸藏 · ISSUE</div>
+         <div class="sc-h">${lang==='zh' ? '把源文变成<br>一眼读懂的视觉' : 'Turn the source<br>into one clear glance'}</div>
+         <div class="sc-rule"></div>
+         <div class="sc-foot"><span>EDITORIAL × E-INK</span><span>${item.en}</span></div>
+       </div>`
+    : `<div class="sc-pad">
+         <div class="sc-tag">01 — SWISS</div>
+         <div class="sc-h">${lang==='zh' ? '系统化的<br>视觉论证' : 'A systematic<br>visual argument'}</div>
+         <div class="sc-chip">${item.en}</div>
+         <div class="sc-bars"><i></i><i></i><i></i><i></i></div>
+       </div>`;
+  return `<div class="sc-poster ${item.mode==='editorial'?'sc-ed':'sc-sw'}${dark}${fit}" style="${vars}">${inner}</div>`;
+}
+
+/* grid 里每个「基调」一张卡, 点开进工作台 */
+function createToneCard(tone){
+  const card = document.createElement('div');
+  card.className = 'card tone-card';
+  const colors = colorsForTone(tone.id);
+  const demoColor = colorById(tone.defaultColor) || colors[0];
+  const ratio3x4 = ratioById('xhs');
+  card.innerHTML = `
+    <span class="zoom-hint">${T().cardEnterHint}</span>
+    <div class="card-demo">
+      <span class="badge">${tone.mode==='editorial'?T().cardModeEditorial:T().cardModeSwiss}</span>
+      <span class="badge count">${colors.length} ${lang==='zh'?'配色':'palettes'}</span>
+      ${socialPosterMarkup(demoColor, ratio3x4)}
+    </div>
+    <div class="meta">
+      <p class="name">${toneLabel(tone)}</p>
+      <p class="desc">${toneDesc(tone)}</p>
+      <p class="author">by 歸藏 / guizang-social-card-skill</p>
+      <p class="enter">▸ ${T().cardEnterHint}</p>
+    </div>`;
+  card.addEventListener('click',()=>openCardStudio(tone));
+  return card;
+}
+
+/* ───── 预览工作台: 切配色分支 + 选比例 + 复制 ───── */
+const cardModalEl = document.getElementById('card-modal');
+let studio = {tone:null, colorId:null, ratioId:'xhs'};
+
+function studioPrompt(){
+  return T().promptCard(colorById(studio.colorId), ratioById(studio.ratioId));
+}
+function renderStudio(){
+  const tone = studio.tone;
+  const color = colorById(studio.colorId);
+  const ratio = ratioById(studio.ratioId);
+  const cn = lang==='zh';
+  document.getElementById('cs-tone-name').textContent = `${toneLabel(tone)} · ${cn?color.zh:color.en}`;
+  document.getElementById('cs-tone-desc').textContent = toneDesc(tone);
+  document.getElementById('cs-color-label').textContent = T().csColorLabel;
+  document.getElementById('cs-ratio-label').textContent = T().csRatioLabel;
+  // 按舞台实际尺寸决定海报以宽还是高撑满, 避免任一比例溢出被裁切
+  const stage = document.getElementById('cs-stage');
+  const cw = stage.clientWidth - 72, ch = stage.clientHeight - 72;  // 减去 36px padding
+  const [ra, rb] = ratio.ratio.split('/').map(Number);
+  const fit = (ra/rb) > (cw/ch) ? 'w' : 'h';
+  stage.innerHTML = socialPosterMarkup(color, {...ratio, fit});
+  document.getElementById('cs-colors').innerHTML = colorsForTone(tone.id).map(c=>
+    `<button class="cs-chip${c.id===studio.colorId?' active':''}" data-color="${c.id}"><span class="sw" style="background:${c.accent}"></span>${cn?c.zh:c.en}</button>`
+  ).join('');
+  document.getElementById('cs-ratios').innerHTML = CARD_RATIOS.map(r=>
+    `<button class="cs-chip ratio${r.id===studio.ratioId?' active':''}" data-ratio="${r.id}">${r.label} · ${cn?r.zh:r.en}</button>`
+  ).join('');
+  document.getElementById('cs-spec').textContent = `${color.mode==='editorial'?'data-theme':'data-accent'}="${color.themeKey}"  ·  ${ratio.spec}`;
+  document.getElementById('cs-note').textContent = T().cardImportNote;
+  const copyBtn = document.getElementById('cs-copy');
+  copyBtn.textContent = T().copyPrompt;
+  copyBtn.classList.remove('ok');
+  document.querySelectorAll('#cs-colors .cs-chip').forEach(b=>b.addEventListener('click',()=>{ studio.colorId=b.dataset.color; renderStudio(); }));
+  document.querySelectorAll('#cs-ratios .cs-chip').forEach(b=>b.addEventListener('click',()=>{ studio.ratioId=b.dataset.ratio; renderStudio(); }));
+}
+function openCardStudio(tone){
+  studio.tone = tone;
+  studio.colorId = tone.defaultColor;
+  if(!CARD_RATIOS.some(r=>r.id===studio.ratioId)) studio.ratioId = 'xhs';
+  cardModalEl.classList.add('open');  // 先显示, 让舞台拿到真实尺寸再渲染海报
+  renderStudio();
+}
+function closeCardStudio(){ cardModalEl.classList.remove('open'); }
+document.getElementById('card-close').addEventListener('click', closeCardStudio);
+cardModalEl.addEventListener('click', e=>{ if(e.target===cardModalEl) closeCardStudio(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && cardModalEl.classList.contains('open')) closeCardStudio(); });
+document.getElementById('cs-copy').addEventListener('click', async ()=>{
+  const ok = await copyToClipboard(studioPrompt());
+  const btn = document.getElementById('cs-copy');
+  if(ok){
+    btn.textContent = T().copied; btn.classList.add('ok');
+    showToast(T().toastCardCopied(lang==='zh'?colorById(studio.colorId).zh:colorById(studio.colorId).en));
+    setTimeout(()=>{ btn.textContent = T().copyPrompt; btn.classList.remove('ok'); }, 2000);
+  }else{ showToast(T().toastFail); }
+});
+
+function createLocalCard(item){
+  const card = document.createElement('div');
+  card.className = 'card local-card';
+  const label = localLabel(item);
+  const desc = localDesc(item);
+  const promptText = localPrompt(item);
+  let modalSrc;
+  let modalLabel = `${label} · ${item.id || 'local'}`;
+
+  if(item.type === 'theme'){
+    const cssHref = safeText(item.css, '../assets/themes/minimal-white.css');
+    modalSrc = {srcdoc: themeDemo(item.id || 'local', label, cssHref)};
+    card.innerHTML = `
+      <button class="copy-btn" type="button">${T().copyPrompt}</button>
+      <span class="zoom-hint">${T().zoomHint}</span>
+      <div class="preview">
+        <span class="badge local">local</span>
+        <iframe srcdoc='${themeDemo(item.id || 'local', label, cssHref).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
+      </div>
+      <div class="meta">
+        <p class="name">${label}</p>
+        <p class="desc">${desc || T().localRegistry}</p>
+        <p class="author">by ${safeText(item.author, 'Local')}</p>
+        <p class="id">${cssHref}</p>
+      </div>`;
+  }else{
+    const iframeSrc = safeText(item.path, '../examples/<slug>/index.html');
+    modalSrc = {src: iframeSrc};
+    const presenter = item.presenter === false ? T().featNoPresenter : T().featPresenter;
+    card.innerHTML = `
+      <button class="copy-btn" type="button">${T().copyPrompt}</button>
+      <span class="zoom-hint">${T().zoomHint}</span>
+      <div class="preview">
+        <span class="badge local">local</span>
+        <iframe src="${iframeSrc}" loading="lazy"></iframe>
+      </div>
+      <div class="meta">
+        <p class="name">${label}</p>
+        <p class="desc">${desc || T().localRegistry}</p>
+        <p class="author">by ${safeText(item.author, 'Local')}</p>
+        <div class="feat"><span class="${item.presenter === false ? 'no' : 'yes'}">${presenter}</span></div>
+        <p class="id">${iframeSrc}</p>
+      </div>`;
+  }
+
+  card.addEventListener('click',()=>openModal(modalSrc, modalLabel, promptText));
+  const copyBtn = card.querySelector('.copy-btn');
+  copyBtn.addEventListener('click', async (e)=>{
+    e.stopPropagation();
+    const ok = await copyToClipboard(promptText);
+    if(ok){
+      card.classList.add('copied');
+      copyBtn.textContent = T().copied;
+      showToast(T().toastCardCopied(label));
+      setTimeout(()=>{
+        card.classList.remove('copied');
+        copyBtn.textContent = T().copyPrompt;
+      }, 2400);
+    }else{
+      showToast(T().toastFail);
+    }
+  });
+  return card;
+}
+
+function createCustomCard(){
+  const c = customCardText();
+  const card = document.createElement('div');
+  card.className = 'card custom-card';
+  card.innerHTML = `
+    <button class="copy-btn" type="button">${T().copyPrompt}</button>
+    <div class="custom-preview"><div class="custom-plus">+</div></div>
+    <div class="meta">
+      <p class="name">${c.name}</p>
+      <p class="desc">${c.desc}</p>
+      <p class="id">${c.id}</p>
+    </div>`;
+  async function copyCustom(e){
+    if(e) e.stopPropagation();
+    const ok = await copyToClipboard(c.prompt);
+    if(ok){
+      card.classList.add('copied');
+      const btn = card.querySelector('.copy-btn');
+      btn.textContent = T().copied;
+      showToast(T().toastCardCopied(c.name.replace(/^\+\s*/, '')));
+      setTimeout(()=>{
+        card.classList.remove('copied');
+        btn.textContent = T().copyPrompt;
+      }, 2400);
+    }else{
+      showToast(T().toastFail);
+    }
+  }
+  card.addEventListener('click', copyCustom);
+  card.querySelector('.copy-btn').addEventListener('click', copyCustom);
+  return card;
+}
+
 /* ───── Static UI strings binding ───── */
 function applyStaticI18n(){
   const t = T();
@@ -576,7 +1722,7 @@ function applyStaticI18n(){
 
   // brand sub
   document.getElementById('brand-sub').innerHTML =
-    `${t.sub}Fork from <a href="${UPSTREAM_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">@lewislulu</a> & <a href="https://github.com/op7418/guizang-ppt-skill" target="_blank" style="color:#8a90a4;text-decoration:underline">@guizang</a>`;
+    `${t.sub}Fork from <a href="${UPSTREAM_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">@lewislulu</a> & <a href="${GUIZANG_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">@guizang</a> & <a href="${TASTE_URL}" target="_blank" style="color:#8a90a4;text-decoration:underline">taste.skill</a>`;
 
   // install bar
   document.getElementById('install-bar').title = t.installTitle;
@@ -595,6 +1741,8 @@ function applyStaticI18n(){
   document.querySelectorAll('.tab').forEach(b=>{
     b.textContent = b.dataset.view==='themes' ? t.tabThemes
                   : b.dataset.view==='decks'  ? t.tabDecks
+                  : b.dataset.view==='ui'     ? t.tabUITaste
+                  : b.dataset.view==='cards'  ? t.tabCards
                   : t.tabGuide;
   });
 
@@ -628,13 +1776,34 @@ function render(){
   guideEl.style.display='none';
 
   grid.innerHTML = '';
+  if(view === 'ui'){
+    const filtered = UI_TASTES.filter(uiTasteMatches);
+    if(filtered.length === 0){ emptyEl.style.display='block'; return; }
+    emptyEl.style.display='none';
+    filtered.forEach(item=>grid.appendChild(createUITasteCard(item)));
+    return;
+  }
+
+  if(view === 'cards'){
+    const filtered = CARD_TONES.filter(toneMatches);
+    if(filtered.length === 0){ emptyEl.style.display='block'; return; }
+    emptyEl.style.display='none';
+    filtered.forEach(tone=>grid.appendChild(createToneCard(tone)));
+    return;
+  }
+
   const items = view==='themes' ? THEMES : DECKS;
+  const localItems = localItemsForCurrentView().filter(localItemMatches);
   const filtered = items.filter(it=>{
     if(!q) return true;
     return it.join(' ').toLowerCase().includes(q.toLowerCase());
   });
-  if(filtered.length===0){ emptyEl.style.display='block'; return }
+  const showCustom = customCardMatches();
+  if(filtered.length===0 && localItems.length===0 && !showCustom){ emptyEl.style.display='block'; return }
   emptyEl.style.display='none';
+
+  if(showCustom) grid.appendChild(createCustomCard());
+  localItems.forEach(item=>grid.appendChild(createLocalCard(item)));
 
   filtered.forEach(it=>{
     const card = document.createElement('div');
@@ -743,7 +1912,8 @@ function renderGuide(){
       <a href="${REPO_URL}/archive/refs/heads/main.zip">${t.linkZip}</a>
       <a href="${REPO_URL}/releases" target="_blank">${t.linkRelease}</a>
       <a href="${UPSTREAM_URL}" target="_blank">${t.linkUpstream}</a>
-      <a href="https://github.com/op7418/guizang-ppt-skill" target="_blank">${t.linkGuizang}</a>
+      <a href="${GUIZANG_URL}" target="_blank">${t.linkGuizang}</a>
+      <a href="${TASTE_URL}" target="_blank">${t.linkTaste}</a>
     </div>
 
     <h2><span class="num">2</span>${t.h2}</h2>
@@ -876,8 +2046,13 @@ modalCopy.addEventListener('click', async e => {
 });
 
 /* ───── Boot ───── */
-applyStaticI18n();
-render();
+(async function boot(){
+  // 注入海报 mock 样式(卡内预览复用同一份 SC_CSS)
+  document.head.insertAdjacentHTML('beforeend', `<style id="sc-style">${SC_CSS}</style>`);
+  applyStaticI18n();
+  await loadLocalTaste();
+  render();
+})();
 </script>
 </body>
 </html>
