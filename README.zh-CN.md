@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/c25315ea-9139-4870-9bd0-7022ce2d803c
+
 # DeckTaste.skill · 给 AI Agent 用的视觉审美菜单
 
 [中文](README.zh-CN.md) · [**English →**](README.md)
@@ -7,14 +11,6 @@
 [![集成 guizang-social-card-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-guizang--social--card--skill-orange?logo=github)](https://github.com/op7418/guizang-social-card-skill)
 [![集成 Leonxlnx/taste-skill](https://img.shields.io/badge/%E9%9B%86%E6%88%90-Leonxlnx%2Ftaste--skill-blueviolet?logo=github)](https://github.com/Leonxlnx/taste-skill)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
-<div align="center">
-
-[![DeckTaste — 60 秒 demo](docs/readme/launch-cover.jpg)](https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4)
-
-<em>▶ 点封面播放 60 秒 demo</em>
-
-</div>
 
 ## 🙏 致敬上游
 
