@@ -16,3 +16,6 @@ examples/local-*/
 
 # Heavy marketing media (kept out of git history; use Release assets / LFS instead)
 marketing/
+
+# Installed skill dependencies (declared in skills-lock.json, fetched on demand)
+.agents/
