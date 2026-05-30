@@ -1,18 +1,19 @@
-# HTML PPT Picker — *Visual deck selector for HTML presentations*
+# DeckTaste.skill — *Visual taste menu for AI-generated decks*
 
 [![Forked from lewislulu/html-ppt-skill](https://img.shields.io/badge/forked%20from-lewislulu%2Fhtml--ppt--skill-blue?logo=github)](https://github.com/lewislulu/html-ppt-skill)
 [![Integrates op7418/guizang-ppt-skill](https://img.shields.io/badge/integrates-op7418%2Fguizang--ppt--skill-orange?logo=github)](https://github.com/op7418/guizang-ppt-skill)
+[![Integrates Leonxlnx/taste-skill](https://img.shields.io/badge/integrates-Leonxlnx%2Ftaste--skill-blueviolet?logo=github)](https://github.com/Leonxlnx/taste-skill)
 [![Upstream stars](https://img.shields.io/github/stars/lewislulu/html-ppt-skill?label=upstream%20stars&style=social)](https://github.com/lewislulu/html-ppt-skill/stargazers)
 [![Guizang stars](https://img.shields.io/github/stars/op7418/guizang-ppt-skill?label=guizang%20stars&style=social)](https://github.com/op7418/guizang-ppt-skill/stargazers)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-> 🙏 **Credit to [@lewislulu](https://github.com/lewislulu)** (core skill) and **[@op7418 歸藏](https://github.com/op7418)** (magazine + swiss decks). This fork adds a visual picker for previewing themes, deck templates, and ready-to-copy prompts.
+> 🙏 **Credit to [@lewislulu](https://github.com/lewislulu)** (core skill), **[@op7418 歸藏](https://github.com/op7418)** (magazine + swiss decks, social cards), and **[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)** (UI taste). This fork packages those capabilities as DeckTaste.skill: see the style first, then copy a prompt your agent can follow.
 
-> A world-class AgentSkill for producing professional HTML presentations in
-> **36 themes**, **24 full-deck picker cards** (15 native + 9 guizang variants),
-> **31 page layouts**, **47 animations** (27 CSS + 20 canvas FX), and a
-> **true presenter mode** with pixel-perfect previews + speaker script + timer
-> — all pure static HTML/CSS/JS, no build step.
+> **Stop prompting taste. Pick it.**
+>
+> DeckTaste.skill is a local-first visual taste picker. It does not primarily solve “how to generate a PPT”; it solves “how do I tell an agent my taste in a stable way?” Browse real deck previews, click a card, and copy an executable prompt for Claude Code / Codex / Hermes. You can also turn decks you like into a local taste library, so the next run reuses your taste instead of asking you to describe it again.
+
+**One-line positioning:** a visual taste menu for AI agents: see the style, copy the prompt, let the agent follow it.
 
 **Author:** lewis &lt;sudolewis@gmail.com&gt;
 **License:** MIT
@@ -20,22 +21,27 @@
 
 > ## 🙏 About This Fork
 >
-> This fork keeps the upstream skill intact and adds a visual picker layer:
+> This fork keeps the upstream skill intact and adds a visual taste layer:
 >
 > - 🎨 **Core skill** — [**lewislulu/html-ppt-skill**](https://github.com/lewislulu/html-ppt-skill): 36 themes, 31 layouts, 47 animations, presenter mode.
 > - 🪶 **Magazine & Swiss decks** — [**op7418/guizang-ppt-skill**](https://github.com/op7418/guizang-ppt-skill) (歸藏): 2 deck templates × 9 color variants, WebGL fluid/grid backgrounds.
+> - 🧩 **UI taste** — [**Leonxlnx/taste-skill**](https://github.com/Leonxlnx/taste-skill): the visual taste system behind the `UI Taste` tab (Auto / High-end Soft / Minimalist / Industrial Brutalist).
+> - 🖼 **Social cards** — [**op7418/guizang-social-card-skill**](https://github.com/op7418/guizang-social-card-skill) (歸藏): the editorial × e-ink and Swiss social-image system behind the `图文 / Social Cards` tab.
 >
 > What this fork adds on top:
 >
-> - 🎨 **Interactive WebUI picker** — `templates/style-picker.html`: browse themes × layouts × full-decks visually, then copy install/usage prompts in one click.
+> - 🎨 **DeckTaste WebUI** — `templates/style-picker.html`: browse deck themes × deck taste cards × UI taste choices visually, then copy install/usage prompts in one click.
 > - 🪶 **+9 guizang deck variants** — `guizang-magazine` (5 colors) + `guizang-swiss` (4 colors), wired into the picker with author attribution.
+> - 🖼 **Social Cards tab** — a 2-tone preview studio (Editorial × E-ink / Swiss) for [guizang-social-card-skill](https://github.com/op7418/guizang-social-card-skill): open a tone, switch color branch, pick a size (Rednote 3:4 / WeChat covers / Square 1:1), then copy a prompt. Preview + size selection + prompt import only — no image generation in this product.
 > - 🐛 **Stability fixes** for `presenter-mode-reveal`.
 >
-> Positioning: a small, practical visual picker on top of a static HTML presentation skill — not a new framework, no runtime, still pure static HTML/CSS/JS, no build step.
+> Positioning: DeckTaste does not generate directly; it is a taste menu plus prompt launcher. The current core is AI-generated decks. UI taste can stay as a minimal Taste.skill visual entry. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.
 
-## 🎨 HTML PPT Picker (this fork's main addition)
+## 🎨 DeckTaste WebUI (this fork's main addition)
 
-A single static HTML file at `templates/style-picker.html` lets you browse all themes / templates / layouts visually, then copy a ready-made prompt to paste into your AI agent.
+A single static HTML file at `templates/style-picker.html` lets you browse deck themes / deck taste cards / UI taste choices / layouts visually, then copy an executable prompt to paste into your AI agent.
+
+The `UI Taste` tab is deliberately minimal: it shows only 4 user-facing taste choices from [leonxlnx/taste-skill](https://github.com/leonxlnx/taste-skill): Auto Taste, High-end Soft, Minimalist Product, and Industrial Brutalist. Workflow skills (`image-to-code`, `redesign-existing-projects`), model-specific tightening (`gpt-taste`), and execution helpers (`full-output-enforcement`) are handled inside the copied prompt instead of appearing as picker cards. Each preview is a DeckTaste interpretation, not an official Taste.skill demo URL.
 
 | Themes (36) | Full-Deck Picker Cards (24) | Page Layouts (31) |
 |---|---|---|
@@ -69,7 +75,7 @@ Click any card → the install command + a ready prompt is copied to your clipbo
 
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
-> One command installs **36 themes × 20 canvas FX × 31 layouts × 24 deck picker cards + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
+> One command installs **36 themes × 20 canvas FX × 31 layouts × 24 deck taste cards + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
 
 ## 🎤 Presenter Mode (new!)
 
@@ -104,7 +110,7 @@ word speaker scripts on every slide.
 ## Install (one command)
 
 ```bash
-npx skills add https://github.com/pakco77/html-ppt-picker
+npx skills add https://github.com/pakco77/DeckTaste
 ```
 
 That registers the skill with your agent runtime. After install, any agent
@@ -120,7 +126,7 @@ that supports AgentSkills can author presentations by asking things like:
 |---|---|---|
 | 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
 | 🎨 **Themes** | **36** | `assets/themes/*.css` |
-| 📑 **Deck picker cards** | **24** | `templates/full-decks/<name>/` + Guizang variants |
+| 📑 **Deck taste cards** | **24** | `templates/full-decks/<name>/` + Guizang variants |
 | 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
@@ -144,9 +150,9 @@ Each is a pure CSS-tokens file — swap one `<link>` to reskin the entire deck.
 Browse them all in `templates/theme-showcase.html` (each slide rendered in an
 isolated iframe so theme ≠ theme is visually guaranteed).
 
-![24 deck picker cards](docs/readme/templates.png)
+![24 deck taste cards](docs/readme/templates.png)
 
-### 24 deck picker cards
+### 24 deck taste cards
 
 15 native full-deck templates plus 9 Guizang color variants. The native set contains eight extracted visual languages and seven generic scenario scaffolds:
 
@@ -223,16 +229,23 @@ open templates/full-decks-index.html       # all 15 native full decks
 ```
 
 
-## Customize or contribute your own deck
+## Create your own deck
 
-Want to create a private deck first? Scaffold one locally and keep it in `examples/`:
+Private decks do not need a public-template review flow. The shortest paths are:
+
+- Click the `+ Custom deck` card in the theme or template tab of `templates/style-picker.html`, then paste the copied prompt into Codex / Claude / Hermes.
+- Or scaffold one locally under `examples/`:
 
 ```bash
 ./scripts/new-deck.sh my-talk
 open examples/my-talk/index.html
 ```
 
-Want to open-source a reusable template? Add it under `templates/full-decks/<slug>/`, register it in the picker/docs, then run the verification checklist. See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the exact sync points.
+Custom decks stay in `examples/` by default. Do not register them in README / SKILL / references, and do not put them under `templates/full-decks/` unless the maintainer explicitly decides to ship them as part of the public catalog. After generation, the agent updates the local private registry at `examples/decktaste.local.json`. Refresh DeckTaste WebUI and the deck appears as a `local` card in the matching tab.
+
+That registry is ignored by `.gitignore`; it is your local taste library, not a public review mechanism, and it does not change the public template counts.
+
+MCP or a local bridge is only needed if the web picker should directly launch an agent, read local files, or write the generated deck folder; copying a prompt into Codex does not require MCP.
 
 ## Keyboard cheat sheet
 
@@ -252,14 +265,14 @@ A                               cycle a demo animation on current slide
 ## Project structure
 
 ```
-html-ppt-picker/
+DeckTaste/
 ├── SKILL.md                      agent-facing dispatcher
 ├── README.md                     this file
 ├── references/                   detailed catalogs
 │   ├── themes.md                 36 themes with when-to-use
 │   ├── layouts.md                31 layout types
 │   ├── animations.md             27 CSS + 20 FX catalog
-│   ├── full-decks.md             24 deck picker cards
+│   ├── full-decks.md             24 deck taste cards
 │   └── authoring-guide.md        full workflow
 ├── assets/
 │   ├── base.css                  shared tokens + primitives
