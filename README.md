@@ -8,13 +8,9 @@
 [![Integrates Leonxlnx/taste-skill](https://img.shields.io/badge/integrates-Leonxlnx%2Ftaste--skill-blueviolet?logo=github)](https://github.com/Leonxlnx/taste-skill)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-<div align="center">
+https://github.com/user-attachments/assets/6d212448-62f3-4dfd-9a3d-efb0010d566f
 
-[![DeckTaste — 60-second demo](docs/readme/launch-cover.jpg)](https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4)
 
-<em>▶ Click the cover to play the 60-second demo</em>
-
-</div>
 
 ## 🙏 Credit & upstream
 
