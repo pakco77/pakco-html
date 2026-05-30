@@ -10,9 +10,9 @@
 
 <div align="center">
 
-https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4
+[![DeckTaste — 60-second demo](docs/readme/launch-cover.jpg)](https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4)
 
-<em>▶ Player not loading? <a href="https://github.com/pakco77/DeckTaste/raw/main/docs/readme/decktaste-launch-demo.mp4">Watch the 60-second demo</a></em>
+<em>▶ Click the cover to play the 60-second demo</em>
 
 </div>
 
