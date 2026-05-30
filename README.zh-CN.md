@@ -109,7 +109,7 @@ idx:N})` 通知 iframe，iframe 只是切换 `.is-active` class —— **不重�
 ## 一行命令安装
 
 ```bash
-npx skills add https://github.com/pakco77/html-ppt-picker
+npx skills add https://github.com/pakco77/DeckTaste
 ```
 
 装好后，任何支持 AgentSkill 的 agent（Claude Code / Codex / Cursor / OpenClaw 等）
@@ -271,7 +271,7 @@ A                               在当前 slide 循环演示一个动画
 ## 项目结构
 
 ```
-html-ppt-picker/
+DeckTaste/
 ├── SKILL.md                      agent 入口
 ├── README.md                     英文 README
 ├── README.zh-CN.md               本文件

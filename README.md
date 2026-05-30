@@ -110,7 +110,7 @@ word speaker scripts on every slide.
 ## Install (one command)
 
 ```bash
-npx skills add https://github.com/pakco77/html-ppt-picker
+npx skills add https://github.com/pakco77/DeckTaste
 ```
 
 That registers the skill with your agent runtime. After install, any agent
@@ -265,7 +265,7 @@ A                               cycle a demo animation on current slide
 ## Project structure
 
 ```
-html-ppt-picker/
+DeckTaste/
 ├── SKILL.md                      agent-facing dispatcher
 ├── README.md                     this file
 ├── references/                   detailed catalogs

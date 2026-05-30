@@ -13,7 +13,7 @@ All pages share a token-based design system in `assets/base.css`.
 ## Install
 
 ```bash
-npx skills add https://github.com/pakco77/html-ppt-picker
+npx skills add https://github.com/pakco77/DeckTaste
 ```
 
 One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
