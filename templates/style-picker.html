@@ -131,6 +131,13 @@
   .card:hover .copy-btn{opacity:1}
   .copy-btn:hover{background:#a78bfa;transform:scale(1.05)}
   .copy-btn.ok{background:#1aaf6c;opacity:1}
+  /* 删除按钮(仅 local 自建卡) */
+  .del-btn{position:absolute;top:8px;left:8px;z-index:4;background:rgba(224,99,90,.92);color:#fff;border:0;
+    width:26px;height:26px;border-radius:6px;font-size:13px;line-height:1;cursor:pointer;opacity:0;transition:.15s;
+    display:flex;align-items:center;justify-content:center;padding:0}
+  .card:hover .del-btn{opacity:1}
+  .del-btn:hover{background:#e0635a;transform:scale(1.1)}
+  .del-btn.ok{background:#1aaf6c;opacity:1}
 
   /* Zoom hint bottom-right */
   .zoom-hint{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;
@@ -364,6 +371,14 @@ const I18N = {
     toastFail: '复制失败，请手动选中文本',
     toastPromptPasted: '已复制 Prompt — 粘到 Agent 即用',
     toastCardCopied: (label)=>`已复制「${label}」Prompt — 粘到 Agent 即用`,
+    deleteLocalTitle: '复制删除 Prompt（真删除文件 + registry 条目）',
+    toastDeleteCopied: (label)=>`已复制删除 Prompt — 粘给 Agent 真删除「${label}」`,
+    promptDeleteLocal: (item, folder, arr)=>`请帮我真删除这个自建（不可恢复，删除前先跟我确认一次）：
+- 目标：id = "${item.id}"
+1. 删除整个文件夹 ${folder}（连同里面所有文件）
+2. 从 examples/decktaste.local.json 的 ${arr} 数组里移除 id 为 "${item.id}" 的那条 entry，保留其它所有 entry；若删后数组为空，保留为空数组 []
+3. 不要动任何公共模板 / references / README / SKILL.md
+删除完成后提醒我刷新 DeckTaste WebUI（这张 local 卡会消失）。`,
     copyPrompt: '📋 复制 Prompt',
     featPresenter: '🎤 演讲者模式',
     featNoPresenter: '无演讲者模式',
@@ -457,7 +472,8 @@ const I18N = {
     promptCustomTheme: () => `请使用 html-ppt skill 帮我自建一份私有 HTML deck 或私有主题。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
 - 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的数组里，绝不删除或覆盖已有 entry
-- 本地 WebUI 展示：生成完成后，新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck 或 theme
+- ⚠️ 写入前必须确认：在新增/修改 examples/decktaste.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
+- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck 或 theme
   registry 格式示例：
   {
     "decks": [
@@ -500,7 +516,8 @@ const I18N = {
     promptCustomDeck: () => `请使用 html-ppt skill 帮我自建一份私有 full-deck。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
 - 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的 decks 数组里，绝不删除或覆盖已有 entry
-- 本地 WebUI 展示：生成完成后，新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck
+- ⚠️ 写入前必须确认：在新增/修改 examples/decktaste.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
+- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck
   registry 格式示例：
   {
     "decks": [
@@ -597,6 +614,14 @@ const I18N = {
     toastFail: 'Copy failed, please select the text manually',
     toastPromptPasted: 'Prompt copied — paste into your agent',
     toastCardCopied: (label)=>`Copied "${label}" prompt — paste into your agent`,
+    deleteLocalTitle: 'Copy delete prompt (really removes files + registry entry)',
+    toastDeleteCopied: (label)=>`Delete prompt copied — paste to your agent to really remove "${label}"`,
+    promptDeleteLocal: (item, folder, arr)=>`Please really delete this custom build (irreversible — confirm with me once before deleting):
+- target: id = "${item.id}"
+1. Remove the entire folder ${folder} (and everything inside it)
+2. Remove the entry whose id is "${item.id}" from the ${arr} array in examples/decktaste.local.json, keeping every other entry; if the array becomes empty, leave it as []
+3. Do not touch any public templates / references / README / SKILL.md
+When done, remind me to refresh DeckTaste WebUI (this local card will disappear).`,
     copyPrompt: '📋 Copy Prompt',
     featPresenter: '🎤 Presenter',
     featNoPresenter: 'No presenter',
@@ -690,7 +715,8 @@ Please return a complete HTML deck I can open in the browser.`,
     promptCustomTheme: () => `Please use the html-ppt skill to create a private HTML deck or private theme for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
 - supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
-- local WebUI visibility: after generation, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck or theme after refresh
+- ⚠️ confirm before writing: before creating/updating examples/decktaste.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
+- local WebUI visibility: only after I confirm, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck or theme after refresh
   registry example:
   {
     "decks": [
@@ -733,7 +759,8 @@ Please output a complete browser-openable HTML deck or theme CSS, tell me the en
     promptCustomDeck: () => `Please use the html-ppt skill to create a private full-deck for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
 - supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
-- local WebUI visibility: after generation, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck after refresh
+- ⚠️ confirm before writing: before creating/updating examples/decktaste.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
+- local WebUI visibility: only after I confirm, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck after refresh
   registry example:
   {
     "decks": [
@@ -1617,12 +1644,20 @@ document.getElementById('cs-copy').addEventListener('click', async ()=>{
   }else{ showToast(T().toastFail); }
 });
 
+// 从 registry 的 css/path 推出要删除的文件夹: ../examples/<slug>/x.css → examples/<slug>/
+function localFolder(item){
+  const ref = item.type === 'theme' ? safeText(item.css, '') : safeText(item.path, '');
+  let f = ref.replace(/^(\.\.\/)+/, '').replace(/[^/]*$/, '');
+  return f || 'examples/<slug>/';
+}
+
 function createLocalCard(item){
   const card = document.createElement('div');
   card.className = 'card local-card';
   const label = localLabel(item);
   const desc = localDesc(item);
   const promptText = localPrompt(item);
+  const delPrompt = T().promptDeleteLocal(item, localFolder(item), item.type === 'theme' ? 'themes' : 'decks');
   let modalSrc;
   let modalLabel = `${label} · ${item.id || 'local'}`;
 
@@ -1661,6 +1696,26 @@ function createLocalCard(item){
         <p class="id">${iframeSrc}</p>
       </div>`;
   }
+
+  // 删除按钮(真删除 = 复制一段删文件夹+删 registry 条目的 prompt 给 Agent 执行)
+  const delBtn = document.createElement('button');
+  delBtn.className = 'del-btn';
+  delBtn.type = 'button';
+  delBtn.title = T().deleteLocalTitle;
+  delBtn.textContent = '🗑';
+  card.insertBefore(delBtn, card.firstChild);
+  delBtn.addEventListener('click', async (e)=>{
+    e.stopPropagation();
+    const ok = await copyToClipboard(delPrompt);
+    if(ok){
+      delBtn.classList.add('ok');
+      delBtn.textContent = '✓';
+      showToast(T().toastDeleteCopied(label));
+      setTimeout(()=>{ delBtn.classList.remove('ok'); delBtn.textContent = '🗑'; }, 2400);
+    }else{
+      showToast(T().toastFail);
+    }
+  });
 
   card.addEventListener('click',()=>openModal(modalSrc, modalLabel, promptText));
   const copyBtn = card.querySelector('.copy-btn');
