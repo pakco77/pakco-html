@@ -458,17 +458,17 @@ const I18N = {
     promptTheme: (name, label) => `请使用 html-ppt skill 帮我做一份 PPT。
 - 主题(theme) = ${name}（${label}）
 - 页数：8 页（你可按内容调整）
-- 输出：一个完整 deck 目录，包含 index.html + 必要 CSS/JS
-- 风格要求：套用 assets/themes/${name}.css，所有视觉 token 用该主题；不要修改主题文件本身
+- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——把 assets/base.css、主题 assets/themes/${name}.css 的视觉 token、需要用到的 assets/animations/animations.css 全部内联进一个 <style>；把 assets/runtime.js 内联进一个 <script>；网页字体可继续走 CDN @import（远程字体不算本地依赖）
+- 风格要求：只使用该主题的视觉 token，不要修改主题源文件
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请生成完整可直接浏览器打开的 HTML。`,
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
     promptDeck: (name, label) => `请使用 html-ppt skill 的 full-deck 模板生成一份 PPT。
 - 模板(template) = ${name}（${label}）
 - 路径：templates/full-decks/${name}/
-- 输出：基于该模板复制一份新 deck，替换为我的内容
-- 保留模板的 .tpl-${name} 作用域 CSS 和所有视觉元素
+- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——基于该模板生成，把模板的 scoped style.css、assets/base.css、用到的 assets/animations/animations.css 全部内联进 <style>；把 assets/runtime.js 内联进 <script>；网页字体可继续走 CDN
+- 保留模板的 .tpl-${name} 作用域 class 和全部视觉元素，只替换成我的内容
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
-请生成完整可直接浏览器打开的 HTML。`,
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
     promptCustomTheme: () => `请使用 html-ppt skill 帮我自建一份私有 HTML deck 或私有主题。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
 - 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的数组里，绝不删除或覆盖已有 entry
@@ -549,9 +549,9 @@ const I18N = {
 - 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}
 - 主题色 = ${label}（theme key: ${themeKey}）
 - 页数：8-12 页（你可按内容调整）
-- 输出：单文件 index.html，含 WebGL 背景和翻页
+- 输出：单文件 HTML（self-contained，全部 CSS/JS 内联，不外链任何本地文件），含 WebGL 背景和翻页
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请生成完整可直接浏览器打开的 HTML。`,
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
     promptUITaste: (item) => `请使用 Taste.skill 处理这个 UI 任务。
 - 推荐先安装完整 Taste.skill bundle：npx skills add https://github.com/Leonxlnx/taste-skill
 - 如果只安装单个视觉入口：npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
@@ -701,17 +701,17 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
     promptTheme: (name, label) => `Please use the html-ppt skill to build me a deck.
 - theme = ${name} (${label})
 - pages: 8 (adjust to fit content)
-- output: a complete deck directory with index.html + necessary CSS/JS
-- styling: apply assets/themes/${name}.css; use only that theme's visual tokens; do not modify the theme file
+- output: a single self-contained .html file (double-click to run, no external local files) — inline assets/base.css, the visual tokens from assets/themes/${name}.css, and any needed assets/animations/animations.css into one <style>; inline assets/runtime.js into one <script>; webfonts may stay as CDN @import (remote fonts are not a local dependency)
+- styling: use only that theme's visual tokens; do not modify the theme source file
 - content: [paste your outline / theme direction / key points here]
-Please return a complete HTML deck I can open in the browser.`,
+Return exactly one complete, browser-openable single-file HTML.`,
     promptDeck: (name, label) => `Please use the html-ppt skill's full-deck template to build me a deck.
 - template = ${name} (${label})
 - path: templates/full-decks/${name}/
-- output: copy this template into a new deck and replace with my content
-- keep the .tpl-${name} scoped CSS and all visual elements
+- output: a single self-contained .html file (double-click to run, no external local files) — build from this template and inline its scoped style.css, assets/base.css, and any needed assets/animations/animations.css into <style>; inline assets/runtime.js into <script>; webfonts may stay as CDN
+- keep the .tpl-${name} scoped class and all visual elements; replace only the content with mine
 - content: [paste your outline / key data / section structure here]
-Please return a complete HTML deck I can open in the browser.`,
+Return exactly one complete, browser-openable single-file HTML.`,
     promptCustomTheme: () => `Please use the html-ppt skill to create a private HTML deck or private theme for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
 - supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
@@ -792,9 +792,9 @@ Please output a complete browser-openable HTML deck, tell me the entry file path
 - style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}
 - color theme = ${label} (theme key: ${themeKey})
 - pages: 8-12 (adjust to fit content)
-- output: single-file index.html with WebGL background and swipe navigation
+- output: a single self-contained .html file (all CSS/JS inlined, no external local files) with WebGL background and swipe navigation
 - content: [paste your outline / theme direction / key points here]
-Please return a complete HTML deck I can open in the browser.`,
+Return exactly one complete, browser-openable single-file HTML.`,
     promptUITaste: (item) => `Please use Taste.skill for this UI task.
 - Recommended install for automatic routing: npx skills add https://github.com/Leonxlnx/taste-skill
 - If installing only the selected visual entry: npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
