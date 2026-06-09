@@ -41,6 +41,11 @@
     border:0;border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600}
   .controls .size-toggle button.active,.controls .lang-toggle button.active{background:rgba(255,255,255,.12);color:#fff}
   .controls .lang-toggle button.active{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff}
+  /* 输出格式切换(只在 皮肤/模板 tab 出现) */
+  .controls .fmt-toggle{display:flex;background:rgba(255,255,255,.05);border-radius:8px;padding:3px}
+  .controls .fmt-toggle button{padding:6px 12px;font-size:12px;color:#aab0c0;background:transparent;border:0;
+    border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600;white-space:nowrap}
+  .controls .fmt-toggle button.active{background:rgba(103,232,249,.18);color:#67e8f9}
 
   /* Tabs */
   .tabs{grid-column:1/-1;display:flex;gap:4px;background:rgba(255,255,255,.05);padding:4px;
@@ -284,6 +289,10 @@
       <button data-size="m" class="active"></button>
       <button data-size="l"></button>
     </div>
+    <div class="fmt-toggle" id="fmt-toggle" style="display:none">
+      <button data-fmt="deck" class="active"></button>
+      <button data-fmt="scroll"></button>
+    </div>
   </div>
 
   <div class="tabs" id="tabs">
@@ -359,6 +368,7 @@ const I18N = {
     copied: '✓ 已复制',
     search: '搜索名称…',
     sizeS: '小', sizeM: '中', sizeL: '大',
+    fmtDeck: '🖥 横版演示', fmtScroll: '📜 纵向网页',
     tabThemes: '🎨 皮肤 (36)',
     tabDecks: '📑 模板 (24)',
     tabUITaste: '🧩 UI Taste (4)',
@@ -410,7 +420,7 @@ const I18N = {
       linkTaste: '🙏 致敬上游 taste.skill',
       terminalTip: '💻 <b style="color:#cfd4e2">如何打开终端：</b>Mac → 聚焦搜索（⌘ Space）输入"终端"或"Terminal"；Windows → 按 Win 键搜索"PowerShell"或"cmd"。',
       h2: '如何让 Agent 用',
-      h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 皮肤</code>、<code>📑 模板</code>、<code>🧩 UI Taste</code> 或 <code>🖼 图文</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。<code>🖼 图文</code> 标签点开后，在预览里切换配色分支、选尺寸（小红书 3:4 / 公众号封面 / 方形 1:1），再复制。<br><b style="color:#cfd4e2">皮肤 vs 模板：</b>皮肤只换配色字体（同一套布局换皮），模板是有独立 HTML 结构的完整版式（换骨）。',
+      h2body: '<b style="color:#fff">最快路径：</b>到 <code>🎨 皮肤</code>、<code>📑 模板</code>、<code>🧩 UI Taste</code> 或 <code>🖼 图文</code> 标签页，点任意一张卡片就把对应的 Prompt 复制到剪贴板了。直接粘到你的 Agent 对话框，把方括号 <code>[在此粘贴你的内容大纲]</code> 换成你自己的内容即可。<code>🖼 图文</code> 标签点开后，在预览里切换配色分支、选尺寸（小红书 3:4 / 公众号封面 / 方形 1:1），再复制。<br><b style="color:#cfd4e2">皮肤 vs 模板：</b>皮肤 = <b>色调与质感</b>（配色/字体/圆角的一组气质，套在通用布局上）；模板 = <b>成品版面结构</b>（某个场景做好的整套排版骨架，自带风格）。一句话：皮肤管"长什么色调"，模板管"长什么骨架"。<br><b style="color:#cfd4e2">输出格式：</b>皮肤和模板都能输出成 <code>🖥 横版演示</code>（一页一屏、可翻页/演讲）或 <code>📜 纵向网页</code>（垂直滚动的汇报/信息同步文档，无快捷键）——顶部切换，再复制 Prompt。',
       h2steps: '<b style="color:#cfd4e2">四步流程：</b>',
       steps: [
         '装好 skill（上面那条命令）',
@@ -455,20 +465,24 @@ const I18N = {
       localRegistry: '本地私有 taste：生成后刷新 WebUI 即可看到',
       tip: '💡 提示：DeckTaste 当前负责可视化选择与复制可执行 Prompt，不负责直接生成。自建 deck / theme 会通过 <code>examples/decktaste.local.json</code> 在本地 WebUI 展示，不进入公共模板库。UI Taste 是 Taste.skill 的极简可视化入口，只复制 UI coding prompt，不包含演示模式。配图风格更准确地说是“配图 Prompt”，只输出给图片模型使用的提示词与比例约束。'
     },
-    promptTheme: (name, label) => `请使用 html-ppt skill 帮我做一份 PPT。
-- 主题(theme) = ${name}（${label}）
-- 页数：8 页（你可按内容调整）
-- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——把 assets/base.css、主题 assets/themes/${name}.css 的视觉 token、需要用到的 assets/animations/animations.css 全部内联进一个 <style>；把 assets/runtime.js 内联进一个 <script>；网页字体可继续走 CDN @import（远程字体不算本地依赖）
-- 风格要求：只使用该主题的视觉 token，不要修改主题源文件
+    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `请使用 html-ppt skill 帮我做一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
+- 皮肤(skin) = ${name}（${label}）—— 只用它的视觉 token（配色/字体/圆角/阴影），不要修改主题源文件
+- 输出格式：${s ? '纵向网页（单页垂直滚动的 HTML 文档，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏的 deck，可左右翻页）'}
+- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——把 assets/base.css、皮肤 assets/themes/${name}.css 的 token、需要的样式全部内联进一个 <style>${s ? '' : '；把 assets/runtime.js 内联进一个 <script>'}；网页字体可继续走 CDN @import
+${s
+  ? '- 结构：不要做成翻页 deck —— 不要 .slide 一页一屏、不要 runtime.js 键盘/演讲快捷键。改成从上到下连续滚动的 <section> 长文档，响应式，正常滚动阅读；可加一个轻量 sticky 顶栏 + 锚点导航'
+  : '- 结构：标准 deck，每页 <section class="slide">，保留 runtime.js 的键盘翻页 / 演讲者模式（S 键）'}
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
-    promptDeck: (name, label) => `请使用 html-ppt skill 的 full-deck 模板生成一份 PPT。
-- 模板(template) = ${name}（${label}）
-- 路径：templates/full-decks/${name}/
-- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——基于该模板生成，把模板的 scoped style.css、assets/base.css、用到的 assets/animations/animations.css 全部内联进 <style>；把 assets/runtime.js 内联进 <script>；网页字体可继续走 CDN
-- 保留模板的 .tpl-${name} 作用域 class 和全部视觉元素，只替换成我的内容
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`; },
+    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `请使用 html-ppt skill 的 full-deck 模板生成一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
+- 模板(template) = ${name}（${label}），路径 templates/full-decks/${name}/
+- 输出格式：${s ? '纵向网页（单页垂直滚动的 HTML 文档，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏的 deck，可左右翻页）'}
+- 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——基于该模板生成，把模板的 scoped style.css、assets/base.css、用到的样式全部内联进 <style>${s ? '' : '；把 assets/runtime.js 内联进 <script>'}；网页字体可继续走 CDN
+${s
+  ? '- 结构：借用该模板的视觉语言（配色/字体/组件样式），但重排成从上到下连续滚动的 <section> 长文档 —— 不要 .slide 翻页、不要 runtime.js 键盘/演讲快捷键；保留 .tpl-' + name + ' 的视觉风格，把内容改成我的'
+  : '- 结构：保留模板的 .tpl-' + name + ' 作用域 class、全部视觉元素与翻页/演讲者模式，只替换成我的内容'}
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
-请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`; },
     promptCustomTheme: () => `请使用 html-ppt skill 帮我自建一份私有 HTML deck 或私有主题。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
 - 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的数组里，绝不删除或覆盖已有 entry
@@ -545,13 +559,15 @@ const I18N = {
 - 还原要求：尽可能还原原模板效果，包括视觉比例、布局密度、背景层、装饰元素、动效节奏、组件样式和 presenter mode 支持
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构 / 参考模板名]
 请输出完整可直接浏览器打开的 HTML deck，说明入口文件路径，并提醒我刷新 DeckTaste WebUI。`,
-    promptGuizang: (id, label, deckDir, themeKey) => `请使用 guizang-ppt-skill 生成一份 PPT。
-- 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}
-- 主题色 = ${label}（theme key: ${themeKey}）
-- 页数：8-12 页（你可按内容调整）
-- 输出：单文件 HTML（self-contained，全部 CSS/JS 内联，不外链任何本地文件），含 WebGL 背景和翻页
+    promptGuizang: (id, label, deckDir, themeKey, format) => { const s = format === 'scroll'; return `请使用 guizang-ppt-skill 生成一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
+- 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}，主题色 = ${label}（theme key: ${themeKey}）
+- 输出格式：${s ? '纵向网页（单页垂直滚动，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏，可左右翻页）'}
+- 输出：单文件 HTML（self-contained，全部 CSS/JS 内联，不外链任何本地文件），保留该风格的 WebGL 背景质感
+${s
+  ? '- 结构：从上到下连续滚动的 <section> 长文档 —— 不要翻页、不要键盘/演讲快捷键'
+  : '- 结构：一页一屏的 deck，含翻页'}
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
-请只产出一个完整、可直接浏览器打开的单文件 HTML。`,
+请只产出一个完整、可直接浏览器打开的单文件 HTML。`; },
     promptUITaste: (item) => `请使用 Taste.skill 处理这个 UI 任务。
 - 推荐先安装完整 Taste.skill bundle：npx skills add https://github.com/Leonxlnx/taste-skill
 - 如果只安装单个视觉入口：npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
@@ -602,6 +618,7 @@ const I18N = {
     copied: '✓ Copied',
     search: 'Search…',
     sizeS: 'S', sizeM: 'M', sizeL: 'L',
+    fmtDeck: '🖥 Deck', fmtScroll: '📜 Web page',
     tabThemes: '🎨 Skins (36)',
     tabDecks: '📑 Templates (24)',
     tabUITaste: '🧩 UI Taste (4)',
@@ -653,7 +670,7 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
       linkTaste: '🙏 Upstream (taste.skill)',
       terminalTip: '💻 <b style="color:#cfd4e2">How to open a terminal:</b> Mac → Spotlight (⌘ Space) type "Terminal"; Windows → press Win key and search "PowerShell" or "cmd".',
       h2: 'How to make your agent use it',
-      h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Skins</code>, <code>📑 Templates</code>, <code>🧩 UI Taste</code>, or <code>🖼 Social Cards</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content. On <code>🖼 Social Cards</code> you can pick a size first (Rednote 3:4 / WeChat covers / Square 1:1) before copying.<br><b style="color:#cfd4e2">Skins vs Templates:</b> a skin only swaps color/type over a shared layout (re-skin); a template is a full layout with its own HTML structure (re-bone).',
+      h2body: '<b style="color:#fff">Fastest path:</b> open the <code>🎨 Skins</code>, <code>📑 Templates</code>, <code>🧩 UI Taste</code>, or <code>🖼 Social Cards</code> tab, click any card — the matching prompt is copied to your clipboard. Paste into your agent and replace the bracketed <code>[paste your outline here]</code> with your content. On <code>🖼 Social Cards</code> you can pick a size first (Rednote 3:4 / WeChat covers / Square 1:1) before copying.<br><b style="color:#cfd4e2">Skins vs Templates:</b> a skin is a <b>look (color/type/feel)</b> applied over a shared layout; a template is a <b>finished layout structure</b> for a scenario, with its own style. In short: skins decide the color/feel, templates decide the bones.<br><b style="color:#cfd4e2">Output format:</b> both can output as <code>🖥 Deck</code> (one screen per page, paging/presenter) or <code>📜 Web page</code> (a vertical-scroll report / sync doc, no shortcuts) — toggle at the top, then copy.',
       h2steps: '<b style="color:#cfd4e2">Four steps:</b>',
       steps: [
         'Install the skill (the command above)',
@@ -698,20 +715,24 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
       localRegistry: 'Local private taste: refresh the WebUI after generation',
       tip: '💡 Tip: DeckTaste currently visualizes choices and copies executable prompts; it does not generate directly. Custom decks / themes appear in the local WebUI through <code>examples/decktaste.local.json</code>, without entering the public template catalog. UI Taste is a minimal visual entry for Taste.skill: it copies UI coding prompts only and has no presenter mode. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.'
     },
-    promptTheme: (name, label) => `Please use the html-ppt skill to build me a deck.
-- theme = ${name} (${label})
-- pages: 8 (adjust to fit content)
-- output: a single self-contained .html file (double-click to run, no external local files) — inline assets/base.css, the visual tokens from assets/themes/${name}.css, and any needed assets/animations/animations.css into one <style>; inline assets/runtime.js into one <script>; webfonts may stay as CDN @import (remote fonts are not a local dependency)
-- styling: use only that theme's visual tokens; do not modify the theme source file
+    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `Please use the html-ppt skill to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
+- skin = ${name} (${label}) — use only its visual tokens (color/type/radius/shadow); do not modify the theme source file
+- format: ${s ? 'vertical web page (single-page scrolling HTML document for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, left/right navigation)'}
+- output: a single self-contained .html file (double-click to run, no external local files) — inline assets/base.css, the tokens from assets/themes/${name}.css, and any needed styles into one <style>${s ? '' : '; inline assets/runtime.js into one <script>'}; webfonts may stay as CDN @import
+${s
+  ? '- structure: NOT a slide deck — no .slide one-screen pages, no runtime.js keyboard/presenter shortcuts. Use stacked <section> blocks that scroll top-to-bottom, responsive; an optional light sticky top bar + anchor nav is fine'
+  : '- structure: standard deck, each page is <section class="slide">, keep runtime.js keyboard nav / presenter mode (S key)'}
 - content: [paste your outline / theme direction / key points here]
-Return exactly one complete, browser-openable single-file HTML.`,
-    promptDeck: (name, label) => `Please use the html-ppt skill's full-deck template to build me a deck.
-- template = ${name} (${label})
-- path: templates/full-decks/${name}/
-- output: a single self-contained .html file (double-click to run, no external local files) — build from this template and inline its scoped style.css, assets/base.css, and any needed assets/animations/animations.css into <style>; inline assets/runtime.js into <script>; webfonts may stay as CDN
-- keep the .tpl-${name} scoped class and all visual elements; replace only the content with mine
+Return exactly one complete, browser-openable single-file HTML.`; },
+    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `Please use the html-ppt skill's full-deck template to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
+- template = ${name} (${label}), path templates/full-decks/${name}/
+- format: ${s ? 'vertical web page (single-page scrolling HTML document for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, left/right navigation)'}
+- output: a single self-contained .html file (no external local files) — build from this template and inline its scoped style.css, assets/base.css, and needed styles into <style>${s ? '' : '; inline assets/runtime.js into <script>'}; webfonts may stay as CDN
+${s
+  ? '- structure: borrow the template visual language (color/type/components) but reflow into stacked <section> blocks that scroll top-to-bottom — no .slide paging, no runtime.js keyboard/presenter shortcuts; keep the .tpl-' + name + ' look, swap in my content'
+  : '- structure: keep the .tpl-' + name + ' scoped class, all visual elements and paging/presenter mode; replace only the content with mine'}
 - content: [paste your outline / key data / section structure here]
-Return exactly one complete, browser-openable single-file HTML.`,
+Return exactly one complete, browser-openable single-file HTML.`; },
     promptCustomTheme: () => `Please use the html-ppt skill to create a private HTML deck or private theme for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
 - supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
@@ -788,13 +809,15 @@ Please output a complete browser-openable HTML deck or theme CSS, tell me the en
 - fidelity requirement: recreate the original template effect as closely as possible, including visual proportions, layout density, background layers, decorative elements, motion timing, component styling, and presenter mode support
 - content: [paste outline / key data / section structure / reference template name here]
 Please output a complete browser-openable HTML deck, tell me the entry file path, and remind me to refresh DeckTaste WebUI.`,
-    promptGuizang: (id, label, deckDir, themeKey) => `Please use guizang-ppt-skill to build me a deck.
-- style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}
-- color theme = ${label} (theme key: ${themeKey})
-- pages: 8-12 (adjust to fit content)
-- output: a single self-contained .html file (all CSS/JS inlined, no external local files) with WebGL background and swipe navigation
+    promptGuizang: (id, label, deckDir, themeKey, format) => { const s = format === 'scroll'; return `Please use guizang-ppt-skill to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
+- style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}, color theme = ${label} (theme key: ${themeKey})
+- format: ${s ? 'vertical web page (single-page scrolling, for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, paging)'}
+- output: a single self-contained .html file (all CSS/JS inlined, no external local files), keep the WebGL background texture of this style
+${s
+  ? '- structure: stacked <section> blocks scrolling top-to-bottom — no paging, no keyboard/presenter shortcuts'
+  : '- structure: one-screen-per-slide deck with paging'}
 - content: [paste your outline / theme direction / key points here]
-Return exactly one complete, browser-openable single-file HTML.`,
+Return exactly one complete, browser-openable single-file HTML.`; },
     promptUITaste: (item) => `Please use Taste.skill for this UI task.
 - Recommended install for automatic routing: npx skills add https://github.com/Leonxlnx/taste-skill
 - If installing only the selected visual entry: npx skills add https://github.com/Leonxlnx/taste-skill --skill "${item.installName}"
@@ -1048,6 +1071,7 @@ const SC_CSS = `
 let lang = localStorage.getItem('htmlppt.lang') || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
 let view = 'themes';
 let q = '';
+let deckFormat = 'deck';   // 'deck'(横版演示) | 'scroll'(纵向网页) —— 皮肤/模板 tab 的输出格式
 let localTaste = {themes: [], decks: []};
 
 function T(){ return I18N[lang]; }
@@ -1085,34 +1109,87 @@ async function loadLocalTaste(){
 }
 
 /* ───── Theme preview demo HTML (bilingual) ───── */
-function themeDemo(themeName, label, cssHref){
+/* 皮肤样张：格式感知（deck=一屏版面 / scroll=纵向网页），用真实 token 展示气质 */
+function themeDemo(themeName, label, cssHref, format){
   const t = T();
+  const cn = lang === 'zh';
+  const fmt = format || deckFormat || 'deck';
   const href = cssHref || `../assets/themes/${themeName}.css`;
+  const kicker = t.themeDemoKicker(themeName);
+  const cardA = cn ? ['字体层级','标题 / 正文 / 注释的对比与节奏'] : ['Type scale','heading / body / caption rhythm'];
+  const cardB = cn ? ['表面质感','卡片、描边、圆角、阴影'] : ['Surfaces','cards, borders, radius, shadow'];
+  const cardC = cn ? ['强调色','一处高饱和的点睛色'] : ['Accent','one saturated highlight'];
+  const btn   = cn ? '主按钮' : 'Primary';
+  const bars  = [52,78,40,92,66].map(h=>`<i style="height:${h}%"></i>`).join('');
+  const css = `*{box-sizing:border-box}html,body{margin:0}
+  body{background:var(--bg);color:var(--text-1);font-family:var(--font-sans,'Inter','Noto Sans SC',sans-serif)}
+  .kick{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0}
+  .h{font-weight:800;letter-spacing:var(--letter-tight,-.03em);margin:10px 0 0;line-height:1.02}
+  .grad{background:var(--grad,linear-gradient(135deg,var(--accent),var(--accent-2,var(--accent))));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:16px;line-height:1.6;color:var(--text-2);margin:14px 0 0}
+  .card{background:var(--surface-2,var(--surface,rgba(127,127,127,.06)));border:1px solid var(--border);border-radius:var(--radius,14px);padding:16px;box-shadow:var(--shadow)}
+  .card h4{margin:0 0 6px;font-size:15px}.card p{margin:0;font-size:12.5px;color:var(--text-2);line-height:1.5}
+  .btn{display:inline-flex;align-items:center;height:42px;padding:0 22px;border-radius:var(--radius-sm,10px);background:var(--accent);color:var(--bg);font-weight:800;font-size:14px}
+  .ghost{background:transparent;border:1px solid var(--border-strong,var(--border));color:var(--text-1)}
+  .stat{font-weight:900;letter-spacing:-.04em;line-height:1}
+  .bars{display:flex;align-items:flex-end;gap:7px}.bars i{flex:1;border-radius:5px 5px 2px 2px;background:var(--grad,var(--accent));display:block}
+  .sw{display:flex;gap:7px}.sw i{width:26px;height:26px;border-radius:7px;border:1px solid var(--border);display:block}`;
+
+  const deckBody = `<style>html,body{height:100%;overflow:hidden}
+  .page{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:46px 56px}
+  .page .h{font-size:48px}.cards{display:flex;gap:13px;margin-top:22px}.cards .card{flex:1}
+  .foot{display:flex;align-items:center;gap:22px;margin-top:24px}.bars{height:62px;width:150px}.stat{font-size:40px}</style>
+  <div class="page">
+    <p class="kick">${kicker}</p>
+    <h1 class="h">${label} <span class="grad">${cn?'皮肤':'skin'}</span></h1>
+    <p class="lede">${t.themeDemoLede}</p>
+    <div class="cards">
+      <div class="card"><h4>${cardA[0]}</h4><p>${cardA[1]}</p></div>
+      <div class="card"><h4>${cardB[0]}</h4><p>${cardB[1]}</p></div>
+      <div class="card" style="text-align:center"><div class="stat grad">98.6%</div><p>${t.themeDemoKpiLabel}</p></div>
+    </div>
+    <div class="foot">
+      <span class="btn">${btn}</span>
+      <span class="btn ghost">${cn?'次按钮':'Secondary'}</span>
+      <div class="bars">${bars}</div>
+      <div class="sw"><i style="background:var(--accent)"></i><i style="background:var(--accent-2,var(--accent))"></i><i style="background:var(--accent-3,var(--accent))"></i><i style="background:var(--surface-2)"></i><i style="background:var(--text-1)"></i></div>
+    </div>
+  </div>`;
+
+  const scrollBody = `<style>html,body{height:100%}body{overflow:auto}
+  .bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 28px;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  .bar .nav{display:flex;gap:18px;font-size:13px;color:var(--text-2)}
+  .hero{padding:54px 40px 30px}.hero .h{font-size:46px}
+  .sec{padding:26px 40px;border-top:1px solid var(--border)}
+  .sec .lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3,var(--text-2));font-weight:700}
+  .row3{display:flex;gap:13px;margin-top:14px}.row3 .card{flex:1}
+  .band{padding:30px 40px;background:var(--surface-2,var(--surface));border-top:1px solid var(--border);display:flex;gap:30px;align-items:center}
+  .band .stat{font-size:54px}
+  .bars{height:80px}
+  .foot{padding:22px 40px;color:var(--text-3,var(--text-2));font-size:13px;border-top:1px solid var(--border)}</style>
+  <div class="bar"><b>${label}</b><div class="nav"><span>${cn?'概览':'Overview'}</span><span>${cn?'数据':'Data'}</span><span>${cn?'结论':'Takeaway'}</span></div></div>
+  <section class="hero">
+    <p class="kick">${kicker}</p>
+    <h1 class="h">${cn?'纵向滚动的':'A scrolling'} <span class="grad">${cn?'网页文档':'web report'}</span></h1>
+    <p class="lede">${cn?'同一套皮肤，从上到下连续滚动阅读——汇报 / 信息同步，不翻页、无快捷键。':'Same skin, read top-to-bottom — a report / sync doc, no slides, no shortcuts.'}</p>
+    <p style="margin-top:18px"><span class="btn">${btn}</span></p>
+  </section>
+  <section class="sec"><p class="lbl">${cn?'内容区块':'Content'}</p>
+    <div class="row3">
+      <div class="card"><h4>${cardA[0]}</h4><p>${cardA[1]}</p></div>
+      <div class="card"><h4>${cardB[0]}</h4><p>${cardB[1]}</p></div>
+      <div class="card"><h4>${cardC[0]}</h4><p>${cardC[1]}</p></div>
+    </div>
+  </section>
+  <section class="band"><div><div class="stat grad">98.6%</div><p class="lede" style="margin:4px 0 0">${t.themeDemoKpiLabel}</p></div><div class="bars" style="flex:1;display:flex;align-items:flex-end;gap:8px">${bars}</div></section>
+  <div class="foot">${cn?'纵向网页 · 无演示快捷键':'Vertical web page · no presentation shortcuts'}</div>`;
+
   return `<!doctype html><html lang="${t.htmlLang}"><head><meta charset="utf-8">
 <link rel="stylesheet" href="../assets/fonts.css">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="${href}">
-<style>
-  html,body{margin:0;height:100%;overflow:hidden}
-  .wrap{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
-    padding:64px 88px;box-sizing:border-box;background:var(--bg);color:var(--text-1);
-    font-family:var(--font-sans)}
-  .swatch{display:flex;gap:10px;margin-top:16px}
-  .swatch div{width:38px;height:38px;border-radius:8px;border:1px solid var(--border)}
-  .kpi{font-size:48px;font-weight:800;letter-spacing:-.02em}
-</style></head><body><div class="wrap">
-  <p class="kicker">${t.themeDemoKicker(themeName)}</p>
-  <h1 class="h1" style="margin:8px 0 12px">${label}</h1>
-  <p class="lede">${t.themeDemoLede}</p>
-  <div class="swatch">
-    <div style="background:var(--accent)"></div>
-    <div style="background:var(--accent-2,var(--accent))"></div>
-    <div style="background:var(--accent-3,var(--accent))"></div>
-    <div style="background:var(--surface-2)"></div>
-    <div style="background:var(--text-1)"></div>
-  </div>
-  <p style="margin-top:20px"><span class="kpi">98.6%</span> <span class="dim" style="margin-left:8px">${t.themeDemoKpiLabel}</span></p>
-</div></body></html>`;
+<style>${css}</style></head><body>${fmt === 'scroll' ? scrollBody : deckBody}</body></html>`;
 }
 
 /* ───── Copy + toast ───── */
@@ -1663,13 +1740,13 @@ function createLocalCard(item){
 
   if(item.type === 'theme'){
     const cssHref = safeText(item.css, '../assets/themes/minimal-white.css');
-    modalSrc = {srcdoc: themeDemo(item.id || 'local', label, cssHref)};
+    modalSrc = {srcdoc: themeDemo(item.id || 'local', label, cssHref, deckFormat)};
     card.innerHTML = `
       <button class="copy-btn" type="button">${T().copyPrompt}</button>
       <span class="zoom-hint">${T().zoomHint}</span>
       <div class="preview">
         <span class="badge local">local</span>
-        <iframe srcdoc='${themeDemo(item.id || 'local', label, cssHref).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
+        <iframe srcdoc='${themeDemo(item.id || 'local', label, cssHref, deckFormat).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
       </div>
       <div class="meta">
         <p class="name">${label}</p>
@@ -1792,6 +1869,12 @@ function applyStaticI18n(){
     b.textContent = b.dataset.size==='s' ? t.sizeS : b.dataset.size==='m' ? t.sizeM : t.sizeL;
   });
 
+  // format toggle labels(横版演示 / 纵向网页)
+  document.querySelectorAll('.fmt-toggle button').forEach(b=>{
+    b.textContent = b.dataset.fmt==='deck' ? t.fmtDeck : t.fmtScroll;
+    b.classList.toggle('active', b.dataset.fmt === deckFormat);
+  });
+
   // tabs
   document.querySelectorAll('.tab').forEach(b=>{
     b.textContent = b.dataset.view==='themes' ? t.tabThemes
@@ -1869,14 +1952,14 @@ function render(){
       const [name] = it;
       const label = themeLabel(it);
       const desc  = themeDesc(it);
-      promptText = t.promptTheme(name, label);
-      modalSrc   = {srcdoc: themeDemo(name, label)};
+      promptText = t.promptTheme(name, label, deckFormat);
+      modalSrc   = {srcdoc: themeDemo(name, label, null, deckFormat)};
       modalLabel = `${label} · ${name}`;
       card.innerHTML = `
         <button class="copy-btn" type="button">${t.copyPrompt}</button>
         <span class="zoom-hint">${t.zoomHint}</span>
         <div class="preview">
-          <iframe srcdoc='${themeDemo(name,label).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
+          <iframe srcdoc='${themeDemo(name,label,null,deckFormat).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
         </div>
         <div class="meta">
           <p class="name">${label}</p>
@@ -1893,9 +1976,9 @@ function render(){
 
       // Guizang decks 用专用 prompt; 普通 deck 用 promptDeck
       if(author && themeKey && t.promptGuizang){
-        promptText = t.promptGuizang(name, label, deckDir, themeKey);
+        promptText = t.promptGuizang(name, label, deckDir, themeKey, deckFormat);
       }else{
-        promptText = t.promptDeck(name, label);
+        promptText = t.promptDeck(name, label, deckFormat);
       }
 
       // iframe src: 带 theme 参数的指向实际目录
@@ -2027,6 +2110,8 @@ document.querySelectorAll('.tab').forEach(btn=>{
     view = btn.dataset.view;
     const ctrls = document.querySelector('.controls');
     ctrls.style.visibility = view==='guide' ? 'hidden' : 'visible';
+    // 格式切换只在 皮肤/模板 tab 显示
+    document.getElementById('fmt-toggle').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
     render();
   });
 });
@@ -2036,6 +2121,15 @@ document.querySelectorAll('.size-toggle button').forEach(btn=>{
     document.querySelectorAll('.size-toggle button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     grid.className = 'grid size-'+btn.dataset.size;
+  });
+});
+
+document.querySelectorAll('.fmt-toggle button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(btn.classList.contains('active')) return;
+    deckFormat = btn.dataset.fmt;
+    document.querySelectorAll('.fmt-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.fmt===deckFormat));
+    render();
   });
 });
 
@@ -2105,6 +2199,8 @@ modalCopy.addEventListener('click', async e => {
   // 注入海报 mock 样式(卡内预览复用同一份 SC_CSS)
   document.head.insertAdjacentHTML('beforeend', `<style id="sc-style">${SC_CSS}</style>`);
   applyStaticI18n();
+  // 初始 view 是 皮肤(themes) → 格式切换可见
+  document.getElementById('fmt-toggle').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
   await loadLocalTaste();
   render();
 })();
