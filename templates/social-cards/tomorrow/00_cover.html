@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>能收数据，才是真产品</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 900px; height: 1200px; overflow: hidden; background: #fff; }
+  body { font-family: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', -apple-system, BlinkMacSystemFont, sans-serif; color: #17120f; }
+
+  :root { --bg:#FDE8DF; --fg:#17120f; --muted:rgba(23,18,15,.48); --orange:#E8522A; --floor:#E9835A; --stripe:#F4A51F; --black:#0E0A07; }
+  .poster { width:900px; height:1200px; background:var(--bg); position:relative; overflow:hidden; display:flex; flex-direction:column; }
+  .top { padding:50px 56px 0; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; }
+  .brand { display:flex; align-items:center; gap:20px; font-size:38px; font-weight:950; letter-spacing:-.02em; }
+  .dot { width:18px; height:18px; border-radius:50%; background:var(--orange); box-shadow:0 0 0 9px rgba(232,82,42,.16); }
+  .sep { color:var(--muted); font-weight:800; margin-left:2px; margin-right:-2px; }
+  .ep { font-size:38px; font-weight:950; letter-spacing:.02em; white-space:nowrap; }
+  .ep span { color:var(--muted); margin-right:8px; }
+  .main { flex:1; padding:0 56px; display:flex; flex-direction:column; justify-content:center; position:relative; }
+  .star { position:absolute; top:86px; right:72px; width:46px; height:46px; border-radius:9px; display:grid; place-items:center; background:#12B923; color:#fff; font-size:35px; line-height:1; font-weight:950; transform:rotate(-6deg); box-shadow:0 4px 0 #087A1B, 0 9px 16px rgba(0,0,0,.16); }
+  h1 { margin:0 0 48px; color:var(--fg); font-size:135px; line-height:.98; letter-spacing:-.07em; font-weight:950; -webkit-text-stroke:1px var(--fg); text-shadow:1px 0 0 var(--fg); }
+  .period { display:inline-block; width:.28em; height:.28em; border:.055em solid var(--orange); border-radius:50%; color:transparent; -webkit-text-stroke:0; text-shadow:none; vertical-align:baseline; margin-left:.04em; transform:translateY(.02em); }
+  .sub { margin:0; max-width:770px; font-size:30px; line-height:1.55; font-weight:650; }
+  .sub .em { background:var(--fg); color:var(--bg); padding:2px 10px; border-radius:2px; font-weight:850; white-space:nowrap; }
+  .deco { flex-shrink:0; }
+  .coil-row { display:block; width:100%; height:50px; background:var(--bg); }
+  .stripe { height:14px; background:var(--stripe); }
+  .floor { height:130px; background:var(--floor); position:relative; overflow:hidden; }
+  .floor svg { position:absolute; inset:0; width:100%; height:100%; }
+  .tag { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--bg); text-shadow:0 2px 0 rgba(0,0,0,.16); }
+  .tag-main { font-size:30px; font-weight:850; letter-spacing:.12em; }
+  .tag-sub { margin-top:12px; font-size:15px; font-weight:650; letter-spacing:.18em; opacity:.92; }
+  .ticker { background:var(--black); padding:16px 0; overflow:hidden; }
+  .track { display:flex; gap:36px; white-space:nowrap; animation:slide 38s linear infinite; padding-left:26px; }
+  .unit { display:inline-flex; align-items:center; gap:18px; flex-shrink:0; color:rgba(255,255,255,.92); font-size:13px; font-weight:850; letter-spacing:.23em; }
+  .unit.cn { letter-spacing:.16em; }
+  .small-star { width:16px; height:16px; border-radius:4px; display:inline-grid; place-items:center; background:#12B923; color:#fff; font-size:12px; letter-spacing:0; transform:rotate(-5deg); box-shadow:0 2px 0 #087A1B; }
+  @keyframes slide { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><span>VibeCoding</span><span class="sep">·</span><span>点亮计划</span></div>
+    <div class="ep"><span>EP.</span>06 / 06</div>
+  </div>
+  <main class="main">
+    <span class="star">✳</span>
+    <h1>能收数据<br>才是真产品<span class="period">。</span></h1>
+    <p class="sub">不用重学后端，<br>但要知道 <span class="em">数据去哪</span>。</p>
+  </main>
+  <div class="deco">
+    
+<svg class="coil-row" viewBox="0 0 900 50" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g fill="none" stroke="rgba(0,0,0,.16)" stroke-width="1.5">
+    <path d="M 5,50 A 30,25 0 0 1 65,50"/><path d="M 65,50 A 30,25 0 0 1 125,50"/><path d="M 125,50 A 30,25 0 0 1 185,50"/><path d="M 185,50 A 30,25 0 0 1 245,50"/><path d="M 245,50 A 30,25 0 0 1 305,50"/><path d="M 305,50 A 30,25 0 0 1 365,50"/><path d="M 365,50 A 30,25 0 0 1 425,50"/><path d="M 425,50 A 30,25 0 0 1 485,50"/><path d="M 485,50 A 30,25 0 0 1 545,50"/><path d="M 545,50 A 30,25 0 0 1 605,50"/><path d="M 605,50 A 30,25 0 0 1 665,50"/><path d="M 665,50 A 30,25 0 0 1 725,50"/><path d="M 725,50 A 30,25 0 0 1 785,50"/><path d="M 785,50 A 30,25 0 0 1 845,50"/><path d="M 845,50 A 30,25 0 0 1 905,50"/>
+  </g>
+</svg>
+    <div class="stripe"></div>
+    <div class="floor">
+<svg viewBox="0 0 900 130" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none">
+    <line x1="450" y1="0" x2="0" y2="130"/><line x1="450" y1="0" x2="90" y2="130"/><line x1="450" y1="0" x2="180" y2="130"/><line x1="450" y1="0" x2="270" y2="130"/><line x1="450" y1="0" x2="360" y2="130"/><line x1="450" y1="0" x2="450" y2="130"/><line x1="450" y1="0" x2="540" y2="130"/><line x1="450" y1="0" x2="630" y2="130"/><line x1="450" y1="0" x2="720" y2="130"/><line x1="450" y1="0" x2="810" y2="130"/><line x1="450" y1="0" x2="900" y2="130"/>
+    <line x1="0" y1="32" x2="900" y2="32"/><line x1="0" y1="64" x2="900" y2="64"/><line x1="0" y1="98" x2="900" y2="98"/>
+  </g>
+</svg><div class="tag"><div class="tag-main">写给有想法的人</div><div class="tag-sub">半个造物主 · 乘百</div></div></div>
+    <div class="ticker"><div class="track">
+      <span class="unit">DATA HAS TO GO SOMEWHERE <span class="small-star">✳</span></span>
+      <span class="unit">VIBECODING 06 / 06 <span class="small-star">✳</span></span>
+      <span class="unit">FORM · BACKEND · TABLE <span class="small-star">✳</span></span>
+      <span class="unit cn">半个造物主 · 乘百 <span class="small-star">✳</span></span>
+      <span class="unit">DATA HAS TO GO SOMEWHERE <span class="small-star">✳</span></span>
+      <span class="unit">VIBECODING 06 / 06 <span class="small-star">✳</span></span>
+      <span class="unit">FORM · BACKEND · TABLE <span class="small-star">✳</span></span>
+      <span class="unit cn">半个造物主 · 乘百 <span class="small-star">✳</span></span>
+    </div></div>
+  </div>
+</div>
+</body>
+</html>

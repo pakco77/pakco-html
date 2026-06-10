@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据路径&lt;br&gt;就这四步</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 480px; height: 640px; overflow: hidden; background: #fff; }
+  body { font-family: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', -apple-system, BlinkMacSystemFont, sans-serif; color: #17120f; }
+
+  :root { --paper:#fffaf6; --fg:#17120f; --muted:#77706b; --line:#17120f; --orange:#E8522A; --pale:#FDE8DF; --gray:#EFEDEB; --green:#12B923; }
+  .card { width:480px; height:640px; background:var(--paper); padding:30px; display:flex; flex-direction:column; border:.5px solid rgba(0,0,0,.14); position:relative; overflow:hidden; }
+  .top, .bottom { display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.17em; color:var(--fg); border-top:1px solid var(--line); padding-top:10px; flex-shrink:0; }
+  .bottom { margin-top:auto; }
+  .hero { display:grid; grid-template-columns:88px 1fr; gap:16px; align-items:end; margin-top:24px; }
+  .num { font-family:Georgia, 'Times New Roman', 'Songti SC', serif; font-size:80px; line-height:.86; letter-spacing:-.05em; font-weight:400; }
+  .title { font-size:31px; line-height:1.1; font-weight:950; letter-spacing:-.035em; }
+  .chapter { margin-top:12px; font-size:11px; letter-spacing:.17em; color:var(--muted); }
+  .copy { margin-top:24px; font-size:22px; line-height:1.44; font-weight:650; }
+  .copy.small { font-size:18px; line-height:1.46; }
+  .muted { color:var(--muted); }
+  .em { color:var(--orange); font-weight:950; }
+  .black { display:inline-block; background:var(--fg); color:var(--paper); padding:1px 8px 2px; border-radius:2px; font-weight:850; }
+  .rule { height:2px; background:var(--fg); margin:18px 0; }
+  .note { border-top:2px solid var(--fg); border-bottom:2px solid var(--fg); padding:14px 0; font-size:22px; line-height:1.38; font-weight:900; margin-top:20px; }
+
+
+  .path { margin-top:24px; display:grid; gap:10px; }
+  .path div { position:relative; min-height:68px; background:#fff; border:1px solid var(--fg); padding:11px 14px 11px 62px; }
+  .path div::after { content:"↓"; position:absolute; left:24px; bottom:-18px; font-size:20px; font-weight:950; color:var(--orange); z-index:2; }
+  .path div:last-child::after { display:none; }
+  .path span { position:absolute; left:13px; top:14px; width:30px; height:30px; display:grid; place-items:center; border-radius:50%; background:var(--orange); color:#fff; font-size:11px; font-weight:950; }
+  .path strong { display:block; font-size:23px; line-height:1.05; font-weight:950; letter-spacing:-.035em; }
+  .path p { margin:5px 0 0; font-size:14px; color:var(--muted); font-weight:750; }
+  
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top"><span>写给有想法的人</span><span>VibeCoding · 06 / 06</span></div>
+  <div class="hero"><div class="num">02</div><div class="title">数据路径<br>就这四步</div></div>
+  <div class="chapter">第 二 张 · 先 知 道 它 去 哪</div>
+  <div class="path">
+    <div><span>01</span><strong>用户输入</strong><p>别人填了什么</p></div>
+    <div><span>02</span><strong>HTML 表单</strong><p>页面把内容送出去</p></div>
+    <div><span>03</span><strong>后端服务</strong><p>负责接住和处理</p></div>
+    <div><span>04</span><strong>数据表</strong><p>最后保存下来</p></div>
+  </div>
+  <div class="note">你不必重学一遍技术。<br>但要知道数据怎么走。</div>
+  <div class="bottom"><span>先看路径</span><span>再让 AI 写</span></div>
+</div>
+</body>
+</html>
