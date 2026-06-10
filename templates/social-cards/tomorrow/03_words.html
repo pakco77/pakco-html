@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三个词&lt;br&gt;够你入门</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 480px; height: 640px; overflow: hidden; background: #fff; }
+  body { font-family: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', -apple-system, BlinkMacSystemFont, sans-serif; color: #17120f; }
+
+  :root { --paper:#fffaf6; --fg:#17120f; --muted:#77706b; --line:#17120f; --orange:#E8522A; --pale:#FDE8DF; --gray:#EFEDEB; --green:#12B923; }
+  .card { width:480px; height:640px; background:var(--paper); padding:30px; display:flex; flex-direction:column; border:.5px solid rgba(0,0,0,.14); position:relative; overflow:hidden; }
+  .top, .bottom { display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.17em; color:var(--fg); border-top:1px solid var(--line); padding-top:10px; flex-shrink:0; }
+  .bottom { margin-top:auto; }
+  .hero { display:grid; grid-template-columns:88px 1fr; gap:16px; align-items:end; margin-top:24px; }
+  .num { font-family:Georgia, 'Times New Roman', 'Songti SC', serif; font-size:80px; line-height:.86; letter-spacing:-.05em; font-weight:400; }
+  .title { font-size:31px; line-height:1.1; font-weight:950; letter-spacing:-.035em; }
+  .chapter { margin-top:12px; font-size:11px; letter-spacing:.17em; color:var(--muted); }
+  .copy { margin-top:24px; font-size:22px; line-height:1.44; font-weight:650; }
+  .copy.small { font-size:18px; line-height:1.46; }
+  .muted { color:var(--muted); }
+  .em { color:var(--orange); font-weight:950; }
+  .black { display:inline-block; background:var(--fg); color:var(--paper); padding:1px 8px 2px; border-radius:2px; font-weight:850; }
+  .rule { height:2px; background:var(--fg); margin:18px 0; }
+  .note { border-top:2px solid var(--fg); border-bottom:2px solid var(--fg); padding:14px 0; font-size:22px; line-height:1.38; font-weight:900; margin-top:20px; }
+
+
+  .defs { margin-top:25px; display:flex; flex-direction:column; gap:14px; }
+  .defs div { background:#fff; border:2px solid var(--fg); padding:16px 18px; display:grid; grid-template-columns:105px 1fr; align-items:center; min-height:86px; box-shadow:6px 6px 0 rgba(23,18,15,.08); }
+  .defs div:nth-child(2) { background:var(--pale); }
+  .defs h3 { margin:0; font-size:29px; color:var(--orange); line-height:1; font-weight:950; }
+  .defs p { margin:0; font-size:20px; line-height:1.35; font-weight:850; }
+  
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top"><span>写给有想法的人</span><span>VibeCoding · 06 / 06</span></div>
+  <div class="hero"><div class="num">03</div><div class="title">三个词<br>够你入门</div></div>
+  <div class="chapter">第 三 张 · 前 端 / 后 端 / 数 据 库</div>
+  <div class="defs">
+    <div><h3>前端</h3><p>别人看到的页面。</p></div>
+    <div><h3>后端</h3><p>接住提交，处理数据。</p></div>
+    <div><h3>数据库</h3><p>真正保存数据的地方。</p></div>
+  </div>
+  <div class="note">不用把它们学完。<br>先知道各自负责什么。</div>
+  
+  <div class="bottom"><span>能分清</span><span>就够开始</span></div>
+</div>
+</body>
+</html>

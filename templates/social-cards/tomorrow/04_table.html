@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>后端先理解成&lt;br&gt;一张表</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 480px; height: 640px; overflow: hidden; background: #fff; }
+  body { font-family: 'PingFang SC', 'Noto Sans SC', 'Hiragino Sans GB', -apple-system, BlinkMacSystemFont, sans-serif; color: #17120f; }
+
+  :root { --paper:#fffaf6; --fg:#17120f; --muted:#77706b; --line:#17120f; --orange:#E8522A; --pale:#FDE8DF; --gray:#EFEDEB; --green:#12B923; }
+  .card { width:480px; height:640px; background:var(--paper); padding:30px; display:flex; flex-direction:column; border:.5px solid rgba(0,0,0,.14); position:relative; overflow:hidden; }
+  .top, .bottom { display:flex; justify-content:space-between; align-items:center; font-size:10px; letter-spacing:.17em; color:var(--fg); border-top:1px solid var(--line); padding-top:10px; flex-shrink:0; }
+  .bottom { margin-top:auto; }
+  .hero { display:grid; grid-template-columns:88px 1fr; gap:16px; align-items:end; margin-top:24px; }
+  .num { font-family:Georgia, 'Times New Roman', 'Songti SC', serif; font-size:80px; line-height:.86; letter-spacing:-.05em; font-weight:400; }
+  .title { font-size:31px; line-height:1.1; font-weight:950; letter-spacing:-.035em; }
+  .chapter { margin-top:12px; font-size:11px; letter-spacing:.17em; color:var(--muted); }
+  .copy { margin-top:24px; font-size:22px; line-height:1.44; font-weight:650; }
+  .copy.small { font-size:18px; line-height:1.46; }
+  .muted { color:var(--muted); }
+  .em { color:var(--orange); font-weight:950; }
+  .black { display:inline-block; background:var(--fg); color:var(--paper); padding:1px 8px 2px; border-radius:2px; font-weight:850; }
+  .rule { height:2px; background:var(--fg); margin:18px 0; }
+  .note { border-top:2px solid var(--fg); border-bottom:2px solid var(--fg); padding:14px 0; font-size:22px; line-height:1.38; font-weight:900; margin-top:20px; }
+
+
+  .table-card { margin-top:24px; background:#fff; border:2px solid var(--fg); padding:12px; overflow:hidden; }
+  table { width:100%; border-collapse:collapse; table-layout:fixed; font-size:12px; font-weight:800; }
+  th { background:var(--fg); color:#fff; padding:9px 4px; border:1px solid var(--fg); }
+  td { padding:10px 4px; border:1px solid #d6d1cd; text-align:center; color:#423b36; }
+  tbody tr:nth-child(even) td { background:var(--pale); }
+  .explain { margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .explain div { background:#fff; border:1px solid var(--fg); padding:13px; font-size:18px; font-weight:850; text-align:center; }
+  .explain span { display:block; color:var(--orange); font-size:26px; line-height:1; font-weight:950; margin-bottom:5px; }
+  
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top"><span>写给有想法的人</span><span>VibeCoding · 06 / 06</span></div>
+  <div class="hero"><div class="num">04</div><div class="title">后端先理解成<br>一张表</div></div>
+  <div class="chapter">第 四 张 · 数 据 库 不 用 一 上 来 就 学</div>
+  <div class="table-card">
+    <table>
+      <thead><tr><th>姓名</th><th>邮箱</th><th>留言</th><th>时间</th></tr></thead>
+      <tbody>
+        <tr><td>小王</td><td>w@...</td><td>想试用</td><td>09:20</td></tr>
+        <tr><td>阿林</td><td>a@...</td><td>求内测</td><td>10:14</td></tr>
+        <tr><td>Pakco</td><td>p@...</td><td>已提交</td><td>11:02</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="explain">
+    <div><span>一行</span>一条提交</div>
+    <div><span>一列</span>一个字段</div>
+  </div>
+  <div class="note">能看懂这张表，<br>你就开始理解数据了。</div>
+  <div class="bottom"><span>表格思维</span><span>新手够用</span></div>
+</div>
+</body>
+</html>

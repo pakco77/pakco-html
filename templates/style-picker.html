@@ -378,7 +378,7 @@ const I18N = {
     tabThemes: '🎨 皮肤 (36)',
     tabDecks: '📑 模板 (24)',
     tabUITaste: '🧩 UI Taste (4)',
-    tabCards: '🖼 图文 (2 基调)',
+    tabCards: '🖼 图文 (3 基调)',
     tabGuide: '📖 使用说明',
     empty: '没有匹配的风格',
     toastDefault: '已复制 Prompt — 粘到 Claude / Codex / Hermes 即用',
@@ -412,6 +412,7 @@ const I18N = {
     cardImportNote: '只导入 prompt，不在本页生成图片',
     cardModeEditorial: '电子杂志 × 墨水',
     cardModeSwiss: '瑞士国际主义',
+    cardModeTomorrow: '明天 · 潮玩杂志',
     cardEnterHint: '点击预览 · 切配色 + 选尺寸',
     csColorLabel: '颜色分支',
     csRatioLabel: '尺寸 / 比例',
@@ -598,7 +599,20 @@ ${s
 
 内容：[在此粘贴产品说明 / 页面需求 / 技术栈 / 现有路径 / 参考图说明]
 请输出可以直接运行或合入项目的 UI 实现。`,
-    promptCard: (item, ratio) => `请使用 guizang-social-card-skill 帮我做社交配图（只做配图，不是 PPT / deck / 横版网页）。
+    promptCard: (item, ratio) => item.mode === 'tomorrow' ? `请用「明天」社交图文风格帮我做一套封面 + 内页（只做配图，不是 PPT / 横版网页）。这套是自包含 HTML 卡片 → 截图 PNG，不经过 guizang skill。
+- 种子模板：templates/social-cards/tomorrow/（封面 00_cover.html + 内页 01–06 + generate_cards.js + README.md）
+- 配色：${item.zh}（${item.themeKey}）—— paper ${item.paper} / ink ${item.ink} / accent ${item.accent}
+- 画布：封面 900×1200、内页 480×640，均 3:4 竖版
+
+工作流（照 README.md，不要跳步）：
+1. 复制 templates/social-cards/tomorrow/ 到任务文件夹；以 00_cover.html 为封面种子、01–06 为内页种子。
+2. 只替换内容，保留整套视觉系统与品牌外壳：VibeCoding · 点亮计划 / 半个造物主 · 乘百、超粗黑体大标题（950 字重 + 描边）、橙红强调、点缀绿星 ✳、黑色反白 chip、封面的装订线圈/琥珀条纹/透视地板/底部跑马灯、内页的编号大衬线数字 + 章节标签 + note 双线带。
+3. 按内容选内页页型（展示卡+虚线批注 / 路由列表 / 三词定义 / 对照表 / 流程 / 深色 Prompt payoff 页），不必固定 6 页。
+4. 每张是独立自包含 HTML；用 node generate_cards.js 或任意 headless 截图工具导出 PNG（封面 900×1200、内页 480×640）。
+5. 先把结果图给我看。
+
+内容：[在此粘贴文章 / 脚本 / 标题 / 每页要点]
+不要把快捷键或使用说明画进图里。` : `请使用 guizang-social-card-skill 帮我做社交配图（只做配图，不是 PPT / deck / 横版网页）。
 - 安装：npx skills add https://github.com/op7418/guizang-social-card-skill
 - 目标平台 / 尺寸：${ratio.platZh}（${ratio.spec}，比例 ${ratio.label}）
 - 视觉模式：${item.mode === 'editorial' ? '电子杂志 × 电子墨水（Editorial × E-ink）' : '瑞士国际主义（Swiss International）'}
@@ -628,7 +642,7 @@ ${s
     tabThemes: '🎨 Skins (36)',
     tabDecks: '📑 Templates (24)',
     tabUITaste: '🧩 UI Taste (4)',
-    tabCards: '🖼 Social Cards (2 tones)',
+    tabCards: '🖼 Social Cards (3 tones)',
     tabGuide: '📖 How to use',
     empty: 'No matches',
     toastDefault: 'Prompt copied — paste into Claude / Codex / Hermes',
@@ -662,6 +676,7 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
     cardImportNote: 'imports a prompt only — no image generation here',
     cardModeEditorial: 'Editorial × E-ink',
     cardModeSwiss: 'Swiss International',
+    cardModeTomorrow: 'Tomorrow · streetwear zine',
     cardEnterHint: 'Open to switch palette + size',
     csColorLabel: 'Color branch',
     csRatioLabel: 'Size / ratio',
@@ -848,7 +863,20 @@ Implementation requirements:
 
 Content: [paste product brief / page requirements / tech stack / existing path / reference notes here]
 Please return UI implementation that can run directly or be merged into the project.`,
-    promptCard: (item, ratio) => `Please use the guizang-social-card-skill to make social card images for me (images only — not a PPT / deck / horizontal website).
+    promptCard: (item, ratio) => item.mode === 'tomorrow' ? `Please make me a "Tomorrow"-style social set (cover + inner pages; images only, not a PPT / website). This style is self-contained HTML cards → screenshot PNG — it does NOT use the guizang skill.
+- Seed templates: templates/social-cards/tomorrow/ (cover 00_cover.html + inner 01–06 + generate_cards.js + README.md)
+- Palette: ${item.en} (${item.themeKey}) — paper ${item.paper} / ink ${item.ink} / accent ${item.accent}
+- Canvas: cover 900×1200, inner 480×640, all 3:4 vertical
+
+Workflow (per README.md, don't skip):
+1. Copy templates/social-cards/tomorrow/ into the task folder; use 00_cover.html as the cover seed and 01–06 as inner-page seeds.
+2. Swap only the content; keep the whole visual system + brand shell: VibeCoding · 点亮计划 / 半个造物主 · 乘百, ultra-bold display (950 weight + stroke), orange accent, spot-green star ✳, black inverted chips, the cover's coil / amber stripe / perspective floor / bottom ticker, the inner pages' big serif numerals + chapter labels + double-rule note bands.
+3. Pick inner page types by content (demo card + dashed callout / routed list / three-word defs / table / flow / dark prompt payoff page); you don't have to use exactly 6 pages.
+4. Each card is one self-contained HTML; export PNGs with node generate_cards.js or any headless screenshot tool (cover 900×1200, inner 480×640).
+5. Show me the rendered images first.
+
+Content: [paste article / script / title / per-page points]
+Do not draw shortcuts or usage instructions into the images.` : `Please use the guizang-social-card-skill to make social card images for me (images only — not a PPT / deck / horizontal website).
 - Install: npx skills add https://github.com/op7418/guizang-social-card-skill
 - Target platform / size: ${ratio.platEn} (${ratio.spec}, ratio ${ratio.label})
 - Visual mode: ${item.mode === 'editorial' ? 'Editorial Magazine × E-ink' : 'Swiss International'}
@@ -1029,7 +1057,13 @@ const SOCIAL_CARDS = [
    paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#C5E803', on:'#0a0a0a'},
   {id:'safety-orange',mode:'swiss', themeKey:'safety-orange',zh:'安全橙',   en:'Safety Orange',
    descZh:'工业 / 警示 / 紧急 / 风险 / 决策点', descEn:'industrial / warning / urgency / risk / decisions',
-   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#FF6B35', on:'#ffffff'}
+   paper:'#fafaf8', paper2:'#f0f0ee', ink:'#0a0a0a', muted:'#737373', accent:'#FF6B35', on:'#ffffff'},
+  {id:'tomorrow-peach', mode:'tomorrow', themeKey:'tomorrow-peach', zh:'明天·暖桃', en:'Tomorrow · Peach',
+   descZh:'潮玩杂志感 · 暖桃底 + 橙红 + 点缀绿，超粗黑标题', descEn:'streetwear-zine · peach + orange + spot green, ultra-bold display',
+   paper:'#FDE8DF', paper2:'#fffaf6', ink:'#17120f', muted:'#77706b', accent:'#E8522A', on:'#ffffff'},
+  {id:'tomorrow-night', mode:'tomorrow', themeKey:'tomorrow-night', zh:'明天·夜', en:'Tomorrow · Night',
+   descZh:'同款系统的深色 payoff 页 · 黑底 + 琥珀', descEn:'the dark payoff page of the same system · black + amber',
+   paper:'#0E0A07', paper2:'#17120f', ink:'#f4ece2', muted:'#9a8c75', accent:'#F4A51F', on:'#0E0A07'}
 ];
 
 /* 两个「基调」是顶层。配色分支(SOCIAL_CARDS)与比例都在预览工作台里切换。 */
@@ -1041,7 +1075,11 @@ const CARD_TONES = [
   {id:'swiss', mode:'swiss', defaultColor:'ikb',
    zh:'瑞士国际主义', en:'Swiss International',
    descZh:'Inter 极细大字 + 严格左对齐网格 + 单一高饱和强调色，工程化、可量化、果断。适合技术、产品更新、数据、发布说明。',
-   descEn:'Inter ultralight display + strict left grid + one high-saturation accent. Engineered, quantified, decisive. For tech, product updates, data, release notes.'}
+   descEn:'Inter ultralight display + strict left grid + one high-saturation accent. Engineered, quantified, decisive. For tech, product updates, data, release notes.'},
+  {id:'tomorrow', mode:'tomorrow', defaultColor:'tomorrow-peach', seed:'templates/social-cards/tomorrow/',
+   zh:'明天', en:'Tomorrow',
+   descZh:'潮玩 × 杂志混搭的封面+内页图文系统：暖桃底、超粗黑标题、橙红强调、点缀绿星、装订线圈/跑马灯、编号章节与深色 payoff 页。自包含 HTML 卡片 → PNG，不走 guizang。3:4 竖版。',
+   descEn:'A streetwear-zine cover+inner social system: peach base, ultra-bold display, orange accent, spot-green star, coil/ticker motifs, numbered chapters and a dark payoff page. Self-contained HTML cards → PNG (not guizang). 3:4 vertical.'}
 ];
 function colorsForTone(toneId){ return SOCIAL_CARDS.filter(c=>c.mode===toneId); }
 
@@ -1071,6 +1109,18 @@ const SC_CSS = `
 .sc-sw .sc-bars i{flex:1;background:var(--sc-accent);display:block}
 .sc-sw .sc-bars i:nth-child(1){height:48%}.sc-sw .sc-bars i:nth-child(2){height:82%}
 .sc-sw .sc-bars i:nth-child(3){height:34%}.sc-sw .sc-bars i:nth-child(4){height:100%}
+.sc-tm{font-family:'PingFang SC','Noto Sans SC',sans-serif}
+.sc-tm .sc-pad{padding:7cqmin 7cqmin 0}
+.sc-tm .sc-tm-top{display:flex;align-items:center;gap:2cqmin;font-size:4cqmin;font-weight:900;letter-spacing:-.02em}
+.sc-tm .sc-tm-dot{width:2.6cqmin;height:2.6cqmin;border-radius:50%;background:var(--sc-accent);box-shadow:0 0 0 1.3cqmin color-mix(in srgb,var(--sc-accent) 18%,transparent)}
+.sc-tm .sc-tm-ep{margin-left:auto;font-size:3.4cqmin;color:var(--sc-muted);font-weight:800}
+.sc-tm .sc-h{font-size:15cqmin;line-height:.96;font-weight:900;letter-spacing:-.05em;margin-top:auto;-webkit-text-stroke:.15cqmin var(--sc-ink)}
+.sc-tm .sc-tm-sub{font-size:3.4cqmin;line-height:1.5;font-weight:650;margin:3cqmin 0 5cqmin;color:var(--sc-ink)}
+.sc-tm .sc-tm-sub b{background:var(--sc-ink);color:var(--sc-paper);padding:.3cqmin 1.4cqmin;border-radius:.6cqmin;font-weight:850}
+.sc-tm .sc-tm-foot{margin-top:auto;margin-left:-7cqmin;margin-right:-7cqmin}
+.sc-tm .sc-tm-stripe{display:block;height:2.4cqmin;background:var(--sc-accent)}
+.sc-tm .sc-tm-ticker{display:block;background:#0E0A07;color:rgba(255,255,255,.92);font-size:2.6cqmin;font-weight:850;
+  letter-spacing:.22em;padding:3cqmin 5cqmin;white-space:nowrap;overflow:hidden}
 `;
 
 /* ───── State + helpers ───── */
@@ -1617,7 +1667,7 @@ function colorById(id){ return SOCIAL_CARDS.find(c=>c.id===id); }
 function ratioById(id){ return CARD_RATIOS.find(r=>r.id===id) || CARD_RATIOS[0]; }
 function toneLabel(tone){ return lang==='zh' ? tone.zh : tone.en; }
 function toneDesc(tone){ return lang==='zh' ? tone.descZh : tone.descEn; }
-function socialCardMode(item){ return item.mode==='editorial' ? T().cardModeEditorial : T().cardModeSwiss; }
+function socialCardMode(item){ return item.mode==='editorial' ? T().cardModeEditorial : item.mode==='swiss' ? T().cardModeSwiss : T().cardModeTomorrow; }
 function toneMatches(tone){
   if(!q) return true;
   const colors = colorsForTone(tone.id).map(c=>`${c.zh} ${c.en} ${c.themeKey} ${c.descZh} ${c.descEn}`).join(' ');
@@ -1627,23 +1677,37 @@ function toneMatches(tone){
 /* 海报 mock 节点(基调卡预览 + 工作台舞台 共用同一份 class)。ratio.fit 为空时不加 fit 类(由外层控制尺寸) */
 function socialPosterMarkup(item, ratio){
   const vars = `--sc-paper:${item.paper};--sc-paper2:${item.paper2};--sc-ink:${item.ink};--sc-muted:${item.muted};--sc-accent:${item.accent};--sc-on:${item.on};--sc-ratio:${ratio.ratio}`;
-  const dark = item.id==='midnight-ink' ? ' sc-dark' : '';
+  const dark = (item.id==='midnight-ink' || item.id==='tomorrow-night') ? ' sc-dark' : '';
   const fit = ratio.fit ? ` fit-${ratio.fit}` : '';
-  const inner = item.mode==='editorial'
-    ? `<div class="sc-grain"></div>
+  const cn = lang === 'zh';
+  let inner, modeClass;
+  if(item.mode==='editorial'){
+    modeClass = 'sc-ed';
+    inner = `<div class="sc-grain"></div>
        <div class="sc-pad">
          <div class="sc-kick">歸藏 · ISSUE</div>
-         <div class="sc-h">${lang==='zh' ? '把源文变成<br>一眼读懂的视觉' : 'Turn the source<br>into one clear glance'}</div>
+         <div class="sc-h">${cn ? '把源文变成<br>一眼读懂的视觉' : 'Turn the source<br>into one clear glance'}</div>
          <div class="sc-rule"></div>
          <div class="sc-foot"><span>EDITORIAL × E-INK</span><span>${item.en}</span></div>
-       </div>`
-    : `<div class="sc-pad">
+       </div>`;
+  }else if(item.mode==='swiss'){
+    modeClass = 'sc-sw';
+    inner = `<div class="sc-pad">
          <div class="sc-tag">01 — SWISS</div>
-         <div class="sc-h">${lang==='zh' ? '系统化的<br>视觉论证' : 'A systematic<br>visual argument'}</div>
+         <div class="sc-h">${cn ? '系统化的<br>视觉论证' : 'A systematic<br>visual argument'}</div>
          <div class="sc-chip">${item.en}</div>
          <div class="sc-bars"><i></i><i></i><i></i><i></i></div>
        </div>`;
-  return `<div class="sc-poster ${item.mode==='editorial'?'sc-ed':'sc-sw'}${dark}${fit}" style="${vars}">${inner}</div>`;
+  }else{ // tomorrow
+    modeClass = 'sc-tm';
+    inner = `<div class="sc-pad">
+         <div class="sc-tm-top"><span class="sc-tm-dot"></span><span>明天</span><span class="sc-tm-ep">EP.06</span></div>
+         <div class="sc-h">${cn ? '能收数据<br>才是真产品' : 'Collect data,<br>then it ships'}</div>
+         <div class="sc-tm-sub">${cn ? '不用重学后端，但要知道 <b>数据去哪</b>。' : 'No backend rewrite — just know <b>where data goes</b>.'}</div>
+         <div class="sc-tm-foot"><span class="sc-tm-stripe"></span><span class="sc-tm-ticker">DATA HAS TO GO SOMEWHERE ✳ ${item.en}</span></div>
+       </div>`;
+  }
+  return `<div class="sc-poster ${modeClass}${dark}${fit}" style="${vars}">${inner}</div>`;
 }
 
 /* grid 里每个「基调」一张卡, 点开进工作台 */
@@ -1656,14 +1720,14 @@ function createToneCard(tone){
   card.innerHTML = `
     <span class="zoom-hint">${T().cardEnterHint}</span>
     <div class="card-demo">
-      <span class="badge">${tone.mode==='editorial'?T().cardModeEditorial:T().cardModeSwiss}</span>
+      <span class="badge">${socialCardMode(tone)}</span>
       <span class="badge count">${colors.length} ${lang==='zh'?'配色':'palettes'}</span>
       ${socialPosterMarkup(demoColor, ratio3x4)}
     </div>
     <div class="meta">
       <p class="name">${toneLabel(tone)}</p>
       <p class="desc">${toneDesc(tone)}</p>
-      <p class="author">by 歸藏 / guizang-social-card-skill</p>
+      <p class="author">${tone.mode==='tomorrow' ? 'by VibeCoding · 点亮计划' : 'by 歸藏 / guizang-social-card-skill'}</p>
       <p class="enter">▸ ${T().cardEnterHint}</p>
     </div>`;
   card.addEventListener('click',()=>openCardStudio(tone));
@@ -1698,7 +1762,9 @@ function renderStudio(){
   document.getElementById('cs-ratios').innerHTML = CARD_RATIOS.map(r=>
     `<button class="cs-chip ratio${r.id===studio.ratioId?' active':''}" data-ratio="${r.id}">${r.label} · ${cn?r.zh:r.en}</button>`
   ).join('');
-  document.getElementById('cs-spec').textContent = `${color.mode==='editorial'?'data-theme':'data-accent'}="${color.themeKey}"  ·  ${ratio.spec}`;
+  document.getElementById('cs-spec').textContent = color.mode==='tomorrow'
+    ? `明天 seed · ${color.themeKey}  ·  封面 900×1200 / 内页 480×640`
+    : `${color.mode==='editorial'?'data-theme':'data-accent'}="${color.themeKey}"  ·  ${ratio.spec}`;
   document.getElementById('cs-note').textContent = T().cardImportNote;
   const copyBtn = document.getElementById('cs-copy');
   copyBtn.textContent = T().copyPrompt;
