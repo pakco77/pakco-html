@@ -122,6 +122,7 @@
   .card-demo .badge.count{left:auto;right:10px;background:rgba(167,139,250,.85);color:#fff;font-weight:700}
   .meta .enter{margin:8px 0 0;font-size:11px;color:#67e8f9;font-weight:600;display:flex;align-items:center;gap:5px}
   .preview{aspect-ratio:16/10;background:#fff;position:relative;overflow:hidden}
+  .preview.portrait{aspect-ratio:3/4}  /* 纵向网页：模板预览竖向 */
   .preview iframe{position:absolute;inset:0;width:166.67%;height:166.67%;border:0;
     transform:scale(.6);transform-origin:0 0;pointer-events:none}
   .preview .badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;
@@ -2084,6 +2085,8 @@ function render(){
       const iframeParams = new URLSearchParams();
       iframeParams.set('lang', lang);
       if(themeKey) iframeParams.set('theme', themeKey);
+      const scroll = deckFormat === 'scroll';   // 纵向网页 → 模板预览竖向堆叠
+      if(scroll) iframeParams.set('scroll', '1');
       const iframeSrc = `full-decks/${deckDir}/index.html?${iframeParams}`;
 
       modalSrc   = {src: iframeSrc};
@@ -2091,7 +2094,7 @@ function render(){
       card.innerHTML = `
         <button class="copy-btn" type="button">${t.copyPrompt}</button>
         <span class="zoom-hint">${t.zoomHint}</span>
-        <div class="preview">
+        <div class="preview${scroll ? ' portrait' : ''}">
           <span class="badge ${kind}">${kind}</span>
           <iframe src="${iframeSrc}" loading="lazy"></iframe>
         </div>

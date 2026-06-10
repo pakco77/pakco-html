@@ -46,6 +46,25 @@
     const previewOnlyIdx = getPreviewIdx();
     const isPreviewMode = previewOnlyIdx >= 0 && previewOnlyIdx < slides.length;
 
+    /* ===== Scroll mode (?scroll=1): stack all slides vertically as one
+     * scrolling web page — no paging, no keyboard, no presenter chrome.
+     * Used by the picker to preview a template as a 纵向网页. */
+    if (/[?&]scroll=1/.test(location.search || '')) {
+      const css = document.createElement('style');
+      css.textContent =
+        'html,body{height:auto!important;overflow:auto!important}' +
+        '.deck{height:auto!important;overflow:visible!important;display:block!important}' +
+        '.slide{position:relative!important;inset:auto!important;width:100%!important;min-height:100vh!important;height:auto!important;opacity:1!important;transform:none!important;pointer-events:auto!important;overflow:visible!important}' +
+        '.slide+.slide{border-top:1px solid rgba(127,127,127,.14)}' +
+        '.deck-header,.deck-footer,.progress-bar,.notes-overlay,.overview,.notes,aside.notes,.speaker-notes{display:none!important}';
+      document.head.appendChild(css);
+      slides.forEach(function (s) { s.classList.add('is-active'); });
+      document.documentElement.setAttribute('data-scroll', '1');
+      document.body.setAttribute('data-scroll', '1');
+      try { window.parent && window.parent.postMessage({ type: 'preview-ready' }, '*'); } catch (e) {}
+      return;
+    }
+
     /* ===== Preview-only mode: show one slide, hide everything else ===== */
     if (isPreviewMode) {
       function showSlide(i) {
