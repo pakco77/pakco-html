@@ -41,11 +41,13 @@
     border:0;border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600}
   .controls .size-toggle button.active,.controls .lang-toggle button.active{background:rgba(255,255,255,.12);color:#fff}
   .controls .lang-toggle button.active{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff}
-  /* 输出格式切换(只在 皮肤/模板 tab 出现) */
-  .controls .fmt-toggle{display:flex;background:rgba(255,255,255,.05);border-radius:8px;padding:3px}
-  .controls .fmt-toggle button{padding:6px 12px;font-size:12px;color:#aab0c0;background:transparent;border:0;
+  /* 输出格式子栏(挂在皮肤/模板 tab 下方, 上下文设置而非全局) */
+  .subbar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
+  .subbar-label{font-size:12px;color:#6a7086;font-weight:600;font-family:'Inter','PingFang SC',sans-serif}
+  .fmt-toggle{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:3px}
+  .fmt-toggle button{padding:6px 14px;font-size:12px;color:#aab0c0;background:transparent;border:0;
     border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600;white-space:nowrap}
-  .controls .fmt-toggle button.active{background:rgba(103,232,249,.18);color:#67e8f9}
+  .fmt-toggle button.active{background:rgba(103,232,249,.18);color:#67e8f9}
 
   /* Tabs */
   .tabs{grid-column:1/-1;display:flex;gap:4px;background:rgba(255,255,255,.05);padding:4px;
@@ -289,10 +291,6 @@
       <button data-size="m" class="active"></button>
       <button data-size="l"></button>
     </div>
-    <div class="fmt-toggle" id="fmt-toggle" style="display:none">
-      <button data-fmt="deck" class="active"></button>
-      <button data-fmt="scroll"></button>
-    </div>
   </div>
 
   <div class="tabs" id="tabs">
@@ -301,6 +299,14 @@
     <button class="tab" data-view="ui"></button>
     <button class="tab" data-view="cards"></button>
     <button class="tab" data-view="guide"></button>
+  </div>
+
+  <div class="subbar" id="subbar" style="display:none">
+    <span class="subbar-label" id="fmt-label"></span>
+    <div class="fmt-toggle" id="fmt-toggle">
+      <button data-fmt="deck" class="active"></button>
+      <button data-fmt="scroll"></button>
+    </div>
   </div>
 </header>
 
@@ -368,7 +374,7 @@ const I18N = {
     copied: '✓ 已复制',
     search: '搜索名称…',
     sizeS: '小', sizeM: '中', sizeL: '大',
-    fmtDeck: '🖥 横版演示', fmtScroll: '📜 纵向网页',
+    fmtLabel: '输出格式', fmtDeck: '🖥 横版演示', fmtScroll: '📜 纵向网页',
     tabThemes: '🎨 皮肤 (36)',
     tabDecks: '📑 模板 (24)',
     tabUITaste: '🧩 UI Taste (4)',
@@ -618,7 +624,7 @@ ${s
     copied: '✓ Copied',
     search: 'Search…',
     sizeS: 'S', sizeM: 'M', sizeL: 'L',
-    fmtDeck: '🖥 Deck', fmtScroll: '📜 Web page',
+    fmtLabel: 'Output', fmtDeck: '🖥 Deck', fmtScroll: '📜 Web page',
     tabThemes: '🎨 Skins (36)',
     tabDecks: '📑 Templates (24)',
     tabUITaste: '🧩 UI Taste (4)',
@@ -1870,6 +1876,7 @@ function applyStaticI18n(){
   });
 
   // format toggle labels(横版演示 / 纵向网页)
+  document.getElementById('fmt-label').textContent = t.fmtLabel;
   document.querySelectorAll('.fmt-toggle button').forEach(b=>{
     b.textContent = b.dataset.fmt==='deck' ? t.fmtDeck : t.fmtScroll;
     b.classList.toggle('active', b.dataset.fmt === deckFormat);
@@ -2110,8 +2117,8 @@ document.querySelectorAll('.tab').forEach(btn=>{
     view = btn.dataset.view;
     const ctrls = document.querySelector('.controls');
     ctrls.style.visibility = view==='guide' ? 'hidden' : 'visible';
-    // 格式切换只在 皮肤/模板 tab 显示
-    document.getElementById('fmt-toggle').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
+    // 格式子栏只在 皮肤/模板 tab 显示
+    document.getElementById('subbar').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
     render();
   });
 });
@@ -2199,8 +2206,8 @@ modalCopy.addEventListener('click', async e => {
   // 注入海报 mock 样式(卡内预览复用同一份 SC_CSS)
   document.head.insertAdjacentHTML('beforeend', `<style id="sc-style">${SC_CSS}</style>`);
   applyStaticI18n();
-  // 初始 view 是 皮肤(themes) → 格式切换可见
-  document.getElementById('fmt-toggle').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
+  // 初始 view 是 皮肤(themes) → 格式子栏可见
+  document.getElementById('subbar').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
   await loadLocalTaste();
   render();
 })();
