@@ -1,4 +1,4 @@
-/* html-ppt :: runtime.js
+/* DeckTaste :: runtime.js
  * Keyboard-driven deck runtime. Zero dependencies.
  *
  * Features:

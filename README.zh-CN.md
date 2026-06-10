@@ -85,13 +85,13 @@ DeckTaste 是给 AI Agent 用的、本地优先的**视觉审美菜单**。它�
 支持任何带 AgentSkill 的运行时。安装后 skill 落在：
 
 ```
-~/.claude/skills/html-ppt/      # Claude Code
-~/.codex/skills/html-ppt/       # Codex
-~/.hermes/skills/html-ppt/      # Hermes Agent
+~/.claude/skills/DeckTaste/      # Claude Code
+~/.codex/skills/DeckTaste/       # Codex
+~/.hermes/skills/DeckTaste/      # Hermes Agent
 ~/.cursor/…  /  其它             # 任何支持 AgentSkill 的 Agent
 ```
 
-每种环境下选择器都是同一个文件：`…/html-ppt/templates/style-picker.html`。把 Prompt 复制给 Agent **不需要 MCP**；只有想让网页直接唤起 Agent、读本地文件、写生成目录时才需要 MCP / 本地桥接。
+每种环境下选择器都是同一个文件：`…/DeckTaste/templates/style-picker.html`。把 Prompt 复制给 Agent **不需要 MCP**；只有想让网页直接唤起 Agent、读本地文件、写生成目录时才需要 MCP / 本地桥接。
 
 ## ⬇️ 安装
 
@@ -103,10 +103,10 @@ npx skills add https://github.com/pakco77/DeckTaste
 
 ```bash
 # 1) 只浏览卡片（预览需要服务器）
-open ~/.claude/skills/html-ppt/templates/style-picker.html
+open ~/.claude/skills/DeckTaste/templates/style-picker.html
 
 # 2) 推荐 —— 起个本地服务器，预览能加载
-cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+cd ~/.claude/skills/DeckTaste && python3 -m http.server 8000
 # 访问：http://localhost:8000/templates/style-picker.html
 ```
 
@@ -118,7 +118,7 @@ cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
 
 ```
 DeckTaste/
-├── SKILL.md                      agent 入口（skill 名仍为 html-ppt）
+├── SKILL.md                      agent 入口（skill 名 DeckTaste）
 ├── README.md / README.zh-CN.md   文档（英文 / 中文）
 ├── skills-lock.json              声明的 skill 依赖（guizang-social-card-skill）
 ├── references/                   详细文档（themes / layouts / animations / full-decks / presenter-mode）

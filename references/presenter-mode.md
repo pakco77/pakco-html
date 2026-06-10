@@ -1,6 +1,6 @@
 # Presenter Mode Guide · 演讲者模式指南
 
-这份文档说明如何在 html-ppt skill 里做出**带逐字稿的演讲者模式 PPT**。
+这份文档说明如何在 DeckTaste skill 里做出**带逐字稿的演讲者模式 PPT**。
 
 ## 何时使用演讲者模式
 
@@ -33,7 +33,7 @@ cp -r templates/full-decks/presenter-mode-reveal examples/my-talk
 
 ### 🔧 进阶做法：给任意已有模板加演讲者模式
 
-html-ppt 的 **S 键演讲者视图是 `runtime.js` 内置的，所有 full-deck 模板都自动支持**。你只需要做两件事：
+DeckTaste 的 **S 键演讲者视图是 `runtime.js` 内置的，所有 full-deck 模板都自动支持**。你只需要做两件事：
 
 1. **每张 slide 末尾加 `<aside class="notes">`**（或 `<div class="notes">`），里面写逐字稿
 2. **确认 HTML 引入了 `assets/runtime.js`**

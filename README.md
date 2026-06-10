@@ -85,13 +85,13 @@ DeckTaste is a local-first *visual taste menu* for AI agents. It does not try to
 Works with any runtime that supports AgentSkills. After install the skill lives at:
 
 ```
-~/.claude/skills/html-ppt/      # Claude Code
-~/.codex/skills/html-ppt/       # Codex
-~/.hermes/skills/html-ppt/      # Hermes Agent
+~/.claude/skills/DeckTaste/      # Claude Code
+~/.codex/skills/DeckTaste/       # Codex
+~/.hermes/skills/DeckTaste/      # Hermes Agent
 ~/.cursor/…  /  others          # any AgentSkill-aware agent
 ```
 
-The picker is the same file in every case: `…/html-ppt/templates/style-picker.html`. Copying a prompt into an agent needs **no MCP**. MCP/a local bridge is only needed if you want the web page to directly launch an agent, read local files, or write the generated folder.
+The picker is the same file in every case: `…/DeckTaste/templates/style-picker.html`. Copying a prompt into an agent needs **no MCP**. MCP/a local bridge is only needed if you want the web page to directly launch an agent, read local files, or write the generated folder.
 
 ## ⬇️ Install
 
@@ -103,10 +103,10 @@ Then open the picker (the second option enables live iframe previews):
 
 ```bash
 # 1) Just browse cards (previews need a server)
-open ~/.claude/skills/html-ppt/templates/style-picker.html
+open ~/.claude/skills/DeckTaste/templates/style-picker.html
 
 # 2) Recommended — serve the folder so previews load
-cd ~/.claude/skills/html-ppt && python3 -m http.server 8000
+cd ~/.claude/skills/DeckTaste && python3 -m http.server 8000
 # visit: http://localhost:8000/templates/style-picker.html
 ```
 
@@ -118,7 +118,7 @@ Click a card → the install command + a ready prompt are on your clipboard → 
 
 ```
 DeckTaste/
-├── SKILL.md                      agent-facing dispatcher (skill name: html-ppt)
+├── SKILL.md                      agent-facing dispatcher (skill name: DeckTaste)
 ├── README.md / README.zh-CN.md   docs (EN / 中文)
 ├── skills-lock.json              declared skill deps (guizang-social-card-skill)
 ├── references/                   detailed catalogs (themes, layouts, animations, full-decks, presenter-mode)

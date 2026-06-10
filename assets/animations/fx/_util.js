@@ -1,4 +1,4 @@
-/* html-ppt fx :: shared helpers */
+/* DeckTaste fx :: shared helpers */
 (function(){
   window.HPX = window.HPX || {};
   const U = window.HPX._u = {};
