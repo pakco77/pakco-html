@@ -1,4 +1,4 @@
-/* html-ppt :: fx-runtime.js
+/* DeckTaste :: fx-runtime.js
  * Canvas FX autoloader + lifecycle manager.
  * - Dynamically loads all fx modules listed in FX_LIST
  * - Initializes [data-fx] elements when their slide becomes active

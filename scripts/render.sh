@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# html-ppt :: render.sh — headless Chrome screenshot(s)
+# DeckTaste :: render.sh — headless Chrome screenshot(s)
 #
 # Usage:
 #   render.sh <html-file>                     # one PNG, slide 1

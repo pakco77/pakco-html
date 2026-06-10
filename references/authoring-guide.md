@@ -1,7 +1,7 @@
 # Authoring guide
 
 How to turn a user request ("make me a deck about X") into a finished
-html-ppt deck. Follow these steps in order.
+DeckTaste deck. Follow these steps in order.
 
 ## 1. Understand the deck
 

@@ -1,9 +1,9 @@
 ---
-name: html-ppt
+name: DeckTaste
 description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
 ---
 
-# html-ppt — DeckTaste.skill
+# DeckTaste.skill
 
 DeckTaste.skill is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes generate the deck with stable visual constraints.
 
@@ -166,7 +166,7 @@ Chinese + English deck, and how to export.
 ## File structure
 
 ```
-html-ppt/
+DeckTaste/
 ├── SKILL.md                 (this file)
 ├── references/              (detailed catalogs, load as needed)
 ├── assets/

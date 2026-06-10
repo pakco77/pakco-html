@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# html-ppt :: new-deck.sh — scaffold a new deck from templates/deck.html
+# DeckTaste :: new-deck.sh — scaffold a new deck from templates/deck.html
 #
 # Usage:
 #   new-deck.sh <name> [output-parent-dir]
