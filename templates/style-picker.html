@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
-<title>DeckTaste.skill</title>
+<title>pakco.html</title>
 <link rel="icon" href="data:,">
 <link rel="stylesheet" href="../assets/fonts.css">
 <style>
@@ -270,13 +270,13 @@
 
 <header>
   <div class="brand">
-    <h1>DeckTaste.skill <span class="accent">· Visual taste menu</span></h1>
+    <h1>pakco.html <span class="accent">· Visual taste menu</span></h1>
     <div class="sub" id="brand-sub"></div>
   </div>
 
   <div class="install" id="install-bar">
     <span class="prompt">$</span>
-    <code id="install-cmd">npx skills add https://github.com/pakco77/DeckTaste</code>
+    <code id="install-cmd">npx skills add https://github.com/pakco77/pakco-html</code>
     <button id="install-copy"></button>
   </div>
 
@@ -357,7 +357,7 @@
 </div>
 
 <script>
-const REPO_URL = 'https://github.com/pakco77/DeckTaste';
+const REPO_URL = 'https://github.com/pakco77/pakco-html';
 const UPSTREAM_URL = 'https://github.com/lewislulu/html-ppt-skill';
 const GUIZANG_URL = 'https://github.com/op7418/guizang-ppt-skill';
 const TASTE_URL = 'https://github.com/Leonxlnx/taste-skill';
@@ -392,9 +392,9 @@ const I18N = {
     promptDeleteLocal: (item, folder, arr)=>`请帮我真删除这个自建（不可恢复，删除前先跟我确认一次）：
 - 目标：id = "${item.id}"
 1. 删除整个文件夹 ${folder}（连同里面所有文件）
-2. 从 examples/decktaste.local.json 的 ${arr} 数组里移除 id 为 "${item.id}" 的那条 entry，保留其它所有 entry；若删后数组为空，保留为空数组 []
+2. 从 examples/pakco-html.local.json 的 ${arr} 数组里移除 id 为 "${item.id}" 的那条 entry，保留其它所有 entry；若删后数组为空，保留为空数组 []
 3. 不要动任何公共模板 / references / README / SKILL.md
-删除完成后提醒我刷新 DeckTaste WebUI（这张 local 卡会消失）。`,
+删除完成后提醒我刷新 pakco.html WebUI（这张 local 卡会消失）。`,
     copyPrompt: '📋 复制 Prompt',
     featPresenter: '🎤 演讲者模式',
     featNoPresenter: '无演讲者模式',
@@ -431,7 +431,7 @@ const I18N = {
       h2steps: '<b style="color:#cfd4e2">四步流程：</b>',
       steps: [
         '装好 skill（上面那条命令）',
-        '在 DeckTaste 里挑一个可见风格，点卡复制 Prompt',
+        '在 pakco.html 里挑一个可见风格，点卡复制 Prompt',
         '粘到 Agent，补内容，回车',
         'Agent 生成 deck 目录，浏览器打开 <code>index.html</code> 即用'
       ],
@@ -460,7 +460,7 @@ const I18N = {
       ],
       h5: '资源 & 文档',
       h6: '自建自己的 taste',
-      h6body: '<b style="color:#fff">最短路径：</b>在皮肤或模板页点击 <code>+ 自建皮肤</code> / <code>+ 自建模板</code> 卡片，复制一段带约束的 Prompt 给 Agent。它会基于 lewislulu/html-ppt-skill 的架构新建 <code>examples/&lt;slug&gt;/</code>，复用 <code>assets/base.css</code>、主题 token、<code>runtime.js</code>、<code>.slide</code> 与 <code>&lt;aside class="notes"&gt;</code>，不注册进 picker，也不进入公共目录。<b>可以反复自建多个</b>，每次取一个新的 slug，append 到 <code>examples/decktaste.local.json</code>，互不覆盖，刷新后都会以 local 卡显示。<br><b style="color:#fff">关于 MCP：</b>只是复制 Prompt 到 Codex / Claude / Hermes 时不需要 MCP；只有想让网页里的按钮直接唤起 Agent、读取本地文件或写入目录，才需要额外接入 MCP / 本地桥接服务。',
+      h6body: '<b style="color:#fff">最短路径：</b>在皮肤或模板页点击 <code>+ 自建皮肤</code> / <code>+ 自建模板</code> 卡片，复制一段带约束的 Prompt 给 Agent。它会基于 lewislulu/html-ppt-skill 的架构新建 <code>examples/&lt;slug&gt;/</code>，复用 <code>assets/base.css</code>、主题 token、<code>runtime.js</code>、<code>.slide</code> 与 <code>&lt;aside class="notes"&gt;</code>，不注册进 picker，也不进入公共目录。<b>可以反复自建多个</b>，每次取一个新的 slug，append 到 <code>examples/pakco-html.local.json</code>，互不覆盖，刷新后都会以 local 卡显示。<br><b style="color:#fff">关于 MCP：</b>只是复制 Prompt 到 Codex / Claude / Hermes 时不需要 MCP；只有想让网页里的按钮直接唤起 Agent、读取本地文件或写入目录，才需要额外接入 MCP / 本地桥接服务。',
       docLinks: [
         ['/blob/main/README.zh-CN.md', '📖 中文 README'],
         ['/blob/main/README.md', '📖 English README'],
@@ -470,9 +470,9 @@ const I18N = {
         ['/blob/main/references/presenter-mode.md', '🎤 演讲者模式指南']
       ],
       localRegistry: '本地私有 taste：生成后刷新 WebUI 即可看到',
-      tip: '💡 提示：DeckTaste 当前负责可视化选择与复制可执行 Prompt，不负责直接生成。自建 deck / theme 会通过 <code>examples/decktaste.local.json</code> 在本地 WebUI 展示，不进入公共模板库。UI Taste 是 Taste.skill 的极简可视化入口，只复制 UI coding prompt，不包含演示模式。配图风格更准确地说是“配图 Prompt”，只输出给图片模型使用的提示词与比例约束。'
+      tip: '💡 提示：pakco.html 当前负责可视化选择与复制可执行 Prompt，不负责直接生成。自建 deck / theme 会通过 <code>examples/pakco-html.local.json</code> 在本地 WebUI 展示，不进入公共模板库。UI Taste 是 Taste.skill 的极简可视化入口，只复制 UI coding prompt，不包含演示模式。配图风格更准确地说是“配图 Prompt”，只输出给图片模型使用的提示词与比例约束。'
     },
-    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `请使用 DeckTaste skill 帮我做一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
+    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `请使用 pakco-html skill 帮我做一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
 - 皮肤(skin) = ${name}（${label}）—— 只用它的视觉 token（配色/字体/圆角/阴影），不要修改主题源文件
 - 输出格式：${s ? '纵向网页（单页垂直滚动的 HTML 文档，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏的 deck，可左右翻页）'}
 - 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——把 assets/base.css、皮肤 assets/themes/${name}.css 的 token、需要的样式全部内联进一个 <style>${s ? '' : '；把 assets/runtime.js 内联进一个 <script>'}；网页字体可继续走 CDN @import
@@ -481,7 +481,7 @@ ${s
   : '- 结构：标准 deck，每页 <section class="slide">，保留 runtime.js 的键盘翻页 / 演讲者模式（S 键）'}
 - 内容：[在此粘贴你的内容大纲 / 主题方向 / 关键论点]
 请只产出一个完整、可直接浏览器打开的单文件 HTML。`; },
-    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `请使用 DeckTaste skill 的 full-deck 模板生成一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
+    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `请使用 pakco-html skill 的 full-deck 模板生成一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
 - 模板(template) = ${name}（${label}），路径 templates/full-decks/${name}/
 - 输出格式：${s ? '纵向网页（单页垂直滚动的 HTML 文档，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏的 deck，可左右翻页）'}
 - 输出：单文件 HTML（self-contained，双击即用，不外链任何本地文件）——基于该模板生成，把模板的 scoped style.css、assets/base.css、用到的样式全部内联进 <style>${s ? '' : '；把 assets/runtime.js 内联进 <script>'}；网页字体可继续走 CDN
@@ -490,11 +490,11 @@ ${s
   : '- 结构：保留模板的 .tpl-' + name + ' 作用域 class、全部视觉元素与翻页/演讲者模式，只替换成我的内容'}
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构]
 请只产出一个完整、可直接浏览器打开的单文件 HTML。`; },
-    promptCustomTheme: () => `请使用 DeckTaste skill 帮我自建一份私有 HTML deck 或私有主题。
+    promptCustomTheme: () => `请使用 pakco-html skill 帮我自建一份私有 HTML deck 或私有主题。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
-- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的数组里，绝不删除或覆盖已有 entry
-- ⚠️ 写入前必须确认：在新增/修改 examples/decktaste.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
-- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck 或 theme
+- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/pakco-html.local.json 的数组里，绝不删除或覆盖已有 entry
+- ⚠️ 写入前必须确认：在新增/修改 examples/pakco-html.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
+- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/pakco-html.local.json，让 pakco.html WebUI 刷新后能看到这个私有 deck 或 theme
   registry 格式示例：
   {
     "decks": [
@@ -531,14 +531,14 @@ ${s
   3. 必须保留 assets/runtime.js，支持 ← → / T / A / F / S / O / N
   4. 每页使用 <section class="slide">，演讲备注放进 <aside class="notes"> 或 <div class="notes">
   5. 需要页面类型时优先复用 templates/single-page/*.html 的结构，再替换内容
-- 还原要求：如果我提供了参考模板 / 截图 / 旧 PPT / 网页，请尽可能还原原模板的布局、字体层级、动效节奏、装饰元素和主题氛围，但用 DeckTaste 的 token 与运行时重构
+- 还原要求：如果我提供了参考模板 / 截图 / 旧 PPT / 网页，请尽可能还原原模板的布局、字体层级、动效节奏、装饰元素和主题氛围，但用 pakco.html 的 token 与运行时重构
 - 内容：[在此粘贴你的主题、受众、页数、内容大纲或参考文件说明]
-请输出完整可直接浏览器打开的 HTML deck 或主题 CSS，说明入口文件路径，并提醒我刷新 DeckTaste WebUI。`,
-    promptCustomDeck: () => `请使用 DeckTaste skill 帮我自建一份私有 full-deck。
+请输出完整可直接浏览器打开的 HTML deck 或主题 CSS，说明入口文件路径，并提醒我刷新 pakco.html WebUI。`,
+    promptCustomDeck: () => `请使用 pakco-html skill 帮我自建一份私有 full-deck。
 - 目标：新建 examples/<slug>/（<slug> 取一个短横线小写名，从我的主题/内容里提炼，如 brand-launch、q3-review；不要用默认名，避免多份自建互相覆盖），不要注册到 picker / README / references，也不要纳入公共模板目录
-- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/decktaste.local.json 的 decks 数组里，绝不删除或覆盖已有 entry
-- ⚠️ 写入前必须确认：在新增/修改 examples/decktaste.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
-- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/decktaste.local.json，让 DeckTaste WebUI 刷新后能看到这个私有 deck
+- 支持累积多个自建：本次用一个新的、不重复的 <slug>；把它 append 到 examples/pakco-html.local.json 的 decks 数组里，绝不删除或覆盖已有 entry
+- ⚠️ 写入前必须确认：在新增/修改 examples/pakco-html.local.json 之前，先把准备写入的 entry（id / 名称 / 路径）列出来给我看，等我明确说"可以写"再写；我若不同意就跳过这一步，只产出 examples/<slug>/ 本身，不碰 registry
+- 本地 WebUI 展示：得到我确认后，再新增或更新 examples/pakco-html.local.json，让 pakco.html WebUI 刷新后能看到这个私有 deck
   registry 格式示例：
   {
     "decks": [
@@ -565,7 +565,7 @@ ${s
   5. 不修改原模板源文件，只在 examples/<slug>/ 里生成我的版本
 - 还原要求：尽可能还原原模板效果，包括视觉比例、布局密度、背景层、装饰元素、动效节奏、组件样式和 presenter mode 支持
 - 内容：[在此粘贴你的内容大纲 / 关键数据 / 章节结构 / 参考模板名]
-请输出完整可直接浏览器打开的 HTML deck，说明入口文件路径，并提醒我刷新 DeckTaste WebUI。`,
+请输出完整可直接浏览器打开的 HTML deck，说明入口文件路径，并提醒我刷新 pakco.html WebUI。`,
     promptGuizang: (id, label, deckDir, themeKey, format) => { const s = format === 'scroll'; return `请使用 guizang-ppt-skill 生成一份${s ? '纵向滚动的网页文档' : '横版演示 PPT'}。
 - 风格 = ${deckDir === 'guizang-magazine' ? 'A · 电子杂志风' : 'B · 瑞士国际主义'}，主题色 = ${label}（theme key: ${themeKey}）
 - 输出格式：${s ? '纵向网页（单页垂直滚动，用于汇报 / 信息同步 / 落地页）' : '横版演示（一页一屏，可左右翻页）'}
@@ -657,9 +657,9 @@ ${s
     promptDeleteLocal: (item, folder, arr)=>`Please really delete this custom build (irreversible — confirm with me once before deleting):
 - target: id = "${item.id}"
 1. Remove the entire folder ${folder} (and everything inside it)
-2. Remove the entry whose id is "${item.id}" from the ${arr} array in examples/decktaste.local.json, keeping every other entry; if the array becomes empty, leave it as []
+2. Remove the entry whose id is "${item.id}" from the ${arr} array in examples/pakco-html.local.json, keeping every other entry; if the array becomes empty, leave it as []
 3. Do not touch any public templates / references / README / SKILL.md
-When done, remind me to refresh DeckTaste WebUI (this local card will disappear).`,
+When done, remind me to refresh pakco.html WebUI (this local card will disappear).`,
     copyPrompt: '📋 Copy Prompt',
     featPresenter: '🎤 Presenter',
     featNoPresenter: 'No presenter',
@@ -696,7 +696,7 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
       h2steps: '<b style="color:#cfd4e2">Four steps:</b>',
       steps: [
         'Install the skill (the command above)',
-        'Pick a visible taste in DeckTaste, click the card to copy its prompt',
+        'Pick a visible taste in pakco.html, click the card to copy its prompt',
         'Paste in your agent, fill in your outline, hit enter',
         'Agent generates a deck directory — open <code>index.html</code> in any browser'
       ],
@@ -725,7 +725,7 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
       ],
       h5: 'Resources & docs',
       h6: 'Create your own taste',
-      h6body: '<b style="color:#fff">Shortest path:</b> click the <code>+ Custom skin</code> / <code>+ Custom template</code> card on the Skins or Templates tab, then paste the copied prompt into your agent. The prompt asks the agent to create <code>examples/&lt;slug&gt;/</code> with the lewislulu/html-ppt-skill architecture: <code>assets/base.css</code>, theme tokens, <code>runtime.js</code>, <code>.slide</code>, and <code>&lt;aside class="notes"&gt;</code>. It does not register the result in the picker or public catalogs. <b>You can build many</b> — each uses a new slug, appends to <code>examples/decktaste.local.json</code>, never overwrites, and shows as a local card after refresh.<br><b style="color:#fff">MCP note:</b> copying a prompt into Codex / Claude / Hermes does not require MCP. MCP or a local bridge is only needed if this web page should directly launch an agent, read local files, or write the generated folder.',
+      h6body: '<b style="color:#fff">Shortest path:</b> click the <code>+ Custom skin</code> / <code>+ Custom template</code> card on the Skins or Templates tab, then paste the copied prompt into your agent. The prompt asks the agent to create <code>examples/&lt;slug&gt;/</code> with the lewislulu/html-ppt-skill architecture: <code>assets/base.css</code>, theme tokens, <code>runtime.js</code>, <code>.slide</code>, and <code>&lt;aside class="notes"&gt;</code>. It does not register the result in the picker or public catalogs. <b>You can build many</b> — each uses a new slug, appends to <code>examples/pakco-html.local.json</code>, never overwrites, and shows as a local card after refresh.<br><b style="color:#fff">MCP note:</b> copying a prompt into Codex / Claude / Hermes does not require MCP. MCP or a local bridge is only needed if this web page should directly launch an agent, read local files, or write the generated folder.',
       docLinks: [
         ['/blob/main/README.md', '📖 English README'],
         ['/blob/main/README.zh-CN.md', '📖 中文 README'],
@@ -735,9 +735,9 @@ When done, remind me to refresh DeckTaste WebUI (this local card will disappear)
         ['/blob/main/references/presenter-mode.md', '🎤 Presenter mode guide']
       ],
       localRegistry: 'Local private taste: refresh the WebUI after generation',
-      tip: '💡 Tip: DeckTaste currently visualizes choices and copies executable prompts; it does not generate directly. Custom decks / themes appear in the local WebUI through <code>examples/decktaste.local.json</code>, without entering the public template catalog. UI Taste is a minimal visual entry for Taste.skill: it copies UI coding prompts only and has no presenter mode. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.'
+      tip: '💡 Tip: pakco.html currently visualizes choices and copies executable prompts; it does not generate directly. Custom decks / themes appear in the local WebUI through <code>examples/pakco-html.local.json</code>, without entering the public template catalog. UI Taste is a minimal visual entry for Taste.skill: it copies UI coding prompts only and has no presenter mode. Illustration should be framed as supporting-image prompts: prompts and aspect-ratio constraints for image models, not image generation inside this product.'
     },
-    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `Please use the DeckTaste skill to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
+    promptTheme: (name, label, format) => { const s = format === 'scroll'; return `Please use the pakco-html skill to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
 - skin = ${name} (${label}) — use only its visual tokens (color/type/radius/shadow); do not modify the theme source file
 - format: ${s ? 'vertical web page (single-page scrolling HTML document for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, left/right navigation)'}
 - output: a single self-contained .html file (double-click to run, no external local files) — inline assets/base.css, the tokens from assets/themes/${name}.css, and any needed styles into one <style>${s ? '' : '; inline assets/runtime.js into one <script>'}; webfonts may stay as CDN @import
@@ -746,7 +746,7 @@ ${s
   : '- structure: standard deck, each page is <section class="slide">, keep runtime.js keyboard nav / presenter mode (S key)'}
 - content: [paste your outline / theme direction / key points here]
 Return exactly one complete, browser-openable single-file HTML.`; },
-    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `Please use the DeckTaste skill's full-deck template to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
+    promptDeck: (name, label, format) => { const s = format === 'scroll'; return `Please use the pakco-html skill's full-deck template to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
 - template = ${name} (${label}), path templates/full-decks/${name}/
 - format: ${s ? 'vertical web page (single-page scrolling HTML document for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, left/right navigation)'}
 - output: a single self-contained .html file (no external local files) — build from this template and inline its scoped style.css, assets/base.css, and needed styles into <style>${s ? '' : '; inline assets/runtime.js into <script>'}; webfonts may stay as CDN
@@ -755,11 +755,11 @@ ${s
   : '- structure: keep the .tpl-' + name + ' scoped class, all visual elements and paging/presenter mode; replace only the content with mine'}
 - content: [paste your outline / key data / section structure here]
 Return exactly one complete, browser-openable single-file HTML.`; },
-    promptCustomTheme: () => `Please use the DeckTaste skill to create a private HTML deck or private theme for me.
+    promptCustomTheme: () => `Please use the pakco-html skill to create a private HTML deck or private theme for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
-- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
-- ⚠️ confirm before writing: before creating/updating examples/decktaste.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
-- local WebUI visibility: only after I confirm, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck or theme after refresh
+- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/pakco-html.local.json and never delete or overwrite an existing entry
+- ⚠️ confirm before writing: before creating/updating examples/pakco-html.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
+- local WebUI visibility: only after I confirm, create or update examples/pakco-html.local.json so pakco.html WebUI can show this private deck or theme after refresh
   registry example:
   {
     "decks": [
@@ -796,14 +796,14 @@ Return exactly one complete, browser-openable single-file HTML.`; },
   3. keep assets/runtime.js so the deck supports ← → / T / A / F / S / O / N
   4. each page must be a <section class="slide">; speaker notes go in <aside class="notes"> or <div class="notes">
   5. when a page type is needed, reuse the structure from templates/single-page/*.html before replacing content
-- fidelity requirement: if I provide a reference template / screenshot / old PPT / web page, recreate the original layout, type hierarchy, motion rhythm, decorative layers, and overall mood as closely as possible, but rebuild it using DeckTaste tokens and runtime
+- fidelity requirement: if I provide a reference template / screenshot / old PPT / web page, recreate the original layout, type hierarchy, motion rhythm, decorative layers, and overall mood as closely as possible, but rebuild it using pakco.html tokens and runtime
 - content: [paste topic, audience, page count, outline, or reference-file notes here]
-Please output a complete browser-openable HTML deck or theme CSS, tell me the entry file path, and remind me to refresh DeckTaste WebUI.`,
-    promptCustomDeck: () => `Please use the DeckTaste skill to create a private full-deck for me.
+Please output a complete browser-openable HTML deck or theme CSS, tell me the entry file path, and remind me to refresh pakco.html WebUI.`,
+    promptCustomDeck: () => `Please use the pakco-html skill to create a private full-deck for me.
 - goal: create examples/<slug>/ (pick a short lowercase kebab-case <slug> derived from my topic/content, e.g. brand-launch, q3-review; do not reuse a default name, so multiple custom builds never overwrite each other); do not register it in the picker / README / references, and do not treat it as a public catalog item
-- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/decktaste.local.json and never delete or overwrite an existing entry
-- ⚠️ confirm before writing: before creating/updating examples/decktaste.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
-- local WebUI visibility: only after I confirm, create or update examples/decktaste.local.json so DeckTaste WebUI can show this private deck after refresh
+- supports stacking many custom builds: use a new, unique <slug> this time; append it to the arrays in examples/pakco-html.local.json and never delete or overwrite an existing entry
+- ⚠️ confirm before writing: before creating/updating examples/pakco-html.local.json, show me the entry you plan to add (id / label / path) and wait for my explicit "yes, write it"; if I decline, skip this step and only produce examples/<slug>/ itself, leaving the registry untouched
+- local WebUI visibility: only after I confirm, create or update examples/pakco-html.local.json so pakco.html WebUI can show this private deck after refresh
   registry example:
   {
     "decks": [
@@ -830,7 +830,7 @@ Please output a complete browser-openable HTML deck or theme CSS, tell me the en
   5. do not modify the source template files; generate my version only inside examples/<slug>/
 - fidelity requirement: recreate the original template effect as closely as possible, including visual proportions, layout density, background layers, decorative elements, motion timing, component styling, and presenter mode support
 - content: [paste outline / key data / section structure / reference template name here]
-Please output a complete browser-openable HTML deck, tell me the entry file path, and remind me to refresh DeckTaste WebUI.`,
+Please output a complete browser-openable HTML deck, tell me the entry file path, and remind me to refresh pakco.html WebUI.`,
     promptGuizang: (id, label, deckDir, themeKey, format) => { const s = format === 'scroll'; return `Please use guizang-ppt-skill to build me ${s ? 'a vertical-scroll web document' : 'a horizontal slide deck'}.
 - style = ${deckDir === 'guizang-magazine' ? 'A · Magazine e-ink' : 'B · Swiss International Style'}, color theme = ${label} (theme key: ${themeKey})
 - format: ${s ? 'vertical web page (single-page scrolling, for a report / sync doc / landing page)' : 'horizontal deck (one idea per full screen, paging)'}
@@ -1155,17 +1155,17 @@ function localPrompt(item){
   if(item && typeof item.prompt === 'string' && item.prompt.trim()) return item.prompt;
   if(item && item.type === 'theme'){
     return lang === 'zh'
-      ? `请使用 DeckTaste 本地主题 ${item.id} 生成一份 HTML deck。\n- 本地主题 CSS：${item.css}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
-      : `Please use the local DeckTaste theme ${item.id} to build an HTML deck.\n- local theme CSS: ${item.css}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
+      ? `请使用 pakco.html 本地主题 ${item.id} 生成一份 HTML deck。\n- 本地主题 CSS：${item.css}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
+      : `Please use the local pakco.html theme ${item.id} to build an HTML deck.\n- local theme CSS: ${item.css}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
   }
   return lang === 'zh'
-    ? `请基于 DeckTaste 本地 deck ${item.id} 的视觉风格继续生成。\n- 本地入口：${item.path}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
-    : `Please continue using the visual taste from local DeckTaste deck ${item.id}.\n- local entry: ${item.path}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
+    ? `请基于 pakco.html 本地 deck ${item.id} 的视觉风格继续生成。\n- 本地入口：${item.path}\n- 内容：[在此粘贴你的内容大纲]\n请输出完整可直接浏览器打开的 HTML。`
+    : `Please continue using the visual taste from local pakco.html deck ${item.id}.\n- local entry: ${item.path}\n- content: [paste your outline here]\nPlease return a complete browser-openable HTML deck.`;
 }
 
 async function loadLocalTaste(){
   try{
-    const res = await fetch('../examples/decktaste.local.json', {cache: 'no-store'});
+    const res = await fetch('../examples/pakco-html.local.json', {cache: 'no-store'});
     if(!res.ok) return;
     const data = await res.json();
     localTaste = {
@@ -1438,7 +1438,7 @@ function uiTasteDemo(item){
 function uiTastePreview(item){
   const zh = lang === 'zh';
   const tag = `${uiTasteKind(item)} · ${item.installName}`;
-  const notice = zh ? 'DeckTaste 可视化 demo，不是 Taste.skill 官方页面' : 'DeckTaste sample demo, not an official Taste.skill page';
+  const notice = zh ? 'pakco.html 可视化 demo，不是 Taste.skill 官方页面' : 'pakco.html sample demo, not an official Taste.skill page';
   const head = `<!doctype html><html lang="${T().htmlLang}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">`;
 
   const demos = {

@@ -1,11 +1,11 @@
 ---
-name: DeckTaste
+name: pakco-html
 description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
 ---
 
-# DeckTaste.skill
+# pakco.html
 
-DeckTaste.skill is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes generate the deck with stable visual constraints.
+pakco.html is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes generate the deck with stable visual constraints.
 
 The underlying skill still authors professional HTML presentations as static files, with themes, full-deck taste cards, layouts, animations, and prompts. One theme file = one look. One layout file = one page type. One animation class = one entry effect.
 All pages share a token-based design system in `assets/base.css`.
@@ -13,7 +13,7 @@ All pages share a token-based design system in `assets/base.css`.
 ## Install
 
 ```bash
-npx skills add https://github.com/pakco77/DeckTaste
+npx skills add https://github.com/pakco77/pakco-html
 ```
 
 One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
@@ -166,7 +166,7 @@ Chinese + English deck, and how to export.
 ## File structure
 
 ```
-DeckTaste/
+pakco-html/
 ├── SKILL.md                 (this file)
 ├── references/              (detailed catalogs, load as needed)
 ├── assets/

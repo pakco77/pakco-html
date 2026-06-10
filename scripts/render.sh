@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# DeckTaste :: render.sh — headless Chrome screenshot(s)
+# pakco.html :: render.sh — headless Chrome screenshot(s)
 #
 # Usage:
 #   render.sh <html-file>                     # one PNG, slide 1

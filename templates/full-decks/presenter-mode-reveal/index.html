@@ -42,7 +42,7 @@
       <div class="agenda-row"><span class="num">01</span><span class="t">为什么 PPT 本身做得好还不够</span><span class="d">~5min</span></div>
       <div class="agenda-row"><span class="num">02</span><span class="t">演讲者模式到底该有哪些信息</span><span class="d">~6min</span></div>
       <div class="agenda-row"><span class="num">03</span><span class="t">逐字稿怎么写才不像念稿</span><span class="d">~8min</span></div>
-      <div class="agenda-row"><span class="num">04</span><span class="t">Live demo · DeckTaste skill 怎么用</span><span class="d">~8min</span></div>
+      <div class="agenda-row"><span class="num">04</span><span class="t">Live demo · pakco-html skill 怎么用</span><span class="d">~8min</span></div>
       <div class="agenda-row"><span class="num">05</span><span class="t">Takeaways + Q&amp;A</span><span class="d">~3min</span></div>
     </div>
     <aside class="notes">
@@ -50,7 +50,7 @@
       <p>第一部分我想先说服你们<strong>"PPT 做得漂亮≠讲得好"</strong>。我见过太多很精致的 deck，但讲的人一上去就开始 "嗯…这个…就是…"。</p>
       <p>第二部分聊演讲者视图。业界的产品其实差别蛮大的，Keynote、PowerPoint、reveal.js 都有各自的方案，但真正好用的设计逻辑是什么，我会给出我的答案。</p>
       <p>第三部分是今天的<em>核心</em>——逐字稿。很多人以为逐字稿就是把要说的话一字不差写下来，错。逐字稿的目的是让你<strong>"看一眼就接得上"</strong>，写法完全不一样。</p>
-      <p>第四部分会现场 demo 我自己用的 DeckTaste skill，展示如何 30 分钟出一份带逐字稿的 deck。</p>
+      <p>第四部分会现场 demo 我自己用的 pakco-html skill，展示如何 30 分钟出一份带逐字稿的 deck。</p>
       <p>最后收尾 + 答疑。</p>
       <p>OK，进入第一部分。</p>
     </aside>
@@ -149,8 +149,8 @@
     <p class="kicker">// part 04-05 · demo + close</p>
     <h2 class="h2">现在<span class="accent">你也能做到</span></h2>
     <div class="code-block mt-m">
-<span class="comment"># 安装 DeckTaste skill</span>
-<span class="cmd">npx</span> skills add <span class="flag">https://github.com/pakco77/DeckTaste</span>
+<span class="comment"># 安装 pakco-html skill</span>
+<span class="cmd">npx</span> skills add <span class="flag">https://github.com/pakco77/pakco-html</span>
 
 <span class="comment"># 复制演讲者模式模板</span>
 <span class="cmd">cp -r</span> templates/full-decks/presenter-mode-reveal examples/my-talk
@@ -169,7 +169,7 @@
     </div>
     <aside class="notes">
       <p>最后我演示一下这个 skill 怎么用，给大家省点时间自己摸索。</p>
-      <p>第一步，装 DeckTaste skill，一行命令。第二步，把我这个 <code>presenter-mode-reveal</code> 模板复制到你自己的 examples 目录。第三步，打开 html，按 S。</p>
+      <p>第一步，装 pakco-html skill，一行命令。第二步，把我这个 <code>presenter-mode-reveal</code> 模板复制到你自己的 examples 目录。第三步，打开 html，按 S。</p>
       <p>键盘操作我列在这里了。<strong>S 进入演讲者视图、T 切换主题、左右键翻页、R 重置计时器</strong>。主题默认带 5 个——tokyo-night、dracula、catppuccin-mocha、nord、corporate-clean——基本覆盖了深色技术分享、浅色商务汇报两种常见场景。</p>
       <p>最关键的一步——<em>每一页底部的 <code>&lt;aside class="notes"&gt;</code> 里，老老实实写 150 到 300 字的逐字稿</em>。这是整个方法论的交付物。AI 可以帮你写初稿，但你一定要自己过一遍，读出来听听是不是你会说的话。</p>
       <p>好，我今天就讲到这里。如果你做下一场分享的时候想起了这个"演讲者视图 + 逐字稿"的组合，并且觉得讲得比以前顺——那就是我最大的收获。谢谢大家，有问题现在开始。</p>

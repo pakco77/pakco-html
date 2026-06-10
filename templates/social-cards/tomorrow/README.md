@@ -1,10 +1,10 @@
 # 「明天」社交图文风格 · 种子模板
 
-DeckTaste `🖼 图文` tab 的第 3 个基调。一套自包含的 HTML 卡片系统 —— **不经过 guizang-social-card-skill**，而是直接写 HTML 卡片再截成 PNG（由 `generate_cards.js` 用 Playwright 渲染）。
+pakco.html `🖼 图文` tab 的第 3 个基调。一套自包含的 HTML 卡片系统 —— **不经过 guizang-social-card-skill**，而是直接写 HTML 卡片再截成 PNG（由 `generate_cards.js` 用 Playwright 渲染）。
 
 风格原创：VibeCoding · 点亮计划 / 半个造物主 · 乘百（致敬署名）。
 
-> ⚠️ **品牌占位**：种子里的「栏目名 / 系列名 / 你的署名 / 一句话标语 / EP / 跑马灯文字」都是中性占位，**不含原作者身份**。使用者请换成自己的——生成的图文不应出现 VibeCoding / 半个造物主·乘百 等原作者信息（那只属于 DeckTaste 里的风格预览）。
+> ⚠️ **品牌占位**：种子里的「栏目名 / 系列名 / 你的署名 / 一句话标语 / EP / 跑马灯文字」都是中性占位，**不含原作者身份**。使用者请换成自己的——生成的图文不应出现 VibeCoding / 半个造物主·乘百 等原作者信息（那只属于 pakco.html 里的风格预览）。
 
 ## 用法（给 Agent）
 
