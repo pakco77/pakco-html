@@ -606,7 +606,7 @@ ${s
 
 工作流（照 README.md，不要跳步）：
 1. 复制 templates/social-cards/tomorrow/ 到任务文件夹；以 00_cover.html 为封面种子、01–06 为内页种子（它们已是 1080×1440 画布）。
-2. 只替换内容，保留整套视觉系统与品牌外壳：VibeCoding · 点亮计划 / 半个造物主 · 乘百、超粗黑体大标题（950 字重 + 描边）、橙红强调、点缀绿星 ✳、黑色反白 chip、封面的装订线圈/琥珀条纹/透视地板/底部跑马灯、内页的编号大衬线数字 + 章节标签 + note 双线带。
+2. 保留整套视觉系统与装饰：超粗黑体大标题（950 字重 + 描边）、橙红强调、点缀绿星 ✳、黑色反白 chip、封面的装订线圈/琥珀条纹/透视地板/底部跑马灯、内页的编号大衬线数字 + 章节标签 + note 双线带。⚠️ 品牌位换成我自己的：种子里的「栏目名 / 系列名 / 你的署名 / 一句话标语 / EP 编号 / 跑马灯文字」都是占位，请替换成我的栏目与署名（我没给就先留占位）——**绝不要写成 VibeCoding · 点亮计划 / 半个造物主 · 乘百 等原作者信息**（那只属于风格预览）。
 3. 按内容选内页页型（展示卡+虚线批注 / 路由列表 / 三词定义 / 对照表 / 流程 / 深色 Prompt payoff 页），不必固定 6 页。
 4. ⚠️ 排版纪律（移动端）：每张都必须吃满画布——内容覆盖 ≥80% 高度，禁止把内容堆在顶部、下面留大片空白；字号按手机阅读校准（正文 ≥ 约 40px、标题 ≥ 约 70px @1080），保证手机上清晰、不显小。
 5. 每张是独立自包含 HTML；用 node generate_cards.js 导出 PNG（统一 1080×1440，脚本里 deviceScaleFactor:2 = 2160×2880 retina 更清晰）。
@@ -871,7 +871,7 @@ Please return UI implementation that can run directly or be merged into the proj
 
 Workflow (per README.md, don't skip):
 1. Copy templates/social-cards/tomorrow/ into the task folder; use 00_cover.html as the cover seed and 01–06 as inner-page seeds (they are already 1080×1440 canvases).
-2. Swap only the content; keep the whole visual system + brand shell: VibeCoding · 点亮计划 / 半个造物主 · 乘百, ultra-bold display (950 weight + stroke), orange accent, spot-green star ✳, black inverted chips, the cover's coil / amber stripe / perspective floor / bottom ticker, the inner pages' big serif numerals + chapter labels + double-rule note bands.
+2. Keep the whole visual system + decorations: ultra-bold display (950 weight + stroke), orange accent, spot-green star ✳, black inverted chips, the cover's coil / amber stripe / perspective floor / bottom ticker, the inner pages' big serif numerals + chapter labels + double-rule note bands. ⚠️ Replace the brand slots with MINE: the seed placeholders 栏目名 / 系列名 / 你的署名 / 一句话标语 / EP number / ticker text are fill-ins — swap in my own column + byline (keep the placeholders if I didn't give any). **Never output VibeCoding · 点亮计划 / 半个造物主 · 乘百 or other original-author identity** — those belong to the style preview only.
 3. Pick inner page types by content (demo card + dashed callout / routed list / three-word defs / table / flow / dark prompt payoff page); you don't have to use exactly 6 pages.
 4. ⚠️ Mobile layout discipline: every card must FILL the canvas — content covers ≥80% of the height; never top-load the content and leave a big empty bottom; size type for phone reading (body ≥ ~40px, titles ≥ ~70px at 1080) so it's crisp and not tiny on a phone.
 5. Each card is one self-contained HTML; export PNGs with node generate_cards.js (1080×1440, deviceScaleFactor:2 = 2160×2880 retina for sharpness).
