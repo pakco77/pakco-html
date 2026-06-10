@@ -115,9 +115,12 @@
   .card-demo .badge.count{left:auto;right:10px;background:rgba(167,139,250,.85);color:#fff;font-weight:700}
   .meta .enter{margin:8px 0 0;font-size:11px;color:#67e8f9;font-weight:600;display:flex;align-items:center;gap:5px}
   .preview{aspect-ratio:16/10;background:#fff;position:relative;overflow:hidden}
-  .preview.portrait{aspect-ratio:3/4}  /* 纵向网页：模板预览竖向 */
+  .preview.portrait{aspect-ratio:3/4}
   .preview iframe{position:absolute;inset:0;width:166.67%;height:166.67%;border:0;
     transform:scale(.6);transform-origin:0 0;pointer-events:none}
+  /* 模板(外部 URL): 再缩一倍, 让 deck 按更接近设计宽度渲染 */
+  .preview iframe[src]{width:333.33%;height:333.33%;transform:scale(.3)}
+  .preview.portrait iframe[src]{width:250%;height:250%;transform:scale(.4)}
   .preview .badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#fff;
     font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;z-index:2}
   .preview .badge.scenario{background:rgba(167,139,250,.85)}
@@ -176,7 +179,8 @@
   .modal-copy.ok{background:#1aaf6c}
   /* 皮肤/模板放大工作台的预览舞台(整块 iframe, 横/纵都用) */
   .ds-stage{padding:0!important;display:block!important;background:#fff;position:relative}
-  .ds-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .ds-stage iframe{position:absolute;top:0;left:0;width:1280px;height:800px;border:0;display:block;
+    transform-origin:0 0}
   .modal-name{position:absolute;top:14px;left:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
     padding:8px 16px;border-radius:18px;font-size:13px;font-weight:600;
     font-family:'Inter','PingFang SC',sans-serif}
@@ -187,7 +191,7 @@
   .card-modal.open{display:flex}
   .card-studio{position:relative;width:min(1180px,95vw);max-height:90vh;background:#13141a;
     border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;
-    display:grid;grid-template-columns:1.35fr 1fr;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+    display:grid;grid-template-columns:2fr 280px;box-shadow:0 30px 100px rgba(0,0,0,.6)}
   .cs-stage{display:grid;place-items:center;padding:36px;min-height:520px;overflow:hidden;
     background:radial-gradient(circle at 28% 18%,rgba(167,139,250,.14),transparent 44%),radial-gradient(circle at 78% 84%,rgba(103,232,249,.1),transparent 46%),#0c0d12}
   .cs-stage .sc-poster{max-height:100%}
@@ -386,9 +390,9 @@ const I18N = {
     sizeS: '小', sizeM: '中', sizeL: '大',
     fmtLabel: '输出格式', fmtDeck: '🖥 横版演示', fmtScroll: '📜 纵向网页',
     tabThemes: '🎨 皮肤 (36)',
-    tabDecks: '📑 模板 (24)',
+    tabDecks: '📑 模板 (23)',
     tabUITaste: '🧩 UI Taste (4)',
-    tabCards: '🖼 图文 (3 基调)',
+    tabCards: '🖼 图文 (4 基调)',
     tabGuide: '📖 使用说明',
     empty: '没有匹配的风格',
     toastDefault: '已复制 Prompt — 粘到 Claude / Codex / Hermes 即用',
@@ -651,9 +655,9 @@ ${s
     sizeS: 'S', sizeM: 'M', sizeL: 'L',
     fmtLabel: 'Output', fmtDeck: '🖥 Deck', fmtScroll: '📜 Web page',
     tabThemes: '🎨 Skins (36)',
-    tabDecks: '📑 Templates (24)',
+    tabDecks: '📑 Templates (23)',
     tabUITaste: '🧩 UI Taste (4)',
-    tabCards: '🖼 Social Cards (3 tones)',
+    tabCards: '🖼 Social Cards (4 tones)',
     tabGuide: '📖 How to use',
     empty: 'No matches',
     toastDefault: 'Prompt copied — paste into Claude / Codex / Hermes',
@@ -963,7 +967,6 @@ const DECKS = [
   ['product-launch',           'Product Launch',     null,                      'scenario',  '产品发布 / 发布会',         'product launch / keynote',          'Lewis'],
   ['tech-sharing',             '技术分享',           'Tech Sharing',            'scenario',  '内部技术分享 / 大会演讲',   'internal tech talk / conference',   'Lewis'],
   ['weekly-report',            'Weekly Report',      null,                      'scenario',  '周报 / 业务复盘',           'weekly report / business review',   'Lewis'],
-  ['xhs-post',                 '小红书 9 屏 3:4',    'XHS 9-card 3:4',          'scenario',  '小红书 / IG 轮播',          'xhs / IG carousel',                'Lewis'],
   ['course-module',            '课程模块',           'Course Module',           'scenario',  '在线课程 / workshop',       'online course / workshop',          'Lewis'],
   ['presenter-mode-reveal',    '🎤 演讲者模式',      '🎤 Presenter Mode',       'scenario',  '带逐字稿 / speaker view',   'speaker notes / speaker view',      'Lewis'],
   // ── Guizang · Style A 电子杂志风 (by 歸藏) ──
@@ -1075,7 +1078,10 @@ const SOCIAL_CARDS = [
    paper:'#FDE8DF', paper2:'#fffaf6', ink:'#17120f', muted:'#77706b', accent:'#E8522A', on:'#ffffff'},
   {id:'tomorrow-night', mode:'tomorrow', themeKey:'tomorrow-night', zh:'明天·夜', en:'Tomorrow · Night',
    descZh:'同款系统的深色 payoff 页 · 黑底 + 琥珀', descEn:'the dark payoff page of the same system · black + amber',
-   paper:'#0E0A07', paper2:'#17120f', ink:'#f4ece2', muted:'#9a8c75', accent:'#F4A51F', on:'#0E0A07'}
+   paper:'#0E0A07', paper2:'#17120f', ink:'#f4ece2', muted:'#9a8c75', accent:'#F4A51F', on:'#0E0A07'},
+  {id:'xhs-post-default', mode:'xhs-post', themeKey:'default', zh:'默认配色', en:'Default',
+   descZh:'小红书 9 屏 3:4 竖版轮播 · 手绘便签 + 表情', descEn:'XHS 9-card 3:4 vertical carousel · hand-drawn stickers + emoji',
+   paper:'#fff8f0', paper2:'#fff0e0', ink:'#1a1a1a', muted:'#888', accent:'#ff6b6b', on:'#fff'}
 ];
 
 /* 两个「基调」是顶层。配色分支(SOCIAL_CARDS)与比例都在预览工作台里切换。 */
@@ -1091,7 +1097,11 @@ const CARD_TONES = [
   {id:'tomorrow', mode:'tomorrow', defaultColor:'tomorrow-peach', seed:'templates/social-cards/tomorrow/',
    zh:'明天', en:'Tomorrow',
    descZh:'潮玩 × 杂志混搭的封面+内页图文系统：暖桃底、超粗黑标题、橙红强调、点缀绿星、装订线圈/跑马灯、编号章节与深色 payoff 页。自包含 HTML 卡片 → PNG，不走 guizang。3:4 竖版。',
-   descEn:'A streetwear-zine cover+inner social system: peach base, ultra-bold display, orange accent, spot-green star, coil/ticker motifs, numbered chapters and a dark payoff page. Self-contained HTML cards → PNG (not guizang). 3:4 vertical.'}
+   descEn:'A streetwear-zine cover+inner social system: peach base, ultra-bold display, orange accent, spot-green star, coil/ticker motifs, numbered chapters and a dark payoff page. Self-contained HTML cards → PNG (not guizang). 3:4 vertical.'},
+  {id:'xhs-post', mode:'xhs-post', defaultColor:'xhs-post-default', deckTemplate:true,
+   zh:'小红书 9 屏 3:4', en:'XHS 9-card 3:4',
+   descZh:'小红书 / IG 轮播的 9 屏竖版 deck 模板：手绘便签 + 表情 + 左滑翻页，3:4 画布。基于 pakco-html full-deck 架构，含 runtime.js 翻页。',
+   descEn:'A 9-card vertical deck template for Rednote / IG carousels: hand-drawn stickers + emoji + swipe paging, 3:4 canvas. Built on pakco-html full-deck architecture with runtime.js paging.'}
 ];
 function colorsForTone(toneId){ return SOCIAL_CARDS.filter(c=>c.mode===toneId); }
 
@@ -1747,6 +1757,53 @@ function socialPosterMarkup(item, ratio){
 function createToneCard(tone){
   const card = document.createElement('div');
   card.className = 'card tone-card';
+
+  if(tone.deckTemplate){
+    const t = T();
+    const cn = lang==='zh';
+    const deckDir = tone.id;
+    const label = toneLabel(tone);
+    const desc = toneDesc(tone);
+    const iframeSrc = `full-decks/${deckDir}/index.html?lang=${lang}`;
+    const fmtCtx = { render:(f)=>{
+      const params = new URLSearchParams();
+      params.set('lang', lang);
+      if(f==='scroll') params.set('scroll', '1');
+      const url = `full-decks/${deckDir}/index.html?${params}`;
+      const prompt = t.promptDeck(deckDir, label, f);
+      return { src:{src:url}, prompt };
+    } };
+    const studioCtx = { name: label, desc, spec: `模板 · templates/full-decks/${deckDir}/`, render: fmtCtx.render };
+    card.innerHTML = `
+      <button class="copy-btn" type="button">${t.copyPrompt}</button>
+      <span class="zoom-hint">${t.zoomHint}</span>
+      <div class="preview portrait">
+        <span class="badge scenario">scenario</span>
+        <iframe src="${iframeSrc}" loading="lazy"></iframe>
+      </div>
+      <div class="meta">
+        <p class="name">${label}</p>
+        <p class="desc">${desc}</p>
+        <p class="author">by Lewis</p>
+        <div class="feat"><span class="yes">${t.featPresenter}</span></div>
+        <p class="id">templates/full-decks/${deckDir}/</p>
+      </div>`;
+    card.addEventListener('click',()=>openDeckStudio(studioCtx));
+    const copyBtn = card.querySelector('.copy-btn');
+    const promptText = fmtCtx.render('deck').prompt;
+    copyBtn.addEventListener('click', async (e)=>{
+      e.stopPropagation();
+      const ok = await copyToClipboard(promptText);
+      if(ok){
+        card.classList.add('copied');
+        copyBtn.textContent = t.copied;
+        showToast(t.toastCardCopied(label));
+        setTimeout(()=>{ card.classList.remove('copied'); copyBtn.textContent = t.copyPrompt; }, 2400);
+      }else{ showToast(t.toastFail); }
+    });
+    return card;
+  }
+
   const colors = colorsForTone(tone.id);
   const demoColor = colorById(tone.defaultColor) || colors[0];
   const ratio3x4 = ratioById('xhs');
@@ -1834,12 +1891,28 @@ document.getElementById('cs-copy').addEventListener('click', async ()=>{
 const deckModalEl = document.getElementById('deck-modal');
 let dsCtx = null;     // {name, desc, spec, render:(fmt)=>({src,prompt})}
 let dsFmt = 'deck';
+let dsRO = null;
 function renderDeckStudio(){
   const cn = lang === 'zh';
   const r = dsCtx.render(dsFmt);
   const stage = document.getElementById('ds-stage');
   stage.innerHTML = '<iframe loading="lazy" referrerpolicy="no-referrer"></iframe>';
   const ifr = stage.querySelector('iframe');
+  const isPortrait = dsFmt === 'scroll';
+  const ifrW = isPortrait ? 600 : 1280;
+  const ifrH = isPortrait ? 800 : 800;
+  ifr.style.width = ifrW + 'px';
+  ifr.style.height = ifrH + 'px';
+  stage.style.aspectRatio = ifrW + '/' + ifrH;
+  function fitStage(){
+    const sw = stage.clientWidth;
+    if(!sw) return;
+    ifr.style.transform = 'scale(' + (sw / ifrW) + ')';
+  }
+  fitStage();
+  if(dsRO) dsRO.disconnect();
+  dsRO = new ResizeObserver(fitStage);
+  dsRO.observe(stage);
   if(r.src && typeof r.src === 'object' && 'srcdoc' in r.src) ifr.srcdoc = r.src.srcdoc;
   else ifr.src = (r.src && r.src.src) ? r.src.src : r.src;
   document.getElementById('ds-name').textContent = dsCtx.name;
@@ -1861,6 +1934,24 @@ function closeDeckStudio(){ deckModalEl.classList.remove('open'); lockScroll(fal
 document.getElementById('deck-close').addEventListener('click', closeDeckStudio);
 deckModalEl.addEventListener('click', e=>{ if(e.target===deckModalEl) closeDeckStudio(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && deckModalEl.classList.contains('open')) closeDeckStudio(); });
+/* 大图预览: 鼠标滚轮 → 翻页(横版左右 / 纵版上下) */
+(function(){
+  let wheelCool = false;
+  document.getElementById('ds-stage').addEventListener('wheel', e=>{
+    if(wheelCool) return;
+    const abs = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if(Math.abs(abs) < 4) return;
+    e.preventDefault();
+    wheelCool = true;
+    const ifr = document.querySelector('#ds-stage iframe');
+    if(ifr && ifr.contentWindow){
+      const key = abs > 0 ? (dsFmt==='scroll' ? 'ArrowDown' : 'ArrowRight')
+                          : (dsFmt==='scroll' ? 'ArrowUp'   : 'ArrowLeft');
+      try{ ifr.contentWindow.document.dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true})); }catch(ex){}
+    }
+    setTimeout(()=>{ wheelCool=false; }, 280);
+  }, {passive:false});
+})();
 document.getElementById('ds-copy').addEventListener('click', async ()=>{
   const r = dsCtx.render(dsFmt);
   const ok = await copyToClipboard(r.prompt);
@@ -2313,6 +2404,23 @@ function closeModal(){
 document.getElementById('modal-close').addEventListener('click', closeModal);
 modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
 document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+/* 通用大图预览: 鼠标滚轮 → 翻页 */
+(function(){
+  let wc = false;
+  document.querySelector('.modal-inner').addEventListener('wheel', e=>{
+    if(wc) return;
+    const abs = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+    if(Math.abs(abs) < 4) return;
+    e.preventDefault();
+    wc = true;
+    const ifr = document.getElementById('modal-iframe');
+    if(ifr && ifr.contentWindow){
+      const key = abs > 0 ? 'ArrowRight' : 'ArrowLeft';
+      try{ ifr.contentWindow.document.dispatchEvent(new KeyboardEvent('keydown',{key,bubbles:true})); }catch(ex){}
+    }
+    setTimeout(()=>{ wc=false; }, 280);
+  }, {passive:false});
+})();
 modalCopy.addEventListener('click', async e => {
   e.stopPropagation();
   if(!modalPrompt) return;
