@@ -1,4 +1,4 @@
-/* DeckTaste :: runtime.js
+/* pakco.html :: runtime.js
  * Keyboard-driven deck runtime. Zero dependencies.
  *
  * Features:

@@ -8,7 +8,7 @@
 </head><body class="single">
 <div class="deck"><section class="slide is-active" data-title="Radar chart">
   <p class="kicker">Chart · 雷达图</p>
-  <h2 class="h2">把 DeckTaste 和竞品放一张图</h2>
+  <h2 class="h2">把 pakco.html 和竞品放一张图</h2>
   <div class="card mt-l" style="height:520px;padding:28px"><canvas id="c"></canvas></div>
   <script>
     addEventListener('DOMContentLoaded',()=>{
@@ -19,7 +19,7 @@
       new Chart(document.getElementById('c'),{type:'radar',
         data:{labels:['上手','美观','自定义','性能','导出','生态'],
           datasets:[
-            {label:'DeckTaste',data:[9,9,10,10,9,6],borderColor:a1,backgroundColor:a1+'33',borderWidth:3,pointRadius:5},
+            {label:'pakco.html',data:[9,9,10,10,9,6],borderColor:a1,backgroundColor:a1+'33',borderWidth:3,pointRadius:5},
             {label:'reveal.js',data:[8,7,9,8,8,10],borderColor:a2,backgroundColor:a2+'22',borderWidth:3,pointRadius:5}]},
         options:{plugins:{legend:{labels:{color:text2}}},
           scales:{r:{suggestedMin:0,suggestedMax:10,ticks:{color:text2,backdropColor:'transparent'},

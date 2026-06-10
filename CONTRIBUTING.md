@@ -1,6 +1,6 @@
 # Maintainer notes
 
-DeckTaste is a static AgentSkill: templates, themes (skins), layouts, examples,
+pakco.html is a static AgentSkill: templates, themes (skins), layouts, examples,
 and the picker should work without a build step.
 
 This repo does not currently operate a public deck-review workflow. Custom skins
@@ -11,7 +11,7 @@ and decks created by users or agents are private artifacts by default.
 Fastest path: open `templates/style-picker.html`, click the `+ Custom skin`
 card on the `🎨 Skins` tab or the `+ Custom template` card on the `📑 Templates`
 tab, then paste the copied prompt into Codex / Claude / Hermes. Each build uses a
-unique `<slug>` and is appended to `examples/decktaste.local.json`, so you can
+unique `<slug>` and is appended to `examples/pakco-html.local.json`, so you can
 stack many custom skins/templates without overwriting earlier ones.
 
 Manual path (pick your own `<slug>`, e.g. `q3-review`):
@@ -36,7 +36,7 @@ in:
 - `SKILL.md`
 
 Private decks and themes can still appear in the local WebUI through
-`examples/decktaste.local.json`. That file is ignored by git and is intended as
+`examples/pakco-html.local.json`. That file is ignored by git and is intended as
 a per-user taste library. It is not part of the public catalog.
 
 Minimal local registry shape:

@@ -1,4 +1,4 @@
-/* DeckTaste fx :: shared helpers */
+/* pakco.html fx :: shared helpers */
 (function(){
   window.HPX = window.HPX || {};
   const U = window.HPX._u = {};
