@@ -1110,17 +1110,28 @@ const SC_CSS = `
 .sc-sw .sc-bars i:nth-child(1){height:48%}.sc-sw .sc-bars i:nth-child(2){height:82%}
 .sc-sw .sc-bars i:nth-child(3){height:34%}.sc-sw .sc-bars i:nth-child(4){height:100%}
 .sc-tm{font-family:'PingFang SC','Noto Sans SC',sans-serif}
-.sc-tm .sc-pad{padding:7cqmin 7cqmin 0}
-.sc-tm .sc-tm-top{display:flex;align-items:center;gap:2cqmin;font-size:4cqmin;font-weight:900;letter-spacing:-.02em}
-.sc-tm .sc-tm-dot{width:2.6cqmin;height:2.6cqmin;border-radius:50%;background:var(--sc-accent);box-shadow:0 0 0 1.3cqmin color-mix(in srgb,var(--sc-accent) 18%,transparent)}
-.sc-tm .sc-tm-ep{margin-left:auto;font-size:3.4cqmin;color:var(--sc-muted);font-weight:800}
-.sc-tm .sc-h{font-size:15cqmin;line-height:.96;font-weight:900;letter-spacing:-.05em;margin-top:auto;-webkit-text-stroke:.15cqmin var(--sc-ink)}
-.sc-tm .sc-tm-sub{font-size:3.4cqmin;line-height:1.5;font-weight:650;margin:3cqmin 0 5cqmin;color:var(--sc-ink)}
-.sc-tm .sc-tm-sub b{background:var(--sc-ink);color:var(--sc-paper);padding:.3cqmin 1.4cqmin;border-radius:.6cqmin;font-weight:850}
-.sc-tm .sc-tm-foot{margin-top:auto;margin-left:-7cqmin;margin-right:-7cqmin}
-.sc-tm .sc-tm-stripe{display:block;height:2.4cqmin;background:var(--sc-accent)}
-.sc-tm .sc-tm-ticker{display:block;background:#0E0A07;color:rgba(255,255,255,.92);font-size:2.6cqmin;font-weight:850;
-  letter-spacing:.22em;padding:3cqmin 5cqmin;white-space:nowrap;overflow:hidden}
+.sc-tm .sc-pad{padding:5.5cqmin 5.5cqmin 0}
+.sc-tm .sc-tm-top{display:flex;align-items:center;gap:1.6cqmin;font-size:3.2cqmin;font-weight:800;flex-shrink:0}
+.sc-tm .sc-tm-dot{width:2.2cqmin;height:2.2cqmin;border-radius:50%;background:var(--sc-accent);box-shadow:0 0 0 1cqmin color-mix(in srgb,var(--sc-accent) 18%,transparent);flex:0 0 auto}
+.sc-tm .sc-tm-sep{opacity:.4}
+.sc-tm .sc-tm-ep{margin-left:auto;font-weight:700;color:var(--sc-ink);white-space:nowrap}
+.sc-tm .sc-tm-ep i{opacity:.5;font-style:normal;margin-right:.4em}
+.sc-tm .sc-tm-main{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;min-height:0}
+.sc-tm .sc-tm-star{position:absolute;top:.5cqmin;right:0;font-size:9cqmin;line-height:1;color:var(--sc-accent);font-weight:800;transform:rotate(-6deg)}
+.sc-tm .sc-h{font-size:21cqmin;line-height:.92;font-weight:900;letter-spacing:-.045em;margin:0 0 4cqmin}
+.sc-tm .sc-tm-pd{color:var(--sc-accent)}
+.sc-tm .sc-tm-sub{font-size:3.5cqmin;line-height:1.5;font-weight:550;max-width:82%}
+.sc-tm .sc-tm-sub b{background:var(--sc-ink);color:var(--sc-paper);padding:.3cqmin 1.3cqmin;border-radius:.5cqmin;font-weight:750}
+.sc-tm .sc-tm-deco{margin:auto -5.5cqmin 0;display:flex;flex-direction:column;flex-shrink:0}
+.sc-tm .sc-tm-coil{display:block;width:100%;height:4cqmin;background:var(--sc-paper)}
+.sc-tm .sc-tm-stripe{height:1.5cqmin;background:#F5A623}
+.sc-tm .sc-tm-floor{position:relative;height:11cqmin;background:#E8835A;overflow:hidden}
+.sc-tm .sc-tm-floor svg{position:absolute;inset:0;width:100%;height:100%}
+.sc-tm .sc-tm-tag{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#FDE8DF;text-shadow:0 .3cqmin 0 rgba(0,0,0,.18)}
+.sc-tm .sc-tm-tag .m{font-size:3.3cqmin;font-weight:700;letter-spacing:.1em;line-height:1}
+.sc-tm .sc-tm-tag .s{font-size:1.9cqmin;font-weight:500;letter-spacing:.16em;margin-top:1cqmin;opacity:.92}
+.sc-tm .sc-tm-ticker{background:#0E0A07;color:rgba(255,255,255,.92);font-size:2.4cqmin;font-weight:700;letter-spacing:.2em;padding:2.6cqmin 5cqmin;white-space:nowrap;overflow:hidden}
+.sc-tm .sc-tm-ticker .x{color:#F5A623}
 `;
 
 /* ───── State + helpers ───── */
@@ -1698,13 +1709,23 @@ function socialPosterMarkup(item, ratio){
          <div class="sc-chip">${item.en}</div>
          <div class="sc-bars"><i></i><i></i><i></i><i></i></div>
        </div>`;
-  }else{ // tomorrow
+  }else{ // tomorrow —— 还原 v4 暖橙编辑派封面: 线圈 + 地板透视线 + 星标 + tag + 跑马灯
     modeClass = 'sc-tm';
+    const coil = '<svg class="sc-tm-coil" viewBox="0 0 900 50" preserveAspectRatio="none"><g fill="none" stroke="rgba(0,0,0,.16)" stroke-width="1.5"><path d="M 5,50 A 30,25 0 0 1 65,50"/><path d="M 65,50 A 30,25 0 0 1 125,50"/><path d="M 125,50 A 30,25 0 0 1 185,50"/><path d="M 185,50 A 30,25 0 0 1 245,50"/><path d="M 245,50 A 30,25 0 0 1 305,50"/><path d="M 305,50 A 30,25 0 0 1 365,50"/><path d="M 365,50 A 30,25 0 0 1 425,50"/><path d="M 425,50 A 30,25 0 0 1 485,50"/><path d="M 485,50 A 30,25 0 0 1 545,50"/><path d="M 545,50 A 30,25 0 0 1 605,50"/><path d="M 605,50 A 30,25 0 0 1 665,50"/><path d="M 665,50 A 30,25 0 0 1 725,50"/><path d="M 725,50 A 30,25 0 0 1 785,50"/><path d="M 785,50 A 30,25 0 0 1 845,50"/><path d="M 845,50 A 30,25 0 0 1 905,50"/></g></svg>';
+    const floor = '<svg viewBox="0 0 900 130" preserveAspectRatio="none"><g stroke="rgba(0,0,0,.2)" stroke-width="1" fill="none"><line x1="450" y1="0" x2="0" y2="130"/><line x1="450" y1="0" x2="90" y2="130"/><line x1="450" y1="0" x2="180" y2="130"/><line x1="450" y1="0" x2="270" y2="130"/><line x1="450" y1="0" x2="360" y2="130"/><line x1="450" y1="0" x2="450" y2="130"/><line x1="450" y1="0" x2="540" y2="130"/><line x1="450" y1="0" x2="630" y2="130"/><line x1="450" y1="0" x2="720" y2="130"/><line x1="450" y1="0" x2="810" y2="130"/><line x1="450" y1="0" x2="900" y2="130"/><line x1="0" y1="32" x2="900" y2="32"/><line x1="0" y1="64" x2="900" y2="64"/><line x1="0" y1="98" x2="900" y2="98"/></g></svg>';
     inner = `<div class="sc-pad">
-         <div class="sc-tm-top"><span class="sc-tm-dot"></span><span>明天</span><span class="sc-tm-ep">EP.06</span></div>
-         <div class="sc-h">${cn ? '能收数据<br>才是真产品' : 'Collect data,<br>then it ships'}</div>
-         <div class="sc-tm-sub">${cn ? '不用重学后端，但要知道 <b>数据去哪</b>。' : 'No backend rewrite — just know <b>where data goes</b>.'}</div>
-         <div class="sc-tm-foot"><span class="sc-tm-stripe"></span><span class="sc-tm-ticker">DATA HAS TO GO SOMEWHERE ✳ ${item.en}</span></div>
+         <div class="sc-tm-top"><span class="sc-tm-dot"></span><span>VibeCoding</span><span class="sc-tm-sep">·</span><span>点亮计划</span><span class="sc-tm-ep"><i>EP</i>01 / 24</span></div>
+         <div class="sc-tm-main">
+           <span class="sc-tm-star">✳</span>
+           <div class="sc-h">${cn ? '从工具<br>开始' : 'Start with<br>a tool'}<span class="sc-tm-pd">.</span></div>
+           <div class="sc-tm-sub">${cn ? '今天只做一件事：选一个 <b>你真的能打开</b> 的工具。' : 'One thing today: pick a tool you can <b>actually open</b>.'}</div>
+         </div>
+         <div class="sc-tm-deco">
+           ${coil}
+           <div class="sc-tm-stripe"></div>
+           <div class="sc-tm-floor">${floor}<div class="sc-tm-tag"><div class="m">写给有想法的人</div><div class="s">半个造物主 · 乘百</div></div></div>
+           <div class="sc-tm-ticker">START WITH A TOOL <span class="x">✳</span> VIBECODING 01 / 24 <span class="x">✳</span> ${item.en}</div>
+         </div>
        </div>`;
   }
   return `<div class="sc-poster ${modeClass}${dark}${fit}" style="${vars}">${inner}</div>`;
