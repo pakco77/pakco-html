@@ -602,14 +602,15 @@ ${s
     promptCard: (item, ratio) => item.mode === 'tomorrow' ? `请用「明天」社交图文风格帮我做一套封面 + 内页（只做配图，不是 PPT / 横版网页）。这套是自包含 HTML 卡片 → 截图 PNG，不经过 guizang skill。
 - 种子模板：templates/social-cards/tomorrow/（封面 00_cover.html + 内页 01–06 + generate_cards.js + README.md）
 - 配色：${item.zh}（${item.themeKey}）—— paper ${item.paper} / ink ${item.ink} / accent ${item.accent}
-- 画布：封面 900×1200、内页 480×640，均 3:4 竖版
+- 画布：所有卡片统一 1080×1440（3:4 移动端标准，封面与内页同尺寸，不要再用 900/480 的旧小稿）
 
 工作流（照 README.md，不要跳步）：
-1. 复制 templates/social-cards/tomorrow/ 到任务文件夹；以 00_cover.html 为封面种子、01–06 为内页种子。
+1. 复制 templates/social-cards/tomorrow/ 到任务文件夹；以 00_cover.html 为封面种子、01–06 为内页种子（它们已是 1080×1440 画布）。
 2. 只替换内容，保留整套视觉系统与品牌外壳：VibeCoding · 点亮计划 / 半个造物主 · 乘百、超粗黑体大标题（950 字重 + 描边）、橙红强调、点缀绿星 ✳、黑色反白 chip、封面的装订线圈/琥珀条纹/透视地板/底部跑马灯、内页的编号大衬线数字 + 章节标签 + note 双线带。
 3. 按内容选内页页型（展示卡+虚线批注 / 路由列表 / 三词定义 / 对照表 / 流程 / 深色 Prompt payoff 页），不必固定 6 页。
-4. 每张是独立自包含 HTML；用 node generate_cards.js 或任意 headless 截图工具导出 PNG（封面 900×1200、内页 480×640）。
-5. 先把结果图给我看。
+4. ⚠️ 排版纪律（移动端）：每张都必须吃满画布——内容覆盖 ≥80% 高度，禁止把内容堆在顶部、下面留大片空白；字号按手机阅读校准（正文 ≥ 约 40px、标题 ≥ 约 70px @1080），保证手机上清晰、不显小。
+5. 每张是独立自包含 HTML；用 node generate_cards.js 导出 PNG（统一 1080×1440，脚本里 deviceScaleFactor:2 = 2160×2880 retina 更清晰）。
+6. 先把结果图给我看。
 
 内容：[在此粘贴文章 / 脚本 / 标题 / 每页要点]
 不要把快捷键或使用说明画进图里。` : `请使用 guizang-social-card-skill 帮我做社交配图（只做配图，不是 PPT / deck / 横版网页）。
@@ -866,14 +867,15 @@ Please return UI implementation that can run directly or be merged into the proj
     promptCard: (item, ratio) => item.mode === 'tomorrow' ? `Please make me a "Tomorrow"-style social set (cover + inner pages; images only, not a PPT / website). This style is self-contained HTML cards → screenshot PNG — it does NOT use the guizang skill.
 - Seed templates: templates/social-cards/tomorrow/ (cover 00_cover.html + inner 01–06 + generate_cards.js + README.md)
 - Palette: ${item.en} (${item.themeKey}) — paper ${item.paper} / ink ${item.ink} / accent ${item.accent}
-- Canvas: cover 900×1200, inner 480×640, all 3:4 vertical
+- Canvas: ALL cards are 1080×1440 (the 3:4 mobile standard; cover and inner are the same size — do not use the old 900/480 small drafts)
 
 Workflow (per README.md, don't skip):
-1. Copy templates/social-cards/tomorrow/ into the task folder; use 00_cover.html as the cover seed and 01–06 as inner-page seeds.
+1. Copy templates/social-cards/tomorrow/ into the task folder; use 00_cover.html as the cover seed and 01–06 as inner-page seeds (they are already 1080×1440 canvases).
 2. Swap only the content; keep the whole visual system + brand shell: VibeCoding · 点亮计划 / 半个造物主 · 乘百, ultra-bold display (950 weight + stroke), orange accent, spot-green star ✳, black inverted chips, the cover's coil / amber stripe / perspective floor / bottom ticker, the inner pages' big serif numerals + chapter labels + double-rule note bands.
 3. Pick inner page types by content (demo card + dashed callout / routed list / three-word defs / table / flow / dark prompt payoff page); you don't have to use exactly 6 pages.
-4. Each card is one self-contained HTML; export PNGs with node generate_cards.js or any headless screenshot tool (cover 900×1200, inner 480×640).
-5. Show me the rendered images first.
+4. ⚠️ Mobile layout discipline: every card must FILL the canvas — content covers ≥80% of the height; never top-load the content and leave a big empty bottom; size type for phone reading (body ≥ ~40px, titles ≥ ~70px at 1080) so it's crisp and not tiny on a phone.
+5. Each card is one self-contained HTML; export PNGs with node generate_cards.js (1080×1440, deviceScaleFactor:2 = 2160×2880 retina for sharpness).
+6. Show me the rendered images first.
 
 Content: [paste article / script / title / per-page points]
 Do not draw shortcuts or usage instructions into the images.` : `Please use the guizang-social-card-skill to make social card images for me (images only — not a PPT / deck / horizontal website).
@@ -1764,6 +1766,8 @@ function studioPrompt(){
 }
 function renderStudio(){
   const tone = studio.tone;
+  // 明天为 3:4 移动端专用, 锁定 xhs
+  if(tone.mode==='tomorrow') studio.ratioId = 'xhs';
   const color = colorById(studio.colorId);
   const ratio = ratioById(studio.ratioId);
   const cn = lang==='zh';
@@ -1780,11 +1784,12 @@ function renderStudio(){
   document.getElementById('cs-colors').innerHTML = colorsForTone(tone.id).map(c=>
     `<button class="cs-chip${c.id===studio.colorId?' active':''}" data-color="${c.id}"><span class="sw" style="background:${c.accent}"></span>${cn?c.zh:c.en}</button>`
   ).join('');
-  document.getElementById('cs-ratios').innerHTML = CARD_RATIOS.map(r=>
+  const ratioChoices = tone.mode==='tomorrow' ? CARD_RATIOS.filter(r=>r.id==='xhs') : CARD_RATIOS;
+  document.getElementById('cs-ratios').innerHTML = ratioChoices.map(r=>
     `<button class="cs-chip ratio${r.id===studio.ratioId?' active':''}" data-ratio="${r.id}">${r.label} · ${cn?r.zh:r.en}</button>`
   ).join('');
   document.getElementById('cs-spec').textContent = color.mode==='tomorrow'
-    ? `明天 seed · ${color.themeKey}  ·  封面 900×1200 / 内页 480×640`
+    ? `明天 seed · ${color.themeKey}  ·  ${cn?'统一 1080×1440 (移动端)':'unified 1080×1440 (mobile)'}`
     : `${color.mode==='editorial'?'data-theme':'data-accent'}="${color.themeKey}"  ·  ${ratio.spec}`;
   document.getElementById('cs-note').textContent = T().cardImportNote;
   const copyBtn = document.getElementById('cs-copy');
@@ -1796,7 +1801,7 @@ function renderStudio(){
 function openCardStudio(tone){
   studio.tone = tone;
   studio.colorId = tone.defaultColor;
-  if(!CARD_RATIOS.some(r=>r.id===studio.ratioId)) studio.ratioId = 'xhs';
+  if(tone.mode==='tomorrow' || !CARD_RATIOS.some(r=>r.id===studio.ratioId)) studio.ratioId = 'xhs';
   cardModalEl.classList.add('open');  // 先显示, 让舞台拿到真实尺寸再渲染海报
   renderStudio();
 }
