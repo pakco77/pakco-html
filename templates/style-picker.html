@@ -41,13 +41,6 @@
     border:0;border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600}
   .controls .size-toggle button.active,.controls .lang-toggle button.active{background:rgba(255,255,255,.12);color:#fff}
   .controls .lang-toggle button.active{background:linear-gradient(135deg,#a78bfa 0%,#f472b6 100%);color:#fff}
-  /* 输出格式子栏(挂在皮肤/模板 tab 下方, 上下文设置而非全局) */
-  .subbar{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
-  .subbar-label{font-size:12px;color:#6a7086;font-weight:600;font-family:'Inter','PingFang SC',sans-serif}
-  .fmt-toggle{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:3px}
-  .fmt-toggle button{padding:6px 14px;font-size:12px;color:#aab0c0;background:transparent;border:0;
-    border-radius:6px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;font-weight:600;white-space:nowrap}
-  .fmt-toggle button.active{background:rgba(103,232,249,.18);color:#67e8f9}
 
   /* Tabs */
   .tabs{grid-column:1/-1;display:flex;gap:4px;background:rgba(255,255,255,.05);padding:4px;
@@ -171,15 +164,26 @@
   .modal.open{display:flex}
   .modal-wrap{position:relative;width:min(1280px,95vw);aspect-ratio:16/10;max-height:90vh;
     background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+  /* 纵向网页态: modal 变竖屏 */
+  .modal.scroll .modal-wrap{width:auto;height:90vh;aspect-ratio:3/4;max-width:95vw}
+  .modal.scroll .modal-name{display:none}  /* 竖屏窄, 隐藏名称避免和格式切换重叠 */
+  .modal.scroll .modal-fmt{left:14px;transform:none}  /* 竖屏: 切换靠左 */
+  /* modal 内格式切换(横版演示 / 纵向网页) */
+  .modal-fmt{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:5;display:flex;
+    background:rgba(0,0,0,.7);border-radius:18px;padding:3px}
+  .modal-fmt button{padding:6px 13px;font-size:12px;font-weight:600;color:#cfd4e2;background:transparent;border:0;
+    border-radius:15px;cursor:pointer;font-family:'Inter','PingFang SC',sans-serif;white-space:nowrap}
+  .modal-fmt button.active{background:rgba(103,232,249,.9);color:#071018}
   .modal-inner{position:absolute;inset:0}
   .modal-inner iframe{width:100%;height:100%;border:0;display:block}
   .modal-close{position:absolute;top:14px;right:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
     border:0;width:36px;height:36px;border-radius:18px;cursor:pointer;font-size:18px;line-height:1}
   .modal-close:hover{background:rgba(0,0,0,.95)}
-  .modal-copy{position:absolute;top:14px;right:60px;z-index:5;background:rgba(167,139,250,.95);color:#fff;
-    border:0;height:36px;padding:0 14px;border-radius:18px;cursor:pointer;font-size:13px;font-weight:600;
-    font-family:'Inter','PingFang SC',sans-serif;display:inline-flex;align-items:center;gap:6px;transition:.15s}
-  .modal-copy:hover{background:#a78bfa;transform:translateY(-1px)}
+  .modal-copy{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:5;background:rgba(167,139,250,.95);color:#fff;
+    border:0;height:38px;padding:0 20px;border-radius:19px;cursor:pointer;font-size:13px;font-weight:600;
+    font-family:'Inter','PingFang SC',sans-serif;display:inline-flex;align-items:center;gap:6px;transition:background .15s;
+    box-shadow:0 8px 24px rgba(0,0,0,.35)}
+  .modal-copy:hover{background:#a78bfa}
   .modal-copy.ok{background:#1aaf6c}
   .modal-name{position:absolute;top:14px;left:14px;z-index:5;background:rgba(0,0,0,.7);color:#fff;
     padding:8px 16px;border-radius:18px;font-size:13px;font-weight:600;
@@ -302,13 +306,6 @@
     <button class="tab" data-view="guide"></button>
   </div>
 
-  <div class="subbar" id="subbar" style="display:none">
-    <span class="subbar-label" id="fmt-label"></span>
-    <div class="fmt-toggle" id="fmt-toggle">
-      <button data-fmt="deck" class="active"></button>
-      <button data-fmt="scroll"></button>
-    </div>
-  </div>
 </header>
 
 <main>
@@ -325,6 +322,10 @@
 <div class="modal" id="modal">
   <div class="modal-wrap">
     <span class="modal-name" id="modal-name"></span>
+    <div class="modal-fmt" id="modal-fmt" style="display:none">
+      <button data-mfmt="deck" class="active"></button>
+      <button data-mfmt="scroll"></button>
+    </div>
     <button class="modal-copy" id="modal-copy"></button>
     <button class="modal-close" id="modal-close">×</button>
     <div class="modal-inner">
@@ -1141,7 +1142,7 @@ const SC_CSS = `
 let lang = localStorage.getItem('htmlppt.lang') || (navigator.language && navigator.language.startsWith('zh') ? 'zh' : 'en');
 let view = 'themes';
 let q = '';
-let deckFormat = 'deck';   // 'deck'(横版演示) | 'scroll'(纵向网页) —— 皮肤/模板 tab 的输出格式
+let deckFormat = 'deck';   // themeDemo 的默认格式回退(横/纵切换已移进放大预览 modal)
 let localTaste = {themes: [], decks: []};
 
 function T(){ return I18N[lang]; }
@@ -1968,13 +1969,6 @@ function applyStaticI18n(){
     b.textContent = b.dataset.size==='s' ? t.sizeS : b.dataset.size==='m' ? t.sizeM : t.sizeL;
   });
 
-  // format toggle labels(横版演示 / 纵向网页)
-  document.getElementById('fmt-label').textContent = t.fmtLabel;
-  document.querySelectorAll('.fmt-toggle button').forEach(b=>{
-    b.textContent = b.dataset.fmt==='deck' ? t.fmtDeck : t.fmtScroll;
-    b.classList.toggle('active', b.dataset.fmt === deckFormat);
-  });
-
   // tabs
   document.querySelectorAll('.tab').forEach(b=>{
     b.textContent = b.dataset.view==='themes' ? t.tabThemes
@@ -2046,20 +2040,21 @@ function render(){
   filtered.forEach(it=>{
     const card = document.createElement('div');
     card.className = 'card';
-    let promptText, modalSrc, modalLabel;
+    let promptText, modalLabel, fmtCtx;
 
     if(view==='themes'){
       const [name] = it;
       const label = themeLabel(it);
       const desc  = themeDesc(it);
-      promptText = t.promptTheme(name, label, deckFormat);
-      modalSrc   = {srcdoc: themeDemo(name, label, null, deckFormat)};
+      // 横/纵两种格式由 modal 切换; grid 缩略图固定横版
+      fmtCtx = { render:(f)=>({ src:{srcdoc: themeDemo(name, label, null, f)}, prompt: t.promptTheme(name, label, f) }) };
+      promptText = t.promptTheme(name, label, 'deck');
       modalLabel = `${label} · ${name}`;
       card.innerHTML = `
         <button class="copy-btn" type="button">${t.copyPrompt}</button>
         <span class="zoom-hint">${t.zoomHint}</span>
         <div class="preview">
-          <iframe srcdoc='${themeDemo(name,label,null,deckFormat).replace(/'/g,"&apos;")}' loading="lazy"></iframe>
+          <iframe srcdoc='${themeDemo(name,label,null,'deck').replace(/'/g,"&apos;")}' loading="lazy"></iframe>
         </div>
         <div class="meta">
           <p class="name">${label}</p>
@@ -2074,29 +2069,27 @@ function render(){
       const deckDir = it[7] || name;     // 第8字段: 实际目录名(缺省=id)
       const themeKey= it[8] || '';       // 第9字段: URL ?theme= 参数值
 
-      // Guizang decks 用专用 prompt; 普通 deck 用 promptDeck
-      if(author && themeKey && t.promptGuizang){
-        promptText = t.promptGuizang(name, label, deckDir, themeKey, deckFormat);
-      }else{
-        promptText = t.promptDeck(name, label, deckFormat);
-      }
-
-      // iframe src: 带 theme 参数的指向实际目录
-      const iframeParams = new URLSearchParams();
-      iframeParams.set('lang', lang);
-      if(themeKey) iframeParams.set('theme', themeKey);
-      const scroll = deckFormat === 'scroll';   // 纵向网页 → 模板预览竖向堆叠
-      if(scroll) iframeParams.set('scroll', '1');
-      const iframeSrc = `full-decks/${deckDir}/index.html?${iframeParams}`;
-
-      modalSrc   = {src: iframeSrc};
+      // 按格式生成 iframe src + prompt(modal 切换时复用)
+      fmtCtx = { render:(f)=>{
+        const params = new URLSearchParams();
+        params.set('lang', lang);
+        if(themeKey) params.set('theme', themeKey);
+        if(f==='scroll') params.set('scroll', '1');
+        const url = `full-decks/${deckDir}/index.html?${params}`;
+        const prompt = (author && themeKey && t.promptGuizang)
+          ? t.promptGuizang(name, label, deckDir, themeKey, f)
+          : t.promptDeck(name, label, f);
+        return { src:{src:url}, prompt };
+      } };
+      const deckR = fmtCtx.render('deck');   // grid 缩略图固定横版
+      promptText = deckR.prompt;
       modalLabel = `${label} · ${name}`;
       card.innerHTML = `
         <button class="copy-btn" type="button">${t.copyPrompt}</button>
         <span class="zoom-hint">${t.zoomHint}</span>
-        <div class="preview${scroll ? ' portrait' : ''}">
+        <div class="preview">
           <span class="badge ${kind}">${kind}</span>
-          <iframe src="${iframeSrc}" loading="lazy"></iframe>
+          <iframe src="${deckR.src.src}" loading="lazy"></iframe>
         </div>
         <div class="meta">
           <p class="name">${label}</p>
@@ -2107,7 +2100,7 @@ function render(){
         </div>`;
     }
 
-    card.addEventListener('click',()=>openModal(modalSrc, modalLabel, promptText));
+    card.addEventListener('click',()=>openModal(null, modalLabel, promptText, fmtCtx));
 
     const copyBtn = card.querySelector('.copy-btn');
     copyBtn.addEventListener('click', async (e)=>{
@@ -2212,8 +2205,6 @@ document.querySelectorAll('.tab').forEach(btn=>{
     view = btn.dataset.view;
     const ctrls = document.querySelector('.controls');
     ctrls.style.visibility = view==='guide' ? 'hidden' : 'visible';
-    // 格式子栏只在 皮肤/模板 tab 显示
-    document.getElementById('subbar').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
     render();
   });
 });
@@ -2223,15 +2214,6 @@ document.querySelectorAll('.size-toggle button').forEach(btn=>{
     document.querySelectorAll('.size-toggle button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     grid.className = 'grid size-'+btn.dataset.size;
-  });
-});
-
-document.querySelectorAll('.fmt-toggle button').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    if(btn.classList.contains('active')) return;
-    deckFormat = btn.dataset.fmt;
-    document.querySelectorAll('.fmt-toggle button').forEach(b=>b.classList.toggle('active', b.dataset.fmt===deckFormat));
-    render();
   });
 });
 
@@ -2256,25 +2238,52 @@ const modalIframe = document.getElementById('modal-iframe');
 const modalName = document.getElementById('modal-name');
 const modalCopy = document.getElementById('modal-copy');
 let modalPrompt = '';
-function openModal(src, name, prompt){
+let modalFmtCtx = null;   // {render:(fmt)=>({src, prompt})} —— 仅皮肤/模板可切横纵
+const modalFmtBox = document.getElementById('modal-fmt');
+
+function applyModalSrc(src){
   modalIframe.removeAttribute('srcdoc');
   modalIframe.removeAttribute('src');
-  if(src && typeof src === 'object' && 'srcdoc' in src){
-    modalIframe.srcdoc = src.srcdoc;
-  }else if(src && typeof src === 'object' && 'src' in src){
-    modalIframe.src = src.src;
-  }else if(typeof src === 'string'){
-    modalIframe.src = src;
-  }
-  modalName.textContent = name;
+  if(src && typeof src === 'object' && 'srcdoc' in src){ modalIframe.srcdoc = src.srcdoc; }
+  else if(src && typeof src === 'object' && 'src' in src){ modalIframe.src = src.src; }
+  else if(typeof src === 'string'){ modalIframe.src = src; }
+}
+function setModalPrompt(prompt){
   modalPrompt = prompt || '';
-  modalCopy.style.display = prompt ? 'inline-flex' : 'none';
+  modalCopy.style.display = modalPrompt ? 'inline-flex' : 'none';
   modalCopy.textContent = T().copyPrompt;
   modalCopy.classList.remove('ok');
+}
+function applyModalFmt(fmt){
+  modal.classList.toggle('scroll', fmt === 'scroll');
+  modalFmtBox.querySelectorAll('button').forEach(b=>b.classList.toggle('active', b.dataset.mfmt === fmt));
+  if(modalFmtCtx){
+    const r = modalFmtCtx.render(fmt);
+    applyModalSrc(r.src);
+    setModalPrompt(r.prompt);
+  }
+}
+function openModal(src, name, prompt, fmtCtx){
+  modalFmtCtx = fmtCtx || null;
+  modalName.textContent = name;
+  if(modalFmtCtx){
+    modalFmtBox.style.display = 'flex';
+    modalFmtBox.querySelectorAll('button').forEach(b=>{ b.textContent = b.dataset.mfmt==='deck' ? T().fmtDeck : T().fmtScroll; });
+    applyModalFmt('deck');   // 每次以横版打开
+  }else{
+    modalFmtBox.style.display = 'none';
+    modal.classList.remove('scroll');
+    applyModalSrc(src);
+    setModalPrompt(prompt);
+  }
   modal.classList.add('open');
 }
+modalFmtBox.querySelectorAll('button').forEach(btn=>{
+  btn.addEventListener('click', e=>{ e.stopPropagation(); applyModalFmt(btn.dataset.mfmt); });
+});
 function closeModal(){
   modal.classList.remove('open');
+  modal.classList.remove('scroll');
   modalIframe.removeAttribute('srcdoc');
   modalIframe.removeAttribute('src');
 }
@@ -2301,8 +2310,6 @@ modalCopy.addEventListener('click', async e => {
   // 注入海报 mock 样式(卡内预览复用同一份 SC_CSS)
   document.head.insertAdjacentHTML('beforeend', `<style id="sc-style">${SC_CSS}</style>`);
   applyStaticI18n();
-  // 初始 view 是 皮肤(themes) → 格式子栏可见
-  document.getElementById('subbar').style.display = (view==='themes' || view==='decks') ? 'flex' : 'none';
   await loadLocalTaste();
   render();
 })();
