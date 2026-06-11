@@ -1,6 +1,6 @@
 ---
 name: pakco-html
-description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
+description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "打开风格菜单", "打开 pakco-html", "打开html风格", "open the picker", "show me styles", "open pakco-html", "html风格菜单", "看看风格", "选风格". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
 ---
 
 # pakco.html
@@ -29,6 +29,17 @@ One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 - **FX runtime** (`assets/animations/fx-runtime.js`) — auto-inits `[data-fx]` on slide enter, cleans up on leave
 - **Showcase decks** for themes / layouts / animations / full-decks gallery
 - **Headless Chrome render script** for PNG export
+
+## Opening the style picker
+
+When the user asks to open/browse the style menu (e.g. "打开风格菜单", "打开 pakco-html", "打开html风格", "看看有什么风格", "open the picker"), start a local server and open the picker in a browser:
+
+```bash
+cd ~/.claude/skills/pakco-html && python3 -m http.server 8000 &
+# then open: http://localhost:8000/templates/style-picker.html
+```
+
+The picker shows 60+ live previews across 4 tabs (Skins / Templates / UI Taste / Social Cards). The user clicks a card to copy the prompt, then pastes it back to you.
 
 ## When to use
 
