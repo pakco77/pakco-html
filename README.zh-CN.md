@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-https://github.com/user-attachments/assets/c25315ea-9139-4870-9bd0-7022ce2d803c
+![三步，HTML 汇报从审美到成品](docs/readme/flow-zh.svg)
 
 **别再描述审美，直接选。**
 

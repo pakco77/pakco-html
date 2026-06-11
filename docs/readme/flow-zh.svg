@@ -1,0 +1,110 @@
+<svg viewBox="0 0 900 460" xmlns="http://www.w3.org/2000/svg" style="background:#0c0d12;border-radius:16px">
+  <defs>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+
+  <text x="450" y="36" text-anchor="middle" fill="#67e8f9" font-family="'JetBrains Mono','Menlo',monospace" font-size="13" font-weight="700" letter-spacing=".08em">PAKCO-HTML</text>
+  <text x="450" y="56" text-anchor="middle" fill="#6a7086" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="13" font-weight="500">解决 HTML 审美描述问题</text>
+  <text x="450" y="95" text-anchor="middle" fill="#fff" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="30" font-weight="800">三步，HTML 汇报从审美到成品</text>
+
+  <line x1="295" y1="262" x2="320" y2="262" stroke="#3a3d4a" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="318,257 328,262 318,267" fill="#3a3d4a"/>
+  <line x1="580" y1="262" x2="605" y2="262" stroke="#3a3d4a" stroke-width="2" stroke-dasharray="4,3"/>
+  <polygon points="603,257 613,262 603,267" fill="#3a3d4a"/>
+
+  <!-- Card 1 -->
+  <rect x="40" y="130" width="250" height="210" rx="10" fill="#1e1f2a"/>
+  <circle cx="68" cy="150" r="14" fill="url(#acc)"/>
+  <text x="68" y="155" text-anchor="middle" fill="#fff" font-family="'Inter',sans-serif" font-size="14" font-weight="800">1</text>
+  <text x="90" y="155" fill="#fff" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="15" font-weight="700">挑选风格</text>
+
+  <rect x="50" y="175" width="72" height="48" rx="4" fill="#2a1a3a"/>
+  <rect x="54" y="180" width="30" height="5" rx="2" fill="#a78bfa" opacity=".6"/>
+  <rect x="54" y="189" width="60" height="3" rx="1" fill="#444" opacity=".5"/>
+  <rect x="54" y="195" width="50" height="3" rx="1" fill="#444" opacity=".4"/>
+  <rect x="54" y="208" width="20" height="8" rx="3" fill="#a78bfa" opacity=".4"/>
+  <rect x="78" y="208" width="20" height="8" rx="3" fill="#555" opacity=".4"/>
+
+  <rect x="128" y="175" width="72" height="48" rx="4" fill="#1a2a1a"/>
+  <rect x="132" y="180" width="30" height="5" rx="2" fill="#67e8f9" opacity=".6"/>
+  <rect x="132" y="189" width="60" height="3" rx="1" fill="#444" opacity=".5"/>
+  <rect x="132" y="195" width="50" height="3" rx="1" fill="#444" opacity=".4"/>
+  <rect x="132" y="208" width="20" height="8" rx="3" fill="#67e8f9" opacity=".4"/>
+
+  <rect x="206" y="175" width="72" height="48" rx="4" fill="#2a2a1a"/>
+  <rect x="210" y="180" width="30" height="5" rx="2" fill="#f472b6" opacity=".6"/>
+  <rect x="210" y="189" width="60" height="3" rx="1" fill="#444" opacity=".5"/>
+  <rect x="210" y="195" width="50" height="3" rx="1" fill="#444" opacity=".4"/>
+
+  <rect x="50" y="229" width="72" height="48" rx="4" fill="#1a1a2a"/>
+  <rect x="54" y="234" width="30" height="5" rx="2" fill="#fb923c" opacity=".6"/>
+  <rect x="54" y="243" width="60" height="3" rx="1" fill="#444" opacity=".5"/>
+
+  <rect x="128" y="229" width="72" height="48" rx="4" fill="#2a1a2a" stroke="#67e8f9" stroke-width="2"/>
+  <rect x="132" y="234" width="30" height="5" rx="2" fill="#fff" opacity=".8"/>
+  <rect x="132" y="243" width="60" height="3" rx="1" fill="#888" opacity=".5"/>
+  <rect x="132" y="249" width="50" height="3" rx="1" fill="#888" opacity=".4"/>
+  <rect x="132" y="261" width="20" height="8" rx="3" fill="#67e8f9" opacity=".5"/>
+
+  <rect x="206" y="229" width="72" height="48" rx="4" fill="#1a2a2a"/>
+  <rect x="210" y="234" width="30" height="5" rx="2" fill="#34d399" opacity=".6"/>
+  <rect x="210" y="243" width="60" height="3" rx="1" fill="#444" opacity=".5"/>
+
+  <g transform="translate(185,268)">
+    <path d="M0,0 L0,16 L4.5,12 L8,19 L11,17.5 L7.5,11 L13,10 Z" fill="#fff" stroke="#0c0d12" stroke-width="1"/>
+  </g>
+
+  <text x="165" y="308" text-anchor="middle" fill="#8a90a4" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="11">浏览 60+ 真实预览</text>
+  <text x="165" y="324" text-anchor="middle" fill="#8a90a4" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="11">点击你喜欢的那个</text>
+
+  <!-- Card 2 -->
+  <rect x="325" y="130" width="250" height="210" rx="10" fill="#1e1f2a"/>
+  <circle cx="353" cy="150" r="14" fill="url(#acc)"/>
+  <text x="353" y="155" text-anchor="middle" fill="#fff" font-family="'Inter',sans-serif" font-size="14" font-weight="800">2</text>
+  <text x="375" y="155" fill="#fff" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="15" font-weight="700">复制 Prompt</text>
+
+  <rect x="340" y="175" width="220" height="120" rx="6" fill="#13141a" stroke="#2a2d3a" stroke-width="1"/>
+  <circle cx="354" cy="187" r="4" fill="#ff5f56"/>
+  <circle cx="366" cy="187" r="4" fill="#ffbd2e"/>
+  <circle cx="378" cy="187" r="4" fill="#27c93f"/>
+  <text x="350" y="210" fill="#67e8f9" font-family="'JetBrains Mono','Menlo',monospace" font-size="9" opacity=".8">--skill "pakco-html"</text>
+  <text x="350" y="226" fill="#888" font-family="'JetBrains Mono','Menlo',monospace" font-size="9" opacity=".6"># 使用白底杂志风模板</text>
+  <text x="350" y="242" fill="#34d399" font-family="'JetBrains Mono','Menlo',monospace" font-size="9" opacity=".8">--look "xhs-editorial"</text>
+  <text x="350" y="258" fill="#f472b6" font-family="'JetBrains Mono','Menlo',monospace" font-size="9" opacity=".8">--format "deck"</text>
+  <text x="350" y="274" fill="#888" font-family="'JetBrains Mono','Menlo',monospace" font-size="9" opacity=".6">[粘贴你的内容大纲]</text>
+
+  <rect x="360" y="302" width="120" height="24" rx="12" fill="#1aaf6c"/>
+  <text x="420" y="318" text-anchor="middle" fill="#fff" font-family="'PingFang SC',sans-serif" font-size="11" font-weight="600">✓ 已复制到剪贴板</text>
+
+  <!-- Card 3 -->
+  <rect x="610" y="130" width="250" height="210" rx="10" fill="#1e1f2a"/>
+  <circle cx="638" cy="150" r="14" fill="url(#acc)"/>
+  <text x="638" y="155" text-anchor="middle" fill="#fff" font-family="'Inter',sans-serif" font-size="14" font-weight="800">3</text>
+  <text x="660" y="155" fill="#fff" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="15" font-weight="700">粘给 Agent，生成</text>
+
+  <rect x="625" y="175" width="220" height="138" rx="6" fill="#fff"/>
+  <rect x="758" y="177" width="80" height="14" rx="3" fill="#f0f0f0"/>
+  <text x="798" y="187" text-anchor="middle" fill="#999" font-family="monospace" font-size="7">index.html</text>
+  <rect x="635" y="182" width="80" height="6" rx="2" fill="#a78bfa" opacity=".3"/>
+  <text x="635" y="210" fill="#1a1a1a" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="16" font-weight="800">以后最贵的工作，</text>
+  <text x="635" y="232" fill="#1a1a1a" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="16" font-weight="800">是 <tspan fill="#a78bfa">测试</tspan> + <tspan fill="#34d399">安全</tspan></text>
+  <rect x="635" y="245" width="140" height="4" rx="1" fill="#ddd"/>
+  <rect x="635" y="253" width="120" height="4" rx="1" fill="#ddd"/>
+  <rect x="635" y="265" width="55" height="16" rx="4" fill="#1a1a1a"/>
+  <text x="662" y="277" text-anchor="middle" fill="#fff" font-family="'PingFang SC',sans-serif" font-size="8">做对</text>
+  <rect x="695" y="265" width="55" height="16" rx="4" fill="#1a1a1a"/>
+  <text x="722" y="277" text-anchor="middle" fill="#fff" font-family="'PingFang SC',sans-serif" font-size="8">没风险</text>
+  <rect x="635" y="290" width="200" height="16" rx="4" fill="#f8f4f0"/>
+  <text x="645" y="302" fill="#666" font-family="'PingFang SC',sans-serif" font-size="8">未来最值钱的，不是生产…</text>
+
+  <text x="735" y="328" text-anchor="middle" fill="#8a90a4" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="11">Agent 按你选的风格生成</text>
+  <text x="735" y="344" text-anchor="middle" fill="#8a90a4" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="11">纯 HTML，浏览器直接打开</text>
+
+  <text x="450" y="395" text-anchor="middle" fill="#fff" font-family="'PingFang SC','Noto Sans SC',sans-serif" font-size="20" font-weight="700">别再描述审美，直接选。</text>
+  <text x="450" y="420" text-anchor="middle" fill="#6a7086" font-family="'Inter','PingFang SC',sans-serif" font-size="12" font-weight="500">支持 网页 / PPT 双模式 · Claude Code · Codex · Hermes · 任何 AgentSkill 环境</text>
+
+  <text x="450" y="448" text-anchor="middle" fill="#3a3d4a" font-family="'JetBrains Mono','Menlo',monospace" font-size="11" font-weight="600">pakco-html · Visual taste menu</text>
+</svg>

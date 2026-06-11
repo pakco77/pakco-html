@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-https://github.com/user-attachments/assets/6d212448-62f3-4dfd-9a3d-efb0010d566f
+![Three steps, from taste to finished deck](docs/readme/flow-en.svg)
 
 **Stop describing taste. Pick it.**
 
