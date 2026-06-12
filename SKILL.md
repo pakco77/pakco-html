@@ -1,6 +1,6 @@
 ---
 name: pakco-html
-description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "打开风格菜单", "打开 pakco-html", "打开html风格", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
+description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
 ---
 
 # pakco.html
@@ -32,7 +32,7 @@ One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 
 ## Opening the style picker
 
-When the user asks to open/browse the style menu (e.g. "打开风格菜单", "打开 pakco-html", "打开html风格", "看看有什么风格", "open the picker"), start a local server and open the picker in a browser:
+When the user asks to open/browse the style menu (e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "看看有什么风格", "open the picker"), start a local server and open the picker in a browser:
 
 ```bash
 cd ~/.claude/skills/pakco-html && python3 -m http.server 8000 &
