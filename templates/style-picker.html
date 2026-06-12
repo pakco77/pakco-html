@@ -1900,14 +1900,18 @@ function renderDeckStudio(){
   const ifr = stage.querySelector('iframe');
   const isPortrait = dsFmt === 'scroll';
   const ifrW = isPortrait ? 600 : 1280;
-  const ifrH = isPortrait ? 800 : 800;
+  const ifrH = 800;
   ifr.style.width = ifrW + 'px';
   ifr.style.height = ifrH + 'px';
-  stage.style.aspectRatio = ifrW + '/' + ifrH;
+  stage.style.aspectRatio = '1280/800';
+  stage.style.background = isPortrait ? '#0c0d12' : '#fff';
   function fitStage(){
-    const sw = stage.clientWidth;
-    if(!sw) return;
-    ifr.style.transform = 'scale(' + (sw / ifrW) + ')';
+    const sw = stage.clientWidth, sh = stage.clientHeight;
+    if(!sw || !sh) return;
+    const sc = Math.min(sw / ifrW, sh / ifrH);
+    ifr.style.transform = 'scale(' + sc + ')';
+    ifr.style.left = Math.max(0, (sw - ifrW * sc) / 2) + 'px';
+    ifr.style.top  = Math.max(0, (sh - ifrH * sc) / 2) + 'px';
   }
   fitStage();
   if(dsRO) dsRO.disconnect();
