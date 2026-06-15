@@ -1,6 +1,6 @@
 ---
 name: pakco-html
-description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation".
+description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation". Also triggers on update requests: "更新 pakco-html", "update pakco-html", "升级 pakco-html", "拉最新版".
 ---
 
 # pakco.html
@@ -103,6 +103,22 @@ A good opening message looks like:
 > 3. 要不要用我现成的 `tech-sharing` 全 deck 模板打底？
 
 Only after those are clear, scaffold the deck and start writing.
+
+## Update (更新)
+
+When the user says "更新 pakco-html", "update pakco-html", "升级", or "拉最新版", run:
+
+```bash
+cd ~/.claude/skills/pakco-html && git pull --rebase origin main
+```
+
+Or use the update script:
+
+```bash
+~/.claude/skills/pakco-html/scripts/update.sh
+```
+
+All existing decks that reference `assets/` via relative paths will automatically get the latest features (themes, layouts, mobile support, bug fixes) — no HTML changes needed.
 
 ## Quick start
 
