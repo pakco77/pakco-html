@@ -109,13 +109,13 @@ Only after those are clear, scaffold the deck and start writing.
 When the user says "更新 pakco-html", "update pakco-html", "升级", or "拉最新版", run:
 
 ```bash
-cd ~/.claude/skills/pakco-html && git pull --rebase origin main
+bash ~/.claude/skills/html-ppt/scripts/update.sh
 ```
 
-Or use the update script:
+If `scripts/update.sh` doesn't exist yet (old install), run the equivalent inline:
 
 ```bash
-~/.claude/skills/pakco-html/scripts/update.sh
+TMP=$(mktemp -d) && git clone --depth 1 https://github.com/pakco77/pakco-html.git "$TMP/r" 2>/dev/null && cp -r "$TMP/r/assets" "$TMP/r/templates" "$TMP/r/references" "$TMP/r/scripts" ~/.claude/skills/html-ppt/ && cp "$TMP/r/SKILL.md" ~/.claude/skills/html-ppt/ && rm -rf "$TMP" && echo "✅ 更新完成"
 ```
 
 All existing decks that reference `assets/` via relative paths will automatically get the latest features (themes, layouts, mobile support, bug fixes) — no HTML changes needed.
