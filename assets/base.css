@@ -177,47 +177,73 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
 }
 
 /* ================= WEBPAGE MODE (网页形态) ================= */
-/* body.webpage 把 deck 系统替换为自然流动的网页布局，
-   内容上下滚动、无分页边界、根据浏览器宽度自适应。
+/* body.webpage 把 deck 系统替换为自然流动的网页布局。
+   自动适应 4 种屏幕：手机 ≤768 / 平板 769-1024 / 1K 1025-1440 / 2K+ 1441+
    用法：<body class="webpage"> — 不需要 .deck/.slide，不需要 runtime.js */
 
 body.webpage{height:auto;overflow:auto}
-.webpage .page{max-width:min(720px,100vw - 40px);margin:0 auto;padding:60px 20px}
-.webpage section{margin-bottom:48px}
+.webpage .page{width:90%;max-width:1200px;margin:0 auto;padding:60px 0}
+.webpage section{margin-bottom:56px}
 .webpage section:last-child{margin-bottom:0}
 
-/* 网页版 hero 区域 */
-.webpage .hero{padding:80px 0 48px;text-align:center}
-.webpage .hero .h1{font-size:48px;margin-bottom:16px}
-.webpage .hero .lede{margin:0 auto;max-width:48ch}
+/* 网页版 hero */
+.webpage .hero{padding:80px 0 56px;text-align:center}
+.webpage .hero .h1{font-size:56px;margin-bottom:16px}
+.webpage .hero .lede{margin:0 auto;max-width:56ch}
 
 /* 网页版分隔线 */
-.webpage .section-break{height:1px;background:var(--border);margin:48px 0}
+.webpage .section-break{height:1px;background:var(--border);margin:56px 0}
 
 /* 网页版 stat 大数字 */
-.webpage .stat-block{text-align:center;padding:40px 0}
-.webpage .stat-block .big-num{font-size:80px;font-weight:900;line-height:1;margin-bottom:8px}
+.webpage .stat-block{text-align:center;padding:48px 0}
+.webpage .stat-block .big-num{font-size:96px;font-weight:900;line-height:1;margin-bottom:8px}
 
 /* 网页版 footer */
-.webpage .page-footer{margin-top:64px;padding:32px 0;border-top:1px solid var(--border);
+.webpage .page-footer{margin-top:72px;padding:32px 0;border-top:1px solid var(--border);
   text-align:center;color:var(--text-3);font-size:13px}
 
-/* 网页版 tablet 断点 */
+/* --- 2K+ (≥1441px): 宽屏大桌面 --- */
+@media (min-width: 1441px) {
+  .webpage .page{max-width:1400px}
+  .webpage .hero .h1{font-size:64px}
+  .webpage .hero .lede{font-size:24px;max-width:64ch}
+  .webpage .stat-block .big-num{font-size:120px}
+  .webpage .g2{grid-template-columns:repeat(2,1fr)}
+  .webpage .g3{grid-template-columns:repeat(3,1fr)}
+  .webpage .g4{grid-template-columns:repeat(4,1fr)}
+}
+
+/* --- 1K (1025–1440px): 标准桌面 --- */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .webpage .page{max-width:1080px}
+  .webpage .g2{grid-template-columns:repeat(2,1fr)}
+  .webpage .g3{grid-template-columns:repeat(3,1fr)}
+  .webpage .g4{grid-template-columns:repeat(3,1fr)}
+}
+
+/* --- 平板 (769–1024px) --- */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .webpage .page{max-width:640px}
+  .webpage .page{max-width:680px}
+  .webpage .hero .h1{font-size:42px}
+  .webpage .hero .lede{font-size:18px}
+  .webpage .g2{grid-template-columns:repeat(2,1fr)}
   .webpage .g3{grid-template-columns:repeat(2,1fr)}
   .webpage .g4{grid-template-columns:repeat(2,1fr)}
+  .webpage .stat-block .big-num{font-size:72px}
 }
-/* 网页版 mobile */
+
+/* --- 手机 (≤768px) --- */
 @media (max-width: 768px) {
-  .webpage .page{padding:32px 16px}
-  .webpage .hero{padding:48px 0 32px}
+  .webpage .page{width:100%;padding:32px 16px}
+  .webpage .hero{padding:40px 0 28px}
   .webpage .hero .h1{font-size:28px}
-  .webpage .hero .lede{font-size:15px}
-  .webpage section{margin-bottom:32px}
-  .webpage .section-break{margin:32px 0}
+  .webpage .hero .lede{font-size:15px;max-width:none}
+  .webpage section{margin-bottom:28px}
+  .webpage .section-break{margin:28px 0}
+  .webpage .stat-block{padding:28px 0}
   .webpage .stat-block .big-num{font-size:48px}
-  .webpage .page-footer{margin-top:40px;padding:24px 0}
+  .webpage .g2,.webpage .g3,.webpage .g4{grid-template-columns:1fr}
+  .webpage .page-footer{margin-top:36px;padding:20px 0}
 }
 
 /* ================= PRINT ================= */
