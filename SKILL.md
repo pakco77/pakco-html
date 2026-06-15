@@ -1,6 +1,6 @@
 ---
 name: pakco-html
-description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation". Also triggers on update requests: "更新 pakco-html", "update pakco-html", "升级 pakco-html", "拉最新版".
+description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation". Also triggers on update requests: "更新 pakco-html", "update pakco-html", "升级 pakco-html", "拉最新版". Also triggers on webpage requests: "做个网页", "生成网页", "网页版", "网页形态", "长页面", "上下滑的", "webpage", "web page", "scrollable page".
 ---
 
 # pakco.html
@@ -71,6 +71,38 @@ Only `presenter-mode-reveal` is designed from the ground up around the feature w
 
 Keyboard in presenter window: `← →` navigate (syncs audience) · `R` reset timer · `Esc` close popup.
 Keyboard in audience window: `S` open presenter · `T` cycle theme · `← →` navigate (syncs presenter) · `F` fullscreen · `O` overview.
+
+### 📱 网页模式（Webpage Mode）
+
+If the user says any of: **网页 / 网页版 / 网页形态 / 做个网页 / 生成网页 / web page / webpage / 长页面 / 上下滑 / 手机看的 / 发链接给别人看**, or the content is meant for **阅读、传播、存档** rather than live presentation — **use the webpage template** instead of a deck.
+
+Webpage mode produces a vertically scrolling HTML page with no slide boundaries. Key differences from deck:
+
+| | Deck | Webpage |
+|---|---|---|
+| 交互 | 键盘/手势翻页 | 浏览器原生滚动 |
+| 布局 | 全屏 16:9 slide | 720px 居中自适应 |
+| JS | 需要 runtime.js | 不需要 |
+| body class | (none) | `webpage` |
+| 结构 | `.deck > .slide` | `.page > section` |
+| 适合 | 演讲、分享会、Keynote | 阅读、传播、发链接 |
+
+**How to scaffold:**
+```html
+<body class="webpage">
+<div class="page">
+  <section class="hero">...</section>
+  <div class="section-break"></div>
+  <section>...</section>
+  ...
+  <div class="page-footer">...</div>
+</div>
+</body>
+```
+
+Starter template: `templates/webpage.html`. Copy it to start a new webpage.
+All design tokens (themes, `.card`, `.grid`, `.pill`, `.gradient-text`, etc.) work in both modes.
+Do NOT include `runtime.js` in webpage mode — it's not needed.
 
 ## Before you author anything — ALWAYS ask or recommend
 
@@ -207,6 +239,7 @@ pakco-html/
 │       └── fx/*.js          (20 canvas FX modules: particles/graph/fireworks…)
 ├── templates/
 │   ├── deck.html                  (minimal 6-slide starter)
+│   ├── webpage.html               (webpage mode starter — vertical scroll, no slides)
 │   ├── theme-showcase.html        (36 slides, iframe-isolated per theme)
 │   ├── layout-showcase.html       (iframe tour of all 31 layouts)
 │   ├── animation-showcase.html    (20 FX + 27 CSS animation slides)

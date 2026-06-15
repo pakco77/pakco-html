@@ -176,6 +176,50 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
   .slide [style*="font-size:220px"],.slide [style*="font-size: 220px"]{font-size:72px!important}
 }
 
+/* ================= WEBPAGE MODE (网页形态) ================= */
+/* body.webpage 把 deck 系统替换为自然流动的网页布局，
+   内容上下滚动、无分页边界、根据浏览器宽度自适应。
+   用法：<body class="webpage"> — 不需要 .deck/.slide，不需要 runtime.js */
+
+body.webpage{height:auto;overflow:auto}
+.webpage .page{max-width:min(720px,100vw - 40px);margin:0 auto;padding:60px 20px}
+.webpage section{margin-bottom:48px}
+.webpage section:last-child{margin-bottom:0}
+
+/* 网页版 hero 区域 */
+.webpage .hero{padding:80px 0 48px;text-align:center}
+.webpage .hero .h1{font-size:48px;margin-bottom:16px}
+.webpage .hero .lede{margin:0 auto;max-width:48ch}
+
+/* 网页版分隔线 */
+.webpage .section-break{height:1px;background:var(--border);margin:48px 0}
+
+/* 网页版 stat 大数字 */
+.webpage .stat-block{text-align:center;padding:40px 0}
+.webpage .stat-block .big-num{font-size:80px;font-weight:900;line-height:1;margin-bottom:8px}
+
+/* 网页版 footer */
+.webpage .page-footer{margin-top:64px;padding:32px 0;border-top:1px solid var(--border);
+  text-align:center;color:var(--text-3);font-size:13px}
+
+/* 网页版 tablet 断点 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .webpage .page{max-width:640px}
+  .webpage .g3{grid-template-columns:repeat(2,1fr)}
+  .webpage .g4{grid-template-columns:repeat(2,1fr)}
+}
+/* 网页版 mobile */
+@media (max-width: 768px) {
+  .webpage .page{padding:32px 16px}
+  .webpage .hero{padding:48px 0 32px}
+  .webpage .hero .h1{font-size:28px}
+  .webpage .hero .lede{font-size:15px}
+  .webpage section{margin-bottom:32px}
+  .webpage .section-break{margin:32px 0}
+  .webpage .stat-block .big-num{font-size:48px}
+  .webpage .page-footer{margin-top:40px;padding:24px 0}
+}
+
 /* ================= PRINT ================= */
 @media print{
   .slide{position:relative;opacity:1!important;transform:none!important;page-break-after:always;height:100vh}
