@@ -143,6 +143,39 @@ h4,.h4{font-size:22px;line-height:1.3;font-weight:600;margin:0 0 8px}
 .tr{text-align:right}.tc{text-align:center}.tl{text-align:left}
 .uppercase{text-transform:uppercase;letter-spacing:.12em}
 
+/* ================= MOBILE (竖版适配) ================= */
+@media (max-width: 768px) {
+  .slide{padding:32px 20px}
+  h1.title,.h1{font-size:32px;line-height:1.15;margin:0 0 12px}
+  h2.title,.h2{font-size:26px;line-height:1.15;margin:0 0 10px}
+  h3,.h3{font-size:20px;margin:0 0 8px}
+  h4,.h4{font-size:16px;margin:0 0 6px}
+  .kicker{font-size:12px}
+  .eyebrow{font-size:11px}
+  .lede{font-size:16px;line-height:1.5}
+  .grid{gap:14px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .card{padding:18px 16px;border-radius:var(--radius-sm)}
+  .row{gap:12px;flex-wrap:wrap}
+  .mt-l{margin-top:20px}
+  .mb-l{margin-bottom:20px}
+  .pill{font-size:11px;padding:3px 10px}
+  .deck-header,.deck-footer{left:20px;right:20px;font-size:10px}
+  .deck-header{top:14px}
+  .deck-footer{bottom:14px}
+
+  /* scroll 模式下 slide 不强制全屏高度 */
+  [data-scroll="1"] .slide{min-height:auto!important;padding:28px 18px}
+
+  /* overview grid 缩为 2 列 */
+  .overview.open{grid-template-columns:repeat(2,1fr);gap:12px;padding:20px}
+
+  /* 大数字/大标题内联样式溢出保护 */
+  .counter{font-size:inherit}
+  .slide .h1[style*="font-size"],.slide h1[style*="font-size"]{font-size:56px!important}
+  .slide [style*="font-size:220px"],.slide [style*="font-size: 220px"]{font-size:72px!important}
+}
+
 /* ================= PRINT ================= */
 @media print{
   .slide{position:relative;opacity:1!important;transform:none!important;page-break-after:always;height:100vh}

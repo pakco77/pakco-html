@@ -1116,6 +1116,35 @@
       }
     });
 
+    /* ===== Touch swipe navigation (手机滑动翻页) ===== */
+    let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+    deck.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+    }, { passive: true });
+    deck.addEventListener('touchend', function (e) {
+      if (e.changedTouches.length !== 1) return;
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      const dy = e.changedTouches[0].clientY - touchStartY;
+      const dt = Date.now() - touchStartTime;
+      // 水平滑动距离 > 50px，且水平位移大于垂直位移，且 < 400ms
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2 && dt < 400) {
+        if (dx < 0) go(idx + 1); // 左滑 → 下一页
+        else go(idx - 1);        // 右滑 → 上一页
+      }
+    }, { passive: true });
+    // tap 右半屏 → 下一页，tap 左半屏 → 上一页
+    deck.addEventListener('click', function (e) {
+      if (e.target.closest('a,button,.card,[data-anim-target],.overview,.notes-overlay')) return;
+      const x = e.clientX / window.innerWidth;
+      if (window.innerWidth <= 768) {
+        if (x > 0.65) go(idx + 1);
+        else if (x < 0.35) go(idx - 1);
+      }
+    });
+
     // hash deep-link
     function fromHash(){
       const m = /^#\/(\d+)/.exec(location.hash||'');
