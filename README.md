@@ -12,6 +12,29 @@ A local-first visual menu for AI agents — browse 60+ real previews, click a ca
 
 ## ▶ Quick start
 
+### Codex
+
+In Codex, ask:
+
+```text
+Install this skill from GitHub: https://github.com/pakco77/pakco-html
+Use the repo root as the skill path and install it as pakco-html.
+```
+
+Or install from a terminal:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-codex.sh | bash
+
+# serve for live iframe previews
+cd ~/.codex/skills/pakco-html && python3 -m http.server 8000
+# visit: http://localhost:8000/templates/style-picker.html
+```
+
+Restart Codex after installation so it reloads the skill list.
+
+### Claude Code / AgentSkill CLI
+
 ```bash
 npx skills add https://github.com/pakco77/pakco-html
 

@@ -12,6 +12,29 @@
 
 ## ▶ 快速开始
 
+### Codex
+
+在 Codex 里直接说：
+
+```text
+帮我从 GitHub 安装这个 skill：https://github.com/pakco77/pakco-html
+使用仓库根目录作为 skill 路径，安装名用 pakco-html。
+```
+
+或者在终端安装：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-codex.sh | bash
+
+# 起本地服务器，加载 iframe 实时预览
+cd ~/.codex/skills/pakco-html && python3 -m http.server 8000
+# 访问：http://localhost:8000/templates/style-picker.html
+```
+
+安装后重启 Codex，让它重新加载技能列表。
+
+### Claude Code / AgentSkill CLI
+
 ```bash
 npx skills add https://github.com/pakco77/pakco-html
 
