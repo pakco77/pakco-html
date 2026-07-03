@@ -24,7 +24,7 @@ Use the repo root as the skill path and install it as pakco-html.
 Terminal fallback:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-codex.sh | bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-codex.sh | bash
 ```
 
 Restart Codex after installation so it reloads `~/.codex/skills/pakco-html`.
@@ -48,8 +48,8 @@ npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
 For any agent that reads a local `SKILL.md` folder, use the generic installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- workbuddy
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
 ```
 
 No build. Pure static HTML/CSS/JS with only CDN webfonts.

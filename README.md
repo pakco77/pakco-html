@@ -24,7 +24,7 @@ Use the repo root as the skill path and install it as pakco-html.
 Or install from a terminal:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-codex.sh | bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-codex.sh | bash
 
 # serve for live iframe previews
 cd ~/.codex/skills/pakco-html && python3 -m http.server 8000
@@ -56,8 +56,8 @@ npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
 For agents that read a local `SKILL.md` directory but are not in the CLI list, use the generic installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- workbuddy
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
 ```
 
 Known generic targets include `codex`, `claude`, `kimi`, `qwen`, `gemini`, `kiro`, `cursor`, `hermes`, `codebuddy`, and `workbuddy`.

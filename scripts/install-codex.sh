@@ -10,4 +10,4 @@ if [ -n "$SCRIPT_DIR" ] && [ -x "$SCRIPT_DIR/install-agent.sh" ]; then
   exec "$SCRIPT_DIR/install-agent.sh" "$AGENT"
 fi
 
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- "$AGENT"
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- "$AGENT"
