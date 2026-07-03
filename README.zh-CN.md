@@ -43,6 +43,25 @@ cd ~/.claude/skills/pakco-html && python3 -m http.server 8000
 # 访问：http://localhost:8000/templates/style-picker.html
 ```
 
+### 其它 AgentSkill Agent
+
+`skills` CLI 已支持的 Agent，可以直接指定 agent：
+
+```bash
+npx skills add https://github.com/pakco77/pakco-html --agent kimi-code-cli
+npx skills add https://github.com/pakco77/pakco-html --agent qwen-code
+npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
+```
+
+如果某个 Agent 读取本地 `SKILL.md` 目录，但不在 CLI 支持列表里，用通用安装脚本：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- workbuddy
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
+```
+
+通用脚本内置 `codex`、`claude`、`kimi`、`qwen`、`gemini`、`kiro`、`cursor`、`hermes`、`codebuddy`、`workbuddy`。
+
 点卡片 → Prompt 已复制 → 粘给 Agent → 完事。
 
 ## 📦 内容一览

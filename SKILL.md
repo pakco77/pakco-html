@@ -35,6 +35,23 @@ Restart Codex after installation so it reloads `~/.codex/skills/pakco-html`.
 npx skills add https://github.com/pakco77/pakco-html
 ```
 
+### Other AgentSkill agents
+
+For supported agents, use the `skills` CLI agent target:
+
+```bash
+npx skills add https://github.com/pakco77/pakco-html --agent kimi-code-cli
+npx skills add https://github.com/pakco77/pakco-html --agent qwen-code
+npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
+```
+
+For any agent that reads a local `SKILL.md` folder, use the generic installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- workbuddy
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
+```
+
 No build. Pure static HTML/CSS/JS with only CDN webfonts.
 
 ## What the skill gives you
