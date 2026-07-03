@@ -1,6 +1,6 @@
 ---
 name: pakco-html
-description: HTML PPT Studio — author professional static HTML presentations in many styles, layouts, and animations, all driven by templates. Use when the user asks for a presentation, PPT, slides, keynote, deck, slideshow, "幻灯片", "演讲稿", "做一份 PPT", "做一份 slides", a reveal-style HTML deck, a 小红书 图文, or any kind of multi-slide pitch/report/sharing document that should look tasteful and be usable with keyboard navigation. Also triggers when the user asks to open/browse the style picker, e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "html来", "HTML来", "风格菜单", "浏览风格", "挑风格", "风格预览", "打开选择器", "html风格菜单", "看看风格", "选风格", "open the picker", "show me styles", "open pakco-html", "browse styles", "style picker", "style menu", "pick a style", "show styles". Triggers include keywords like "presentation", "ppt", "slides", "deck", "keynote", "reveal", "slideshow", "幻灯片", "演讲稿", "分享稿", "小红书图文", "talk slides", "pitch deck", "tech sharing", "technical presentation". Also triggers on update requests: "更新 pakco-html", "update pakco-html", "升级 pakco-html", "拉最新版". Also triggers on webpage requests: "做个网页", "生成网页", "网页版", "网页形态", "长页面", "上下滑的", "webpage", "web page", "scrollable page".
+description: "HTML PPT Studio for static decks, webpages, social cards, and the pakco-html visual style picker."
 ---
 
 # pakco.html
