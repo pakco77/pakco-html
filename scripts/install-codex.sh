@@ -3,10 +3,13 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR=""
+if [ "${BASH_SOURCE[0]+x}" = "x" ]; then
+  SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
 AGENT="${1:-codex}"
 
-if [ -x "$SCRIPT_DIR/install-agent.sh" ]; then
+if [ -n "$SCRIPT_DIR" ] && [ -x "$SCRIPT_DIR/install-agent.sh" ]; then
   exec "$SCRIPT_DIR/install-agent.sh" "$AGENT"
 fi
 
