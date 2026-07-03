@@ -43,6 +43,25 @@ cd ~/.claude/skills/pakco-html && python3 -m http.server 8000
 # visit: http://localhost:8000/templates/style-picker.html
 ```
 
+### Other AgentSkill agents
+
+For agents supported by the `skills` CLI, install to a specific agent:
+
+```bash
+npx skills add https://github.com/pakco77/pakco-html --agent kimi-code-cli
+npx skills add https://github.com/pakco77/pakco-html --agent qwen-code
+npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
+```
+
+For agents that read a local `SKILL.md` directory but are not in the CLI list, use the generic installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- workbuddy
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
+```
+
+Known generic targets include `codex`, `claude`, `kimi`, `qwen`, `gemini`, `kiro`, `cursor`, `hermes`, `codebuddy`, and `workbuddy`.
+
 Click any card → prompt copied → paste into your agent → done.
 
 ## 📦 What's inside
