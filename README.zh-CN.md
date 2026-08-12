@@ -8,7 +8,7 @@
 
 **别再描述审美，直接选。**
 
-本地优先的视觉菜单——浏览 60+ 种真实预览，点一张卡，拿到可执行 Prompt。粘给 Claude Code / Codex / Hermes，Agent 按你选的视觉约束生成 deck。
+本地优先的视觉菜单——浏览 60+ 种真实预览，点一张卡，拿到可执行 Prompt。粘给 Claude Code / Codex / Hermes / WorkBuddy / TRAE Work，Agent 按你选的视觉约束生成 deck。
 
 ## ▶ 快速开始
 
@@ -43,6 +43,30 @@ cd ~/.claude/skills/pakco-html && python3 -m http.server 8000
 # 访问：http://localhost:8000/templates/style-picker.html
 ```
 
+### WorkBuddy
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
+
+# 起本地服务器，加载 iframe 实时预览
+cd ~/.workbuddy/skills/pakco-html && python3 -m http.server 8000
+# 访问：http://localhost:8000/templates/style-picker.html
+```
+
+安装后重启 WorkBuddy，或刷新 Skill 列表。
+
+### TRAE Work / TRAE SOLO
+
+```bash
+# TRAE Work CN / TRAE SOLO CN
+npx skills add https://github.com/pakco77/pakco-html --agent trae-cn -g
+
+# 国际版
+npx skills add https://github.com/pakco77/pakco-html --agent trae -g
+```
+
+TRAE Work CN 的通用安装脚本目标是 `trae-work`。安装后重启 TRAE Work，或刷新 Skill 列表。
+
 ### 其它 AgentSkill Agent
 
 `skills` CLI 已支持的 Agent，可以直接指定 agent：
@@ -56,11 +80,10 @@ npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
 如果某个 Agent 读取本地 `SKILL.md` 目录，但不在 CLI 支持列表里，用通用安装脚本：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
 curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
 ```
 
-通用脚本内置 `codex`、`claude`、`kimi`、`qwen`、`gemini`、`kiro`、`cursor`、`hermes`、`codebuddy`、`workbuddy`。
+通用脚本内置 `codex`、`claude`、`kimi`、`qwen`、`gemini`、`kiro`、`cursor`、`hermes`、`codebuddy`、`workbuddy`、`trae`、`trae-cn`、`trae-work`。
 
 点卡片 → Prompt 已复制 → 粘给 Agent → 完事。
 
