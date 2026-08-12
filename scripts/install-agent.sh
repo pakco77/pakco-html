@@ -21,7 +21,10 @@ Agents:
   cursor       -> ~/.cursor/skills/pakco-html
   hermes       -> ~/.hermes/skills/pakco-html
   codebuddy    -> ~/.codebuddy/skills/pakco-html
-  workbuddy    -> ~/.workbuddy/skills-marketplace/skills/pakco-html
+  workbuddy    -> ~/.workbuddy/skills/pakco-html
+  trae         -> ~/.trae/skills/pakco-html
+  trae-cn      -> ~/.trae-cn/skills/pakco-html
+  trae-work    -> ~/.trae-cn/skills/pakco-html
 
 You can also pass an explicit target directory:
   scripts/install-agent.sh ~/.some-agent/skills/pakco-html
@@ -58,7 +61,13 @@ target_for() {
       printf '%s\n' "$HOME/.codebuddy/skills/$SKILL_NAME"
       ;;
     workbuddy)
-      printf '%s\n' "$HOME/.workbuddy/skills-marketplace/skills/$SKILL_NAME"
+      printf '%s\n' "$HOME/.workbuddy/skills/$SKILL_NAME"
+      ;;
+    trae)
+      printf '%s\n' "$HOME/.trae/skills/$SKILL_NAME"
+      ;;
+    trae-cn|trae-work)
+      printf '%s\n' "$HOME/.trae-cn/skills/$SKILL_NAME"
       ;;
     */*)
       printf '%s\n' "$1"

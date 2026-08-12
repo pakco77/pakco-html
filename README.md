@@ -8,7 +8,7 @@
 
 **Stop describing taste. Pick it.**
 
-A local-first visual menu for AI agents — browse 60+ real previews, click a card, get an executable prompt. Paste it into Claude Code / Codex / Hermes and the agent generates the deck following the visual constraints you picked.
+A local-first visual menu for AI agents — browse 60+ real previews, click a card, get an executable prompt. Paste it into Claude Code / Codex / Hermes / WorkBuddy / TRAE Work and the agent generates the deck following the visual constraints you picked.
 
 ## ▶ Quick start
 
@@ -43,6 +43,30 @@ cd ~/.claude/skills/pakco-html && python3 -m http.server 8000
 # visit: http://localhost:8000/templates/style-picker.html
 ```
 
+### WorkBuddy
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
+
+# serve for live iframe previews
+cd ~/.workbuddy/skills/pakco-html && python3 -m http.server 8000
+# visit: http://localhost:8000/templates/style-picker.html
+```
+
+Restart WorkBuddy or refresh Skills after installation.
+
+### TRAE Work / TRAE SOLO
+
+```bash
+# TRAE Work CN / TRAE SOLO CN
+npx skills add https://github.com/pakco77/pakco-html --agent trae-cn -g
+
+# International edition
+npx skills add https://github.com/pakco77/pakco-html --agent trae -g
+```
+
+The fallback installer target for TRAE Work CN is `trae-work`. Restart TRAE Work or refresh Skills after installation.
+
 ### Other AgentSkill agents
 
 For agents supported by the `skills` CLI, install to a specific agent:
@@ -56,11 +80,10 @@ npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
 For agents that read a local `SKILL.md` directory but are not in the CLI list, use the generic installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
 curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
 ```
 
-Known generic targets include `codex`, `claude`, `kimi`, `qwen`, `gemini`, `kiro`, `cursor`, `hermes`, `codebuddy`, and `workbuddy`.
+Known generic targets include `codex`, `claude`, `kimi`, `qwen`, `gemini`, `kiro`, `cursor`, `hermes`, `codebuddy`, `workbuddy`, `trae`, `trae-cn`, and `trae-work`.
 
 Click any card → prompt copied → paste into your agent → done.
 

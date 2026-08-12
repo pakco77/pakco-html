@@ -1,11 +1,11 @@
 ---
 name: pakco-html
-description: "HTML PPT Studio for static decks, webpages, social cards, and the pakco-html visual style picker."
+description: "Creates HTML decks, webpages, and social cards with pakco.html templates. Use for slides, PPT-style reports, visual web pages, or the style picker."
 ---
 
 # pakco.html
 
-pakco.html is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes generate the deck with stable visual constraints.
+pakco.html is a local-first visual taste menu for AI-generated decks. It helps users stop describing taste from scratch: browse visible styles, copy an executable prompt, and let Claude Code / Codex / Hermes / WorkBuddy / TRAE Work generate the deck with stable visual constraints.
 
 The underlying skill still authors professional HTML presentations as static files, with themes, full-deck taste cards, layouts, animations, and prompts. One theme file = one look. One layout file = one page type. One animation class = one entry effect.
 All pages share a token-based design system in `assets/base.css`.
@@ -35,6 +35,34 @@ Restart Codex after installation so it reloads `~/.codex/skills/pakco-html`.
 npx skills add https://github.com/pakco77/pakco-html
 ```
 
+### WorkBuddy
+
+Install into WorkBuddy's user Skill directory:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
+```
+
+Restart WorkBuddy or refresh Skills after installation.
+
+### TRAE Work / TRAE SOLO
+
+Use the AgentSkill CLI target that matches the installed edition:
+
+```bash
+npx skills add https://github.com/pakco77/pakco-html --agent trae-cn -g
+# International edition:
+npx skills add https://github.com/pakco77/pakco-html --agent trae -g
+```
+
+Terminal fallback for TRAE Work CN:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- trae-work
+```
+
+Restart TRAE Work or refresh Skills after installation.
+
 ### Other AgentSkill agents
 
 For supported agents, use the `skills` CLI agent target:
@@ -45,10 +73,9 @@ npx skills add https://github.com/pakco77/pakco-html --agent qwen-code
 npx skills add https://github.com/pakco77/pakco-html --agent gemini-cli
 ```
 
-For any agent that reads a local `SKILL.md` folder, use the generic installer:
+For any other agent that reads a local `SKILL.md` folder, use the generic installer:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- workbuddy
 curl -fsSL https://raw.githubusercontent.com/pakco77/pakco-html/refs/heads/main/scripts/install-agent.sh | bash -s -- ~/.some-agent/skills/pakco-html
 ```
 
@@ -68,14 +95,14 @@ No build. Pure static HTML/CSS/JS with only CDN webfonts.
 
 ## Opening the style picker
 
-When the user asks to open/browse the style menu (e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "看看有什么风格", "open the picker"), start a local server and open the picker in a browser:
+When the user asks to open/browse the style menu (e.g. "html来", "打开风格菜单", "打开 pakco-html", "打开html风格", "看看有什么风格", "open the picker"), treat the directory containing this `SKILL.md` as `SKILL_ROOT`. Start a local server from that directory and open the picker in the host's browser or HTML preview:
 
 ```bash
-cd ~/.codex/skills/pakco-html && python3 -m http.server 8000 &
+cd "$SKILL_ROOT" && python3 -m http.server 8000 &
 # then open: http://localhost:8000/templates/style-picker.html
 ```
 
-If you installed with Claude Code / AgentSkill CLI, use `~/.claude/skills/pakco-html` instead.
+Common roots are `~/.codex/skills/pakco-html`, `~/.claude/skills/pakco-html`, `~/.workbuddy/skills/pakco-html`, `~/.trae/skills/pakco-html`, and `~/.trae-cn/skills/pakco-html`. Check the actual loaded Skill path instead of assuming one of them.
 
 The picker shows 60+ live previews across 4 tabs (Skins / Templates / UI Taste / Social Cards). The user clicks a card to copy the prompt, then pastes it back to you.
 
@@ -176,18 +203,16 @@ Only after those are clear, scaffold the deck and start writing.
 
 ## Update (更新)
 
-When the user says "更新 pakco-html", "update pakco-html", "升级", or "拉最新版", run:
+When the user says "更新 pakco-html", "update pakco-html", "升级", or "拉最新版", use the directory containing this `SKILL.md` as `SKILL_ROOT`, then run:
 
 ```bash
-bash ~/.codex/skills/pakco-html/scripts/update.sh
+bash "$SKILL_ROOT/scripts/update.sh"
 ```
-
-For Claude Code installs, run `bash ~/.claude/skills/pakco-html/scripts/update.sh`.
 
 If `scripts/update.sh` doesn't exist yet (old install), run the equivalent inline:
 
 ```bash
-TMP=$(mktemp -d) && git clone --depth 1 https://github.com/pakco77/pakco-html.git "$TMP/r" 2>/dev/null && mkdir -p ~/.codex/skills/pakco-html && cp -r "$TMP/r/assets" "$TMP/r/templates" "$TMP/r/references" "$TMP/r/scripts" ~/.codex/skills/pakco-html/ && cp "$TMP/r/SKILL.md" ~/.codex/skills/pakco-html/ && rm -rf "$TMP" && echo "✅ 更新完成"
+TMP=$(mktemp -d) && git clone --depth 1 https://github.com/pakco77/pakco-html.git "$TMP/r" 2>/dev/null && cp -r "$TMP/r/assets" "$TMP/r/templates" "$TMP/r/references" "$TMP/r/scripts" "$SKILL_ROOT/" && cp "$TMP/r/SKILL.md" "$SKILL_ROOT/" && rm -rf "$TMP" && echo "✅ 更新完成"
 ```
 
 All existing decks that reference `assets/` via relative paths will automatically get the latest features (themes, layouts, mobile support, bug fixes) — no HTML changes needed.
